@@ -1,0 +1,250 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Rich from '../components/Rich.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQ from '../components/FAQ.astro';
+import Steps from '../components/Steps.astro';
+import ctas from '../data/ctas.json';
+import { plain, rich, PLACEHOLDER_RE } from '../lib/site';
+
+const page = (await getEntry('pages', 'home'))!;
+const d = page.data as any;
+
+// FAQ schema: only publish answers that contain no unfilled placeholders.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: d.faq
+    .filter((f: any) => !new RegExp(PLACEHOLDER_RE.source).test(rich(f.a)))
+    .map((f: any) => ({ '@type': 'Question', name: plain(f.q), acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })),
+};
+---
+<BaseLayout title={d.seoTitle} description={d.seoDescription} schema={faqSchema.mainEntity.length ? [faqSchema] : []}>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">{d.hero.eyebrow}</p>
+        <h1><Rich text={d.hero.heading} /></h1>
+        <p class="hero__sub" set:html={rich(d.hero.subheading)} />
+        <div class="btn-row btn-row--stack">
+          <Button href={d.hero.buttons[0].href} variant="quote" size="lg">{d.hero.buttons[0].label}</Button>
+          <Button href={d.hero.buttons[1].href} variant="ghost" size="lg" iconAfter="arrow-right">{d.hero.buttons[1].label}</Button>
+        </div>
+      </div>
+      <div class="hero__media">
+        <ImagePlaceholder label={d.hero.image.label} alt={d.hero.image.alt} tone="dark" ratio="5/4" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <div class="trust">
+    <div class="container">
+      <ul class="trust__list">
+        {d.hero.trust.map((t: any) => (
+          <li><span class="trust__icon"><Icon name={t.icon} size={20} /></span><Rich text={t.text} /></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container split">
+      <div>
+        <SectionHead eyebrow={d.problem.eyebrow} heading={d.problem.heading} />
+        <p class="lead" set:html={rich(d.problem.text)} />
+        <div class="btn-row" style="margin-top:2rem">
+          <Button href="/contact/#rfq" variant="primary" iconAfter="arrow-right">Get a Free Quote</Button>
+        </div>
+      </div>
+      <ImagePlaceholder label={d.problem.image.label} alt={d.problem.image.alt} ratio="4/3" />
+    </div>
+  </section>
+
+  <!-- What we supply -->
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHead eyebrow={d.supply.eyebrow} heading={d.supply.heading} />
+      <div class="grid grid--3">
+        {d.supply.cards.map((c: any) => (
+          <article class="card">
+            <ImagePlaceholder label={c.image} ratio="16/9" class="card__media" />
+            <div class="card__body">
+              <span class="icon-badge supply-icon"><Icon name={c.icon} /></span>
+              <h3><Rich text={c.title} /></h3>
+              <p set:html={rich(c.text)} />
+              <a class="link-arrow" href={c.href}>{d.supply.linkLabel}<Icon name="arrow-right" /></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container split split--reverse">
+      <div>
+        <SectionHead eyebrow={d.services.eyebrow} heading={d.services.heading} />
+        <ul class="feature-list">
+          {d.services.items.map((s: any) => (
+            <li class="feature">
+              <span class="icon-badge"><Icon name={s.icon} /></span>
+              <div><h3><Rich text={s.title} /></h3><p set:html={rich(s.text)} /></div>
+            </li>
+          ))}
+        </ul>
+        <div class="btn-row" style="margin-top:2rem">
+          <Button href={d.services.button.href} variant="secondary" iconAfter="arrow-right">{d.services.button.label}</Button>
+        </div>
+      </div>
+      <ImagePlaceholder label={d.services.image.label} alt={d.services.image.alt} ratio="4/5" />
+    </div>
+  </section>
+
+  <CTABand variant="banner" heading={ctas.midPage.heading} text={ctas.midPage.text} buttons={[ctas.midPage.button]} />
+
+  <!-- Who we serve -->
+  <section class="section section--dark serve">
+    <div class="container split">
+      <div>
+        <SectionHead eyebrow={d.serve.eyebrow} heading={d.serve.heading} />
+        <p class="lead serve__text" set:html={rich(d.serve.text)} />
+        <ul class="regions" aria-label="Regions">
+          {d.serve.regions.map((r: string) => <li><Icon name="map-pin" size={16} />{r}</li>)}
+        </ul>
+      </div>
+      <ul class="serve__links">
+        {d.serve.links.map((l: any) => (
+          <li>
+            <a href={l.href}>
+              <span class="icon-badge"><Icon name={l.icon} /></span>
+              <span>{l.label}</span>
+              <Icon name="arrow-right" size={18} class="serve__arrow" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Why Exron -->
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow={d.why.eyebrow} heading={d.why.heading} />
+      <ul class="why">
+        {d.why.items.map((w: any) => (
+          <li class="why__item">
+            <span class="icon-badge"><Icon name={w.icon} /></span>
+            <h3><Rich text={w.title} /></h3>
+            <p set:html={rich(w.text)} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHead eyebrow={d.howItWorks.eyebrow} heading={d.howItWorks.heading} center />
+      <Steps steps={d.howItWorks.steps} />
+      <div class="btn-row" style="justify-content:center;margin-top:2.5rem">
+        <Button href="/contact/#rfq" variant="quote" size="lg">Get a Free Quote</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <FAQ items={d.faq} />
+    </div>
+  </section>
+
+  <CTABand variant="secondary" heading={ctas.secondary.heading} text={ctas.secondary.text} buttons={ctas.secondary.buttons} />
+  <CTABand variant="closing" heading={d.closing.heading} text={d.closing.text} buttons={d.closing.buttons} />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative; overflow: hidden; color: #c8d3e2;
+    background:
+      radial-gradient(900px 500px at 100% 0%, rgba(47, 116, 200, 0.28), transparent 60%),
+      linear-gradient(180deg, var(--navy-900), var(--navy-950));
+    padding-block: clamp(3rem, 2rem + 4vw, 6rem) clamp(4.5rem, 3rem + 4vw, 7.5rem);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+  }
+  .hero__grid { position: relative; display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) { .hero__grid { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; } }
+  .hero h1 { color: #fff; font-size: var(--fs-display); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 1.25rem; }
+  .hero__sub { font-size: var(--fs-lead); line-height: 1.6; max-width: 58ch; margin-bottom: 2rem; color: #c8d3e2; }
+  .hero__media { display: none; }
+  @media (min-width: 1024px) { .hero__media { display: block; } }
+
+  /* Trust strip */
+  .trust { position: relative; z-index: 2; margin-top: -2.75rem; }
+  .trust__list {
+    list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  }
+  .trust__list li {
+    display: flex; align-items: center; gap: 0.75rem; padding: 1rem; min-width: 0; overflow-wrap: anywhere;
+    font-weight: 600; font-size: 0.875rem; line-height: 1.35; color: var(--charcoal-900);
+  }
+  .trust__list li:nth-child(odd) { border-right: 1px solid var(--color-border); }
+  .trust__list li:nth-child(-n + 2) { border-bottom: 1px solid var(--color-border); }
+  .trust__icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: var(--blue-100); color: var(--blue-700); }
+  @media (min-width: 900px) {
+    .trust__list { grid-template-columns: repeat(4, 1fr); }
+    .trust__list li { padding: 1.375rem 1.5rem; font-size: 0.9375rem; border: 0 !important; }
+    .trust__list li + li { border-left: 1px solid var(--color-border) !important; }
+  }
+
+  /* Supply cards */
+  .card :global(.card__media) { border-radius: 0; border: 0; border-bottom: 1px solid var(--color-border); }
+  .supply-icon { margin-top: calc(-24px - var(--space-5)); position: relative; background: #fff; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+
+  /* Who we serve */
+  .serve__text { color: #c8d3e2; }
+  .regions { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
+  .regions li {
+    display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.4rem 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; font-size: 0.875rem; font-weight: 500; color: #fff;
+  }
+  .regions :global(svg) { color: #ff8a9b; }
+  .serve__links { list-style: none; display: grid; gap: 0.75rem; }
+  @media (min-width: 640px) and (max-width: 959px) { .serve__links { grid-template-columns: 1fr 1fr; } }
+  .serve__links a {
+    display: flex; align-items: center; gap: 1rem; padding: 1.125rem 1.25rem;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--radius-lg);
+    color: #fff; font-weight: 600; text-decoration: none; transition: background var(--transition), border-color var(--transition);
+  }
+  .serve__links a:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.28); }
+  .serve__links :global(.serve__arrow) { margin-left: auto; color: #9fc0ea; transition: transform var(--transition); }
+  .serve__links a:hover :global(.serve__arrow) { transform: translateX(3px); }
+
+  /* Why */
+  .why { list-style: none; display: grid; gap: 1.25rem; }
+  @media (min-width: 640px) { .why { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .why { grid-template-columns: repeat(6, 1fr); } .why__item { grid-column: span 2; } .why__item:nth-child(4) { grid-column: 2 / span 2; } }
+  .why__item { padding: 1.5rem; border: 1px solid var(--color-border); border-top: 3px solid var(--blue-600); border-radius: var(--radius-lg); background: #fff; }
+  .why__item h3 { margin: 1rem 0 0.5rem; font-size: 1.125rem; }
+  .why__item p { color: var(--slate-600); font-size: 0.975rem; }
+</style>

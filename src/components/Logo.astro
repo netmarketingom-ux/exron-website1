@@ -1,0 +1,29 @@
+---
+/**
+ * Temporary text wordmark. When Exron supplies the official logo, put the file in
+ * /public/images/ and set "logo" in src/data/site.json (e.g. "/images/logo.svg").
+ */
+import { site } from '../lib/site';
+interface Props { inverse?: boolean; }
+const { inverse = false } = Astro.props;
+---
+<a href="/" class:list={['logo', inverse && 'logo--inverse']} aria-label={`${site.name} — home`}>
+  {site.logo ? (
+    <img src={site.logo} alt={site.legalName} height="40" />
+  ) : (
+    <span class="logo__word">
+      <span class="logo__main">EXRON</span><span class="logo__sub">GLOBAL</span>
+    </span>
+  )}
+</a>
+
+<style>
+  .logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .logo img { height: 40px; width: auto; }
+  .logo__word { display: inline-flex; align-items: baseline; gap: 0.35em; position: relative; padding-bottom: 5px; }
+  .logo__word::after { content: ''; position: absolute; left: 0; bottom: 0; width: 28px; height: 3px; background: var(--red-600); }
+  .logo__main { font-weight: 800; font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem); letter-spacing: 0.06em; color: var(--navy-900); }
+  .logo__sub { font-weight: 500; font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem); letter-spacing: 0.06em; color: var(--blue-600); }
+  .logo--inverse .logo__main { color: #fff; }
+  .logo--inverse .logo__sub { color: #9fc0ea; }
+</style>

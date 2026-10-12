@@ -1,0 +1,18 @@
+{
+  "_readme": "Company details used across the whole site. Replace any value that starts with [CLIENT TO PROVIDE ...] with the real information. Phone and WhatsApp must include the country code, e.g. +971 4 000 0000.",
+  "name": "Exron Global",
+  "legalName": "Exron Global General Trading LLC",
+  "url": "https://exronglobal.com",
+  "email": "info@exronglobal.com",
+  "phone": "[CLIENT TO PROVIDE: phone number]",
+  "whatsapp": "[CLIENT TO PROVIDE: WhatsApp number]",
+  "address": "[CLIENT TO PROVIDE: office address, city, country]",
+  "hours": "[CLIENT TO PROVIDE: business days, hours and time zone]",
+  "responseTime": "[CLIENT TO PROVIDE: 24 or 48]",
+  "mapLocation": "[CLIENT TO PROVIDE: location for Google Maps embed]",
+  "mapEmbedUrl": "",
+  "logo": "",
+  "topBar": "Procurement, supply & logistics for government and commercial operations",
+  "footerIntro": "Exron Global General Trading LLC is a procurement and supply company providing construction materials, power and IT equipment, facility supplies, logistics and manpower to government, defense-related and commercial customers across North America, the Middle East, Asia and Europe.",
+  "copyright": "© 2026 Exron Global General Trading LLC. All rights reserved."
+}

@@ -1,0 +1,75 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Rich from './Rich.astro';
+import nav from '../data/navigation.json';
+import { site, isSet, telHref, mailHref, whatsappHref } from '../lib/site';
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__about">
+      <Logo inverse />
+      <p>{site.footerIntro}</p>
+      <a class="btn btn--quote" href={nav.quote.href}>{nav.quote.label}</a>
+    </div>
+
+    <nav aria-label="Footer navigation">
+      <h2 class="site-footer__title">Company</h2>
+      <ul class="site-footer__links">
+        {nav.main.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-label="Quick links">
+      <h2 class="site-footer__title">Quick links</h2>
+      <ul class="site-footer__links">
+        {nav.footerQuickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="site-footer__title">Contact</h2>
+      <ul class="site-footer__contact">
+        <li><Icon name="mail" size={18} /><span><span class="k">Email</span><a href={mailHref}>{site.email}</a></span></li>
+        <li><Icon name="phone" size={18} /><span><span class="k">Phone</span>
+          {isSet(site.phone) ? <a href={telHref}>{site.phone}</a> : <Rich text={site.phone} />}</span></li>
+        <li><Icon name="whatsapp" size={18} /><span><span class="k">WhatsApp</span>
+          {isSet(site.whatsapp) ? <a href={whatsappHref} target="_blank" rel="noopener">{site.whatsapp}</a> : <Rich text={site.whatsapp} />}</span></li>
+        <li><Icon name="map-pin" size={18} /><span><span class="k">Address</span><Rich text={site.address} /></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container site-footer__bottom-inner">
+      <p>{site.copyright}</p>
+      <ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/terms-of-use/">Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--navy-900); color: #b4c2d6; font-size: 0.9375rem; border-top: 3px solid var(--red-600); }
+  .site-footer__grid { display: grid; gap: 2.5rem; padding-block: 3.5rem 3rem; }
+  @media (min-width: 640px) { .site-footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .site-footer__grid { grid-template-columns: 1.6fr 0.8fr 0.9fr 1.3fr; gap: 3rem; } }
+  .site-footer__about { display: grid; gap: 1.25rem; justify-items: start; }
+  .site-footer__about p { margin: 0; line-height: 1.7; max-width: 46ch; }
+  .site-footer__title { color: #fff; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; }
+  .site-footer__links { list-style: none; display: grid; gap: 0.55rem; }
+  .site-footer a { color: #d4deeb; text-decoration: none; }
+  .site-footer a:hover { color: #fff; text-decoration: underline; }
+  .site-footer__contact { list-style: none; display: grid; gap: 1rem; }
+  .site-footer__contact li { display: flex; gap: 0.75rem; align-items: flex-start; }
+  .site-footer__contact svg { color: #9fc0ea; flex-shrink: 0; margin-top: 0.2rem; }
+  .site-footer__contact li > span { display: grid; gap: 0.1rem; }
+  .site-footer__contact .k { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f93b0; }
+  .site-footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8125rem; }
+  .site-footer__bottom-inner { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; justify-content: space-between; align-items: center; padding-block: 1.25rem; padding-bottom: calc(1.25rem + 64px); }
+  @media (min-width: 768px) { .site-footer__bottom-inner { padding-bottom: 1.25rem; } }
+  .site-footer__bottom p { margin: 0; }
+  .site-footer__bottom ul { list-style: none; display: flex; gap: 1.25rem; }
+</style>

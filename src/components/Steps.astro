@@ -1,0 +1,36 @@
+---
+import { rich } from '../lib/site';
+import Rich from './Rich.astro';
+interface Step { title: string; text: string; }
+interface Props { steps: Step[]; dark?: boolean; }
+const { steps, dark = false } = Astro.props;
+---
+<ol class:list={['steps', dark && 'steps--dark']}>
+  {steps.map((s, i) => (
+    <li class="step">
+      <span class="step__num">{String(i + 1).padStart(2, '0')}</span>
+      <h3><Rich text={s.title} /></h3>
+      <p set:html={rich(s.text)} />
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps { list-style: none; display: grid; gap: 1.25rem; counter-reset: step; }
+  @media (min-width: 640px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+  .step { position: relative; padding: 1.5rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .step__num { display: block; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; color: var(--red-600); margin-bottom: 0.75rem; }
+  .step h3 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+  .step p { color: var(--slate-600); font-size: 0.975rem; }
+  @media (min-width: 1024px) {
+    .step:not(:last-child)::after {
+      content: ''; position: absolute; top: 2.05rem; right: -1.25rem; width: 1.25rem; height: 2px; background: var(--slate-300);
+    }
+  }
+  .steps--dark .step { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.12); }
+  .steps--dark .step h3 { color: #fff; }
+  .steps--dark .step p { color: #b4c2d6; }
+  .steps--dark .step__num { color: #ff8a9b; }
+  .steps--dark .step:not(:last-child)::after { background: rgba(255, 255, 255, 0.2); }
+</style>

@@ -1,0 +1,23 @@
+{
+  "main": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about/" },
+    { "label": "Capabilities", "href": "/capabilities/" },
+    { "label": "Products & Supply", "href": "/products-supply/" },
+    { "label": "Services", "href": "/services/" },
+    { "label": "Industries", "href": "/industries/" },
+    { "label": "Projects", "href": "/projects/" },
+    { "label": "Resources", "href": "/resources/" },
+    { "label": "Contact", "href": "/contact/" }
+  ],
+  "quote": { "label": "Get a Free Quote", "href": "/contact/#rfq" },
+  "footerQuickLinks": [
+    { "label": "Capabilities", "href": "/capabilities/" },
+    { "label": "Products & Supply", "href": "/products-supply/" },
+    { "label": "Services", "href": "/services/" },
+    { "label": "Industries", "href": "/industries/" },
+    { "label": "Request a Quote", "href": "/contact/#rfq" },
+    { "label": "Privacy Policy", "href": "/privacy-policy/" },
+    { "label": "Terms of Use", "href": "/terms-of-use/" }
+  ]
+}

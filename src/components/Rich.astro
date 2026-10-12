@@ -1,0 +1,10 @@
+---
+/**
+ * Renders a string from the content files. Fills {tokens} from site.json and
+ * highlights [CLIENT TO PROVIDE: ...] placeholders.
+ */
+import { rich } from '../lib/site';
+interface Props { text?: string; as?: string; class?: string; }
+const { text = '', as: Tag = 'span', class: className } = Astro.props;
+---
+<Tag class={className} set:html={rich(text)} />

@@ -1,0 +1,22 @@
+{
+  "_readme": "Sales CTAs reused site-wide (from the approved copy, 'Sales CTAs' table).",
+  "endOfPage": {
+    "heading": "Send your requirement. Get a clear quote.",
+    "text": "Share your specs, quantity and delivery location. We reply within {responseTime} business hours.",
+    "button": { "label": "Get a Free Quote", "href": "/contact/#rfq" }
+  },
+  "midPage": {
+    "heading": "One supplier. Every requirement.",
+    "text": "Materials, equipment, logistics and manpower, coordinated by one team.",
+    "button": { "label": "Request a Quote", "href": "/contact/#rfq" }
+  },
+  "secondary": {
+    "heading": "Prefer to talk first?",
+    "text": "Speak directly with our procurement team.",
+    "buttons": [
+      { "label": "Contact Us", "href": "/contact/" },
+      { "label": "WhatsApp", "href": "whatsapp" }
+    ]
+  },
+  "floating": { "label": "WhatsApp Us" }
+}
