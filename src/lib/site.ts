@@ -31,6 +31,11 @@ const tokens: Record<string, string> = {
   whatsapp: site.whatsapp,
   address: site.address,
   hours: site.hours,
+  headquarters: site.headquarters,
+  procurementEmail: site.procurementEmail,
+  groupName: site.groupName,
+  rfqAcknowledgment: site.rfqAcknowledgment,
+  naics: site.vendor.naics,
 };
 
 const esc = (s: string) =>

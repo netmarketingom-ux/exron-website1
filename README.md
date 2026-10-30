@@ -3,7 +3,7 @@
 A static site for **Exron Global General Trading LLC**, built with [Astro](https://astro.build) and deployed on Netlify at **exronglobal.com**.
 
 - Scope: `docs/Exron_Global_Website_Proposal.pdf`
-- Approved copy: `docs/Exron-Global-Website-Copy-Final.pdf`
+- Original copy: `docs/Exron-Global-Website-Copy-Final.pdf` (superseded for the homepage by `docs/Website_feedback.pdf`)
 
 ## Run locally
 
@@ -27,7 +27,6 @@ npm run placeholders   # list every [CLIENT TO PROVIDE: …] still on the site
     ├── data/
     │   ├── site.json          ← company details: email, phone, WhatsApp, address, hours, quote response time, map
     │   ├── navigation.json    ← header nav (Section 26) and footer quick links
-    │   └── ctas.json          ← reusable sales CTAs ("Send your requirement…", "One supplier…")
     ├── components/            Header, Footer, Button, CTABand, FAQ, Steps, ImagePlaceholder, Icon, Logo…
     ├── layouts/BaseLayout.astro   <head>/SEO, Inter font, header, footer, WhatsApp button
     ├── lib/site.ts            helpers: {token} filling, placeholder highlighting, tel:/wa.me links
@@ -40,8 +39,7 @@ npm run placeholders   # list every [CLIENT TO PROVIDE: …] still on the site
 
 - **Text:** edit the YAML at the top of `src/content/pages/<page>.md`. Keep the quotes around each value.
 - **Company details:** edit `src/data/site.json`. These values appear everywhere (top bar, footer, contact page, WhatsApp and phone links) and are written as tokens in the copy:
-  `{responseTime}`, `{email}`, `{phone}`, `{whatsapp}`, `{address}`, `{hours}`.
-  For example, setting `"responseTime": "24"` updates every "within … business hours" on the site.
+  `{headquarters}`, `{procurementEmail}`, `{groupName}`, `{naics}`, `{email}`, `{phone}`, `{whatsapp}`, `{address}`, `{hours}`.
 - **Placeholders:** any text like `[CLIENT TO PROVIDE: …]` appears as a yellow dashed highlight on the page. Replace it with the approved information. Run `npm run placeholders` to see what is still outstanding.
 - **Logo:** put the file in `public/images/` and set `"logo": "/images/logo.svg"` in `site.json`.
 - **Images:** grey boxes labelled "IMAGE – <subject>" are `<ImagePlaceholder>` slots. Replace one with
@@ -50,26 +48,36 @@ npm run placeholders   # list every [CLIENT TO PROVIDE: …] still on the site
 
 > Content rule (Proposal §21): do not add clients, contracts, certifications, government approvals, affiliations or achievements unless Exron has officially provided them.
 
-## Design system
+## Design system (v2, after client feedback of 30 Oct 2026)
 
 | Token | Hex | Use |
 |---|---|---|
-| `--navy-900` | `#0B1F3A` | Hero, dark sections, footer |
-| `--navy-950` | `#071528` | Top bar, hero gradient |
-| `--blue-600` | `#1F5FAE` | Links, primary buttons, icons, eyebrows |
-| `--blue-100` / `--blue-50` | `#E6EEF8` / `#F2F6FC` | Icon badges, tinted sections |
-| `--red-600` | `#C8102E` | **Accents only:** quote buttons, thin rules, active nav underline, step numbers |
-| `--white` / `--offwhite` | `#FFFFFF` / `#F5F6F8` | Page and alternating section backgrounds |
-| `--slate-700` | `#3A4554` | Body text |
-| `--charcoal-900` | `#1C232D` | Headings |
+| `--navy-700` | `#3C3B6E` | **Brand navy, the dominant colour:** hero, government section, RFQ section, primary buttons |
+| `--navy-900` / `--navy-950` | `#222149` / `#17173A` | Footer, top bar, coverage section, data panels |
+| `--navy-50` / `--navy-100` | `#F3F3F8` / `#E7E7F0` | Tinted panels, notices, hover states |
+| `--red-600` | `#B22234` | **Brand red, for emphasis and calls to action:** Submit an RFQ, rules, markers, eyebrows |
+| `--red-300` | `#E8838F` | Red accents on dark navy backgrounds |
+| `--white` / `--paper` | `#FFFFFF` / `#F7F7FA` | Backgrounds |
+| `--ink-900` / `--ink-700` / `--ink-500` | `#1C1D30` / `#3D3F55` / `#66687E` | Headings / body / secondary text |
 
-**Type:** Inter Variable (self-hosted). Fluid sizes from mobile to desktop:
-Display 34→56px · H1 32→48 · H2 26→38 · H3 19→22 · Lead 17→20 · Body 16→17 · Eyebrow 13 (uppercase, tracked).
+**Type:**
+- Archivo, semi-expanded (108%), for headings, navigation and buttons.
+- Inter for body text.
+- IBM Plex Mono for labels and reference data (vendor codes, RFQ fields, process step numbers).
 
-**Buttons** (`.btn` plus a modifier, at least 48px tall):
-`--quote` red, for quote CTAs only · `--primary` blue · `--secondary` navy outline · `--ghost` white outline on dark backgrounds · `--whatsapp` green. Sizes are `--sm` and `--lg`.
+All fonts are self-hosted. Display size runs 34→60px, H2 26→40px, body 16px.
 
-**Layout:** 1200px container, 16/24/32px gutters, 8px spacing grid. The full navigation appears from 1180px, with a slide-down menu below that.
+**Buttons:** `--quote` (red) is used only for "Submit an RFQ". The others are `--primary` (navy), `--secondary` (navy outline) and `--ghost` (white outline on navy). Corners are 3px, kept square for a more institutional look.
+
+**Imagery:**
+- Use real photographs only: Exron's own operations, team and warehousing, or carefully chosen licensed images.
+- Never use AI-generated images.
+- Never use military imagery that implies U.S. Government endorsement.
+- The coverage map is generated from map data at build time (`src/components/CoverageMap.astro`).
+
+## Site structure (client feedback §11)
+
+Home · About Exron · Capabilities · Industries We Serve · Government Contracting · Contact / Submit an RFQ, plus Privacy Policy and Terms of Use.
 
 ## Deploying to Netlify
 
