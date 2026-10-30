@@ -15,7 +15,7 @@
   "rfqAcknowledgment": "[CLIENT TO PROVIDE: e.g. same business day]",
   "groupName": "[CLIENT TO PROVIDE: group / affiliated company name]",
   "mapEmbedUrl": "",
-  "logo": "",
+  "logo": "/images/exron-logo.png",
   "vendor": {
     "_readme": "Government vendor information. Status text only until each item is officially issued and verified.",
     "samGov": "Registration in process",

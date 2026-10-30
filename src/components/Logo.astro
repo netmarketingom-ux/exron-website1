@@ -11,7 +11,7 @@ const src = site.logo && inverse ? site.logo.replace(/(\.\w+)$/, '-white$1') : s
 ---
 <a href="/" class:list={['logo', inverse && 'logo--inverse']} aria-label={`${site.legalName} — home`}>
   {src ? (
-    <img src={src} alt={site.legalName} height="44" />
+    <img src={src} alt={site.legalName} width="868" height="212" />
   ) : (
     <span class="logo__word">
       <span class="logo__main">EXRON</span>
@@ -22,7 +22,8 @@ const src = site.logo && inverse ? site.logo.replace(/(\.\w+)$/, '-white$1') : s
 
 <style>
   .logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-  .logo img { height: 44px; width: auto; }
+  .logo img { height: clamp(38px, 30px + 1.6vw, 52px); width: auto; }
+  .logo--inverse img { height: 56px; }
   .logo__word {
     display: inline-flex; align-items: baseline; gap: 0.3em;
     font-family: var(--font-display); font-stretch: 118%; letter-spacing: 0.04em; line-height: 1;
