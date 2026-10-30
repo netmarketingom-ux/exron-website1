@@ -1,0 +1,68 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import RfqForm from '../../components/RfqForm.astro';
+import { home, site, rich, procurementEmail } from '../../lib/content';
+
+const page = (await getEntry('pages', 'submit-rfq'))!;
+const next = home.government.steps.slice(0, 4);
+---
+<BaseLayout title={page.data.seo_title} description={page.data.description} noindex={page.data.noindex}>
+  <PageHead eyebrow="RFQ intake" title={page.data.title} summary={page.data.summary} />
+
+  <section class="section rfq">
+    <div class="container grid">
+      <div class="rfq__form">
+        <RfqForm />
+      </div>
+
+      <aside class="rfq__aside" aria-label="About this form">
+        <div class="aside-block">
+          <h2 class="aside-block__title">What happens next</h2>
+          <ol class="next">
+            {next.map((s: any, i: number) => (
+              <li>
+                <span class="mono">{String(i + 1).padStart(2, '0')}</span>
+                <div><strong>{s.title}.</strong> {s.text}</div>
+              </li>
+            ))}
+          </ol>
+          <p class="small">You receive an acknowledgment email with your reference number <span set:html={rich(site.rfq_acknowledgment)} />.</p>
+        </div>
+
+        <div class="aside-block aside-block--notice">
+          <h2 class="aside-block__title">Controlled information</h2>
+          <p class="small">{site.secure_notice}</p>
+        </div>
+
+        <div class="aside-block">
+          <h2 class="aside-block__title">Prefer email?</h2>
+          <p class="small">
+            Send the solicitation and attachments to
+            {procurementEmail
+              ? <a href={`mailto:${procurementEmail}`}>{procurementEmail}</a>
+              : <span set:html={rich(site.procurement_email)} />}.
+            Put the RFQ number in the subject line.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .rfq { padding-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+  .rfq__aside { margin-top: 3rem; display: grid; gap: 1.5rem; align-content: start; }
+  @media (min-width: 1024px) {
+    .rfq__form { grid-column: 1 / span 8; }
+    .rfq__aside { grid-column: 9 / span 4; margin-top: 0; }
+  }
+  .aside-block { padding: 1.5rem; background: var(--paper); border-top: 3px solid var(--navy); }
+  .aside-block--notice { border-top-color: var(--red); }
+  .aside-block__title { font-size: var(--step-1); margin-bottom: 1rem; }
+  .next { list-style: none; display: grid; gap: 0.9rem; margin-bottom: 1.25rem; font-size: 0.9375rem; line-height: 1.5; }
+  .next li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.5rem; }
+  .next .mono { color: var(--red); font-size: 0.8125rem; padding-top: 0.15rem; }
+  .next strong { color: var(--navy); }
+</style>

@@ -1,0 +1,173 @@
+# Homepage content. Edited through the CMS at /admin.
+# {headquarters} and {rfq_acknowledgment} are filled in from src/content/site.json.
+# Text in [CONFIRM: ...] is information only Exron Global can provide.
+
+seo:
+  title: Military Installation Procurement Specialists | Exron Global
+  description: Exron Global sources and delivers supplies, equipment and logistics for U.S. Government operations, military installations and prime contractors. Submit an RFQ.
+
+hero:
+  eyebrow: EXRON GLOBAL
+  title: Government & Military Installation Support Procurement Specialists
+  tagline: Mission-Driven Procurement. Global Supply. Reliable Execution.
+  text: Strategic sourcing, procurement, supply and logistics coordination for U.S. Government operations, military installations, defense support contractors and institutional customers. Commercial and industrial buyers are served through our second division.
+  primary_label: Submit an RFQ
+  secondary_label: View our capabilities
+  image: ""
+  image_alt: ""
+  image_note: "PHOTO: palletised supplies or containers at a logistics yard, early light"
+  panel_title: At a glance
+  panel:
+    - label: Primary focus
+      value: U.S. Government operations and military installation requirements
+    - label: Primary market
+      value: Middle East, with international coverage
+    - label: Management background
+      value: Installation procurement and logistics across the Middle East, gained in previous roles
+    - label: RFQ response
+      value: "Acknowledged {rfq_acknowledgment}, with a reference number and a named contact"
+
+strip:
+  text: "Have an open solicitation? Send the RFQ number, item list and documents. Every request is acknowledged {rfq_acknowledgment}."
+  link_label: Submit an RFQ
+
+intro:
+  title: A procurement company built around installation requirements
+  text: "Exron Global General Trading LLC sources and delivers the supplies, equipment and materials that government operations and military installations order every day: maintenance stock, electrical and HVAC parts, IT hardware, safety equipment, and the specialized items that have to be found, quoted and shipped against a deadline. We are a privately owned company based in {headquarters}, working with contracting officers, installation purchasing teams and prime contractors."
+  facts:
+    - label: Headquarters
+      value: "{headquarters}"
+    - label: Divisions
+      value: Government & Military Installation Support · Commercial & Industrial Procurement
+    - label: Primary market
+      value: Middle East, with international coverage
+
+government:
+  eyebrow: Division one · Our primary focus
+  title: Government & military installation support
+  lead: "Installation requirements rarely arrive as a single item. A typical RFQ mixes maintenance stock, electrical parts, safety equipment and one or two things that are hard to find, all due at a gate with its own access and receiving rules. We are set up for exactly that kind of request: one quotation covering every line, sourced against the stated specification, with the documentation your file needs."
+  image: ""
+  image_alt: ""
+  image_note: "PHOTO: equipment being inspected against a packing list at a loading bay"
+  steps_title: How an RFQ moves through Exron Global
+  steps:
+    - title: Acknowledge
+      text: Every RFQ is logged, given a reference number and acknowledged. We confirm the response deadline, delivery destination and any requirements we need to clarify.
+    - title: Identify suppliers
+      text: We go to manufacturers and authorized distributors that can supply the exact item, brand or equivalent the specification allows.
+    - title: Check compliance
+      text: Each line is checked against the technical specification. Where we propose an equal to a named brand, we say so clearly and attach the data sheet.
+    - title: Price and propose
+      text: You receive an itemized quotation with unit prices, lead times and validity period, prepared in the format the solicitation asks for.
+    - title: Execute the order
+      text: When a purchase order or award arrives, we place supplier orders, confirm production and dispatch dates, and track each one.
+    - title: Coordinate freight and customs
+      text: We coordinate freight forwarding, shipping documents and customs clearance with our logistics partners.
+    - title: Deliver and document
+      text: Deliveries are scheduled to the installation's receiving requirements, with packing lists, invoices and proof of delivery.
+    - title: Follow through
+      text: After delivery we handle discrepancies, replacements and warranty questions, and remain your single point of contact.
+  link_label: "For contracting officers: company and vendor information"
+
+capabilities:
+  title: What we supply
+  intro: We quote mixed requirements across these categories in a single response.
+  items:
+    - name: General supplies and commodities
+      examples: Consumables, janitorial and cleaning supplies, packaging, operational stock
+    - name: Industrial equipment, tools and machinery
+      examples: Power and hand tools, workshop equipment, compressors, material handling
+    - name: Electrical, mechanical and maintenance supplies
+      examples: Cable, breakers, lighting, bearings, fasteners, lubricants
+    - name: Building materials and facility maintenance
+      examples: Cement, steel, paint, doors, fixtures, repair materials
+    - name: HVAC, plumbing and infrastructure equipment
+      examples: Split and package AC units, pumps, pipe and fittings, water tanks
+    - name: IT hardware, networking and office technology
+      examples: Laptops, servers, switches, structured cabling, printers
+    - name: Safety equipment and PPE
+      examples: Helmets, gloves, eyewear, high-visibility clothing, fire extinguishers, first aid
+    - name: Office furniture, equipment and operational supplies
+      examples: Desks, seating, storage, lodging furniture
+    - name: Specialized equipment sourcing
+      examples: Hard-to-find, low-volume or brand-specific items
+    - name: Logistics and delivery support
+      examples: Freight forwarding coordination, customs clearance coordination, final delivery
+  footnote: We also quote other authorized procurement requirements within our operational capabilities. If an item is not listed, send the specification.
+  link_label: View full capabilities
+
+experience:
+  eyebrow: Experience
+  title: Experience that comes before the company
+  body:
+    - "Exron Global is a new company. The people running it are not new to this work. Members of our management team have spent [CONFIRM: number] years in procurement, sourcing, trading and logistics coordination, including at Expedition Trading & Services, a company that supported U.S. military installations and government-related requirements across the Middle East."
+    - "That background shapes how we work: how installation RFQs are written, what a contracting officer needs to see in a quotation, and what it takes to move material through customs and onto an installation on schedule."
+  disclosure: The experience described here was gained by members of our management team in previous roles. Contracts and past performance of Expedition Trading & Services belong to that company and are not represented as those of Exron Global.
+  show_leadership: false
+  leadership:
+    - name: "[CONFIRM: name]"
+      title: "[CONFIRM: title]"
+      background: "[CONFIRM: one-line background]"
+      photo: ""
+
+why:
+  title: Why contracting officers and buyers work with us
+  items:
+    - claim: Experienced management.
+      detail: Our managers have quoted, sourced and delivered against installation requirements before.
+    - claim: We know how government RFQs work.
+      detail: We read the whole solicitation, including specifications, delivery terms, required forms and deadlines, and quote to it.
+    - claim: International sourcing.
+      detail: "We source from manufacturers and distributors in [CONFIRM: source regions or countries] and coordinate them on your behalf."
+    - claim: One quotation across many categories.
+      detail: Mixed RFQs are quoted together rather than split across several vendors.
+    - claim: Clear RFQ communication.
+      detail: Every request gets a reference number, an acknowledgment and a named contact.
+    - claim: Logistics included.
+      detail: Freight, customs and delivery coordination are part of the order, not an add-on.
+    - claim: Quality-focused supplier selection.
+      detail: We prefer manufacturers and authorized distributors, and we document what we supply.
+    - claim: Competitive sourcing.
+      detail: We compare sources for each line and look at freight and duty as well as unit price.
+    - claim: Accuracy and accountability.
+      detail: Our quotation matches the specification, or we tell you exactly where it does not.
+    - claim: A wider business network.
+      detail: Our affiliated companies add market knowledge and commercial support (see below).
+
+coverage:
+  title: Where we source and where we deliver
+  text: "Our primary market is the Middle East, where our management team has worked for [CONFIRM: number] years. We also take on requirements in other international markets where we can perform reliably."
+  deliver_title: We deliver to
+  deliver:
+    - "[CONFIRM: countries or regions]"
+  source_title: We source from
+  source:
+    - "[CONFIRM: countries or regions]"
+
+commercial:
+  eyebrow: Division two
+  title: Commercial & industrial procurement
+  text: "The same sourcing and logistics team also buys for affiliated companies, construction and infrastructure projects, industrial operators and external commercial customers. The process does not change: a clear quotation, the right specification and a delivery date you can plan around."
+  sectors:
+    - Construction and infrastructure projects
+    - Industrial and plant operations
+    - Affiliated group companies
+    - Commercial and institutional buyers
+  button_label: Send a commercial inquiry
+  image: ""
+  image_alt: ""
+  image_note: "PHOTO: building materials and pipe fittings staged on pallets for a site delivery"
+
+group:
+  title: Part of a wider business group
+  text: "Exron Global is affiliated with [CONFIRM: group name], whose companies work in [CONFIRM: sectors, e.g. engineering, infrastructure, energy, construction]. The group gives us market knowledge, supplier relationships and commercial backing. Each company in the group operates independently, and Exron Global does not present their contracts or capabilities as its own."
+  show_logos: false
+  logos:
+    - name: "[CONFIRM: company name]"
+      image: ""
+
+cta:
+  title: Have an open requirement?
+  text: Send us the solicitation or your item list. Include the RFQ number, quantities, delivery destination and required date, and attach any specifications. We will acknowledge it and come back with an itemized quotation.
+  primary_label: Submit an RFQ
+  secondary_label: Contact procurement

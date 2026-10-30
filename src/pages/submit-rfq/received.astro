@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import { home, site, rich, procurementEmail } from '../../lib/content';
+
+const steps = home.government.steps.slice(1, 4);
+---
+<BaseLayout
+  title="RFQ received | Exron Global"
+  description="Confirmation that your RFQ has been submitted to Exron Global procurement."
+  noindex
+>
+  <PageHead eyebrow="RFQ received" title="Your RFQ has been submitted">
+    <div class="ref" data-ref-box hidden>
+      <p class="ref__label mono">Your reference</p>
+      <p class="ref__value mono" data-ref></p>
+    </div>
+  </PageHead>
+
+  <section class="section">
+    <div class="container received">
+      <p class="lead">
+        We have your request. An acknowledgment email with the reference number and a summary of what you sent goes to the address you entered.
+        Our procurement team will contact you <span set:html={rich(site.rfq_acknowledgment)} /> to confirm the response deadline and any points we need to clarify.
+      </p>
+      <h2>What happens next</h2>
+      <ol class="received__steps">
+        {steps.map((s: any, i: number) => (
+          <li><span class="mono">{String(i + 2).padStart(2, '0')}</span><div><strong>{s.title}.</strong> {s.text}</div></li>
+        ))}
+      </ol>
+      <p>
+        Quote the reference in any follow-up. If the acknowledgment has not arrived, check your spam folder or write to
+        {procurementEmail ? <a href={`mailto:${procurementEmail}`}>{procurementEmail}</a> : <span set:html={rich(site.procurement_email)} />}.
+      </p>
+      <p><a class="text-link" href="/">Return to the homepage <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { REFERENCE_RE } from '../../lib/rfq/rules';
+  let ref = new URLSearchParams(location.search).get('ref') ?? '';
+  if (!REFERENCE_RE.test(ref)) {
+    try { ref = sessionStorage.getItem('exron-rfq-ref') ?? ''; } catch { ref = ''; }
+  }
+  if (REFERENCE_RE.test(ref)) {
+    document.querySelector('[data-ref]')!.textContent = ref;
+    document.querySelector<HTMLElement>('[data-ref-box]')!.hidden = false;
+  }
+</script>
+
+<style>
+  .ref { margin-top: 1.75rem; display: inline-block; padding: 1rem 1.25rem; border: 1px solid var(--rule-on-navy); background: var(--navy-deep); }
+  .ref__label { margin: 0; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--on-navy-muted); }
+  .ref__value { margin: 0.25rem 0 0; font-size: var(--step-2); font-weight: 500; color: #fff; letter-spacing: 0.04em; }
+  .received { max-width: 52rem; }
+  .received h2 { font-size: var(--step-3); margin: 2.5rem 0 1rem; }
+  .received__steps { list-style: none; display: grid; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--rule); }
+  .received__steps li { display: grid; grid-template-columns: 2.5rem 1fr; gap: 0.75rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+  .received__steps .mono { color: var(--red); }
+  .received__steps strong { color: var(--navy); }
+</style>

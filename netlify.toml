@@ -1,9 +1,13 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && npm run check:placeholders"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 # Redirect www to the apex domain once exronglobal.com is attached in Netlify.
 [[redirects]]
@@ -12,16 +16,27 @@
   status = 301
   force = true
 
+# The page-level Content-Security-Policy is set in each page's <head>
+# (the CMS needs a different one). This header adds the directives that
+# only work as a header, and applies to every response.
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
 
 [[headers]]
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "no-store"

@@ -1,84 +1,108 @@
 ---
 import Logo from './Logo.astro';
-import Icon from './Icon.astro';
-import nav from '../data/navigation.json';
-import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site';
+import VendorList from './VendorList.astro';
+import { site, rich, isSet, procurementEmail, telHref, whatsappHref, visibleVendorFields } from '../lib/content';
+
+const columns = [
+  {
+    title: 'Company',
+    links: [
+      { label: 'About Exron', href: '/about/' },
+      { label: 'Capabilities', href: '/capabilities/' },
+      { label: 'Industries We Serve', href: '/industries/' },
+    ],
+  },
+  {
+    title: 'Government',
+    links: [
+      { label: 'Government Contracting', href: '/government-contracting/' },
+      { label: 'Capability Statement', href: '/government-contracting/#capability-statement' },
+      { label: 'Submit an RFQ', href: '/submit-rfq/' },
+    ],
+  },
+];
+
+const contact = [
+  { label: 'Procurement', value: site.procurement_email, href: procurementEmail && `mailto:${procurementEmail}` },
+  { label: 'Phone', value: site.phone, href: telHref },
+  { label: 'WhatsApp', value: site.whatsapp, href: whatsappHref },
+  { label: 'Address', value: site.address, href: '' },
+];
 ---
-<footer class="site-footer">
-  <div class="container site-footer__grid">
-    <div class="site-footer__about">
-      <Logo inverse />
-      <p class="site-footer__positioning">{site.positioning}</p>
-      <p>{site.footerIntro}</p>
-      <a class="btn btn--quote" href={nav.quote.href}>{nav.quote.label}</a>
-    </div>
-
-    <nav aria-label="Footer navigation">
-      <h2 class="site-footer__title">Company</h2>
-      <ul class="site-footer__links">
-        {nav.main.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
-      </ul>
-    </nav>
-
-    <nav aria-label="Procurement links">
-      <h2 class="site-footer__title">Procurement</h2>
-      <ul class="site-footer__links">
-        {nav.footerQuickLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
-      </ul>
-    </nav>
-
-    <div>
-      <h2 class="site-footer__title">Contact</h2>
-      <ul class="site-footer__contact">
-        <li><Icon name="mail" size={18} /><span><span class="k">General</span><a href={mailHref}>{site.email}</a></span></li>
-        <li><Icon name="file" size={18} /><span><span class="k">RFQs</span>
-          {isSet(site.procurementEmail) ? <a href={`mailto:${site.procurementEmail}`}>{site.procurementEmail}</a> : <span set:html={rich(site.procurementEmail)} />}</span></li>
-        <li><Icon name="phone" size={18} /><span><span class="k">Phone</span>
-          {isSet(site.phone) ? <a href={telHref}>{site.phone}</a> : <span set:html={rich(site.phone)} />}</span></li>
-        <li><Icon name="whatsapp" size={18} /><span><span class="k">WhatsApp</span>
-          {isSet(site.whatsapp) ? <a href={whatsappHref} target="_blank" rel="noopener">{site.whatsapp}</a> : <span set:html={rich(site.whatsapp)} />}</span></li>
-        <li><Icon name="map-pin" size={18} /><span><span class="k">Office</span><span set:html={rich(site.address)} /></span></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="site-footer__bottom">
-    <div class="container site-footer__bottom-inner">
-      <p class="site-footer__disclaimer">{site.disclaimer}</p>
-      <div class="site-footer__legal">
-        <p>{site.copyright}</p>
-        <ul>
-          <li><a href="/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="/terms-of-use/">Terms of Use</a></li>
-        </ul>
+<footer class="site-footer on-navy">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <Logo inverse height={44} />
+        <p>{site.description}</p>
       </div>
+
+      {columns.map((col) => (
+        <nav class="site-footer__col" aria-label={col.title}>
+          <h2>{col.title}</h2>
+          <ul>
+            {col.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          </ul>
+        </nav>
+      ))}
+
+      <div class="site-footer__col">
+        <h2>Contact</h2>
+        <dl class="site-footer__contact">
+          {contact.map((c) => (
+            <div>
+              <dt>{c.label}</dt>
+              <dd>
+                {isSet(c.value) && c.href
+                  ? <a href={c.href}>{c.value}</a>
+                  : <span set:html={rich(c.value)} />}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+
+    {visibleVendorFields.length > 0 && (
+      <div class="site-footer__vendor">
+        <VendorList fields={visibleVendorFields} compact />
+      </div>
+    )}
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__disclaimer">{site.disclaimer}</p>
+      <ul class="site-footer__legal">
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Use</a></li>
+        <li>© {site.copyright_year} {site.legal_name}</li>
+      </ul>
     </div>
   </div>
 </footer>
 
 <style>
-  .site-footer { background: var(--navy-900); color: var(--on-dark-3); font-size: 0.9375rem; border-top: 4px solid var(--red-600); }
-  .site-footer__grid { display: grid; gap: 2.5rem; padding-block: 3.5rem 3rem; }
-  .site-footer__grid > * { min-width: 0; }
-  @media (min-width: 640px) { .site-footer__grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .site-footer__grid { grid-template-columns: 1.6fr 0.8fr 0.9fr 1.3fr; gap: 3rem; } }
-  .site-footer__about { display: grid; gap: 1rem; justify-items: start; }
-  .site-footer__about p { margin: 0; line-height: 1.7; max-width: 48ch; }
-  .site-footer__positioning { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 650; color: #fff; font-size: 1rem; line-height: 1.35 !important; }
-  .site-footer__title { color: #fff; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-stretch: normal; margin-bottom: 1rem; }
-  .site-footer__links { list-style: none; display: grid; gap: 0.55rem; }
-  .site-footer a { color: var(--on-dark-2); text-decoration: none; }
-  .site-footer a:hover { color: #fff; text-decoration: underline; }
-  .site-footer__contact { list-style: none; display: grid; gap: 1rem; }
-  .site-footer__contact li { display: flex; gap: 0.75rem; align-items: flex-start; }
-  .site-footer__contact :global(svg) { color: var(--red-300); flex-shrink: 0; margin-top: 0.2rem; }
-  .site-footer__contact li > span { display: grid; gap: 0.1rem; min-width: 0; overflow-wrap: anywhere; }
-  .site-footer__contact .k { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--on-dark-3); }
-  .site-footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.8125rem; }
-  .site-footer__bottom-inner { display: grid; gap: 1rem; padding-block: 1.5rem calc(1.5rem + 64px); }
-  @media (min-width: 768px) { .site-footer__bottom-inner { padding-bottom: 1.5rem; } }
-  .site-footer__disclaimer { margin: 0; max-width: 90ch; color: var(--on-dark-3); }
-  .site-footer__legal { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; justify-content: space-between; align-items: center; }
-  .site-footer__legal p { margin: 0; }
-  .site-footer__legal ul { list-style: none; display: flex; gap: 1.25rem; }
+  .site-footer { background: var(--navy-deep); color: var(--on-navy-muted); padding-block: 4rem 2rem; font-size: 0.9375rem; }
+  .site-footer a { color: #fff; text-decoration: none; }
+  .site-footer a:hover { text-decoration: underline; color: #fff; }
+  .site-footer__top { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
+  .site-footer__brand p { margin-top: 1.25rem; max-width: 34ch; }
+  .site-footer h2 {
+    margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--on-navy-muted);
+  }
+  .site-footer ul { list-style: none; display: grid; gap: 0.6rem; }
+  .site-footer__contact { margin: 0; display: grid; gap: 0.75rem; }
+  .site-footer__contact dt { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .site-footer__contact dd { margin: 0.15rem 0 0; color: #fff; overflow-wrap: anywhere; }
+  .site-footer__vendor { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--rule-on-navy); }
+  .site-footer__bottom { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-on-navy); display: grid; gap: 1rem; font-size: 0.875rem; }
+  .site-footer__disclaimer { max-width: 80ch; }
+  .site-footer__legal { display: flex !important; flex-wrap: wrap; gap: 0.5rem 1.5rem !important; }
+
+  @media (min-width: 640px) {
+    .site-footer__top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .site-footer__top { grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 3rem; }
+  }
 </style>

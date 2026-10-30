@@ -1,86 +1,107 @@
-# Exron Global — corporate website
+# Exron Global website
 
-A static site for **Exron Global General Trading LLC**, built with [Astro](https://astro.build) and deployed on Netlify at **exronglobal.com**.
+The corporate website for **Exron Global General Trading LLC**, built with Astro and hosted on Netlify. Content is edited with Decap CMS.
 
-- Scope: `docs/Exron_Global_Website_Proposal.pdf`
-- Original copy: `docs/Exron-Global-Website-Copy-Final.pdf` (superseded for the homepage by `docs/Website_feedback.pdf`)
+**Status:** draft 2. This draft follows `BUILD-PROMPT.md` and the client's feedback in `docs/Website_feedback.pdf`. The homepage and the RFQ page are complete. The other pages are outlines, waiting for the client to approve the direction.
+
+| Document | Contents |
+| --- | --- |
+| `docs/design-rationale.md` | How draft 2 answers each point of the feedback |
+| `docs/sitemap.md` | Site structure and navigation |
+| `docs/odoo-integration.md` | RFQ adapters and how to switch on Odoo |
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321 with live reload
-npm run build      # production build into dist/
-npm run preview    # serve the built site
-npm run placeholders   # list every [CLIENT TO PROVIDE: …] still on the site
+npm run dev                  # http://localhost:4321
+npm run build                # static build into dist/
+npm run check:placeholders   # list open [CONFIRM] markers (fails only in production)
+npm run check                # type check
 ```
 
-## Folder structure
+## Where things live
 
 ```
-├── netlify.toml               build settings, security headers, www → apex redirect
-├── astro.config.mjs           site URL (https://exronglobal.com) and sitemap
-├── docs/                      proposal and approved copy (source documents)
-├── public/                    favicon, robots.txt, and later /images and /documents
-└── src/
-    ├── content/pages/         ← PAGE COPY: one .md file per page (home.md, …)
-    ├── data/
-    │   ├── site.json          ← company details: email, phone, WhatsApp, address, hours, quote response time, map
-    │   ├── navigation.json    ← header nav (Section 26) and footer quick links
-    ├── components/            Header, Footer, Button, CTABand, FAQ, Steps, ImagePlaceholder, Icon, Logo…
-    ├── layouts/BaseLayout.astro   <head>/SEO, Inter font, header, footer, WhatsApp button
-    ├── lib/site.ts            helpers: {token} filling, placeholder highlighting, tel:/wa.me links
-    ├── styles/tokens.css      ← design system (colors, type scale, spacing)
-    ├── styles/global.css      base styles, buttons, cards, grid
-    └── pages/                 one .astro template per URL (index.astro = Home)
+src/content/home.yml        Homepage text (all ten sections)
+src/content/site.json       Contact details, RFQ acknowledgment time, disclaimer, secure-transmission notice
+src/content/vendor.yml      Vendor information for contracting officers, each field with show: true/false
+src/content/pages/*.md      Other pages: titles, descriptions, stub text, legal text
+src/assets/images/          Photos uploaded through the CMS (optimized to AVIF/WebP at build)
+src/assets/brand/           Logo files used by the site (copies of public/images/exron-logo*.png)
+src/components/             Header, Footer, RfqForm, ContactForm, PhotoSlot, VendorList, …
+src/lib/content.ts          Loads content, fills {tokens}, highlights [CONFIRM] markers
+src/lib/rfq/                RFQ validation, email adapter, Odoo adapter
+src/lib/rfq-form.ts         Browser code for the RFQ form
+netlify/functions/          submission-created: runs after every verified form submission
+public/admin/               Decap CMS
+scripts/check-placeholders.mjs
 ```
 
-## Editing content
+## Placeholders
 
-- **Text:** edit the YAML at the top of `src/content/pages/<page>.md`. Keep the quotes around each value.
-- **Company details:** edit `src/data/site.json`. These values appear everywhere (top bar, footer, contact page, WhatsApp and phone links) and are written as tokens in the copy:
-  `{headquarters}`, `{procurementEmail}`, `{groupName}`, `{naics}`, `{email}`, `{phone}`, `{whatsapp}`, `{address}`, `{hours}`.
-- **Placeholders:** any text like `[CLIENT TO PROVIDE: …]` appears as a yellow dashed highlight on the page. Replace it with the approved information. Run `npm run placeholders` to see what is still outstanding.
-- **Logo:** put the file in `public/images/` and set `"logo": "/images/logo.svg"` in `site.json`.
-- **Images:** grey boxes labelled "IMAGE – <subject>" are `<ImagePlaceholder>` slots. Replace one with
-  `<img src="/images/<file>.jpg" alt="…" loading="lazy" />`. Each placeholder has a suggested `alt` in the page's `.md` file. Use licensed images only, and never imply they show Exron's own projects.
-- **Map:** paste the Google Maps "Embed a map" `src` URL into `mapEmbedUrl` in `site.json`.
+`[CONFIRM: …]` marks information that only Exron Global can provide. On preview deploys these markers show as pale red boxes.
 
-> Content rule (Proposal §21): do not add clients, contracts, certifications, government approvals, affiliations or achievements unless Exron has officially provided them.
+The Netlify build runs `npm run check:placeholders`:
 
-## Design system (v2, after client feedback of 30 Oct 2026)
+- **Production context:** the build fails while any marker remains in a rendered page.
+- **Deploy previews and branch deploys:** the markers are listed, and the build still succeeds.
 
-| Token | Hex | Use |
-|---|---|---|
-| `--navy-700` | `#3C3B6E` | **Brand navy, the dominant colour:** hero, government section, RFQ section, primary buttons |
-| `--navy-900` / `--navy-950` | `#222149` / `#17173A` | Footer, top bar, coverage section, data panels |
-| `--navy-50` / `--navy-100` | `#F3F3F8` / `#E7E7F0` | Tinted panels, notices, hover states |
-| `--red-600` | `#B22234` | **Brand red, for emphasis and calls to action:** Submit an RFQ, rules, markers, eyebrows |
-| `--red-300` | `#E8838F` | Red accents on dark navy backgrounds |
-| `--white` / `--paper` | `#FFFFFF` / `#F7F7FA` | Backgrounds |
-| `--ink-900` / `--ink-700` / `--ink-500` | `#1C1D30` / `#3D3F55` / `#66687E` | Headings / body / secondary text |
+The `/brand` page is skipped by the check, because it shows a marker as an example.
 
-**Type:**
-- Archivo, semi-expanded (108%), for headings, navigation and buttons.
-- Inter for body text.
-- IBM Plex Mono for labels and reference data (vendor codes, RFQ fields, process step numbers).
+## Content rules
 
-All fonts are self-hosted. Display size runs 34→60px, H2 26→40px, body 16px.
+- Do not add contracts, past performance, certifications, registrations or government relationships that Exron Global has not obtained.
+- Describe experience at Expedition Trading & Services as that of individuals on the management team, and keep the disclosure line.
+- Do not present affiliated companies' capabilities as Exron Global's own.
+- Vendor fields stay `show: false` until verified. SAM.gov and CAGE/NCAGE may show "Registration in progress", never a number before it is issued.
 
-**Buttons:** `--quote` (red) is used only for "Submit an RFQ". The others are `--primary` (navy), `--secondary` (navy outline) and `--ghost` (white outline on navy). Corners are 3px, kept square for a more institutional look.
+## Forms
 
-**Imagery:**
-- Use real photographs only: Exron's own operations, team and warehousing, or carefully chosen licensed images.
-- Never use AI-generated images.
-- Never use military imagery that implies U.S. Government endorsement.
-- The coverage map is generated from map data at build time (`src/components/CoverageMap.astro`).
+**Netlify Forms** handles two forms, `rfq` and `contact`. Both use a honeypot field and Netlify reCAPTCHA v2.
 
-## Site structure (client feedback §11)
+**What happens after a submission:** `netlify/functions/submission-created.ts` runs.
 
-Home · About Exron · Capabilities · Industries We Serve · Government Contracting · Contact / Submit an RFQ, plus Privacy Policy and Terms of Use.
+1. It validates the submission again on the server.
+2. It emails procurement (`RFQ_INBOX`).
+3. For RFQs, it also sends the submitter an acknowledgment through Resend.
 
-## Deploying to Netlify
+The function never logs field values.
 
-1. In Netlify, choose **Add new site → Import from Git** and pick this repository. The build settings come from `netlify.toml`.
-2. Under **Domain management**, add `exronglobal.com` and `www.exronglobal.com`, then point the GoDaddy DNS records at Netlify. HTTPS is issued automatically.
-3. **Forms:** Netlify Forms is detected at build time. Set up email notifications to info@exronglobal.com under **Forms → Notifications**.
+## Environment variables (Netlify → Site configuration → Environment variables)
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `RESEND_API_KEY` | yes | Sends acknowledgment and internal emails |
+| `RFQ_INBOX` | yes | Procurement address(es) for RFQ and contact notifications, comma-separated |
+| `RFQ_FROM` | no | Sender. Default `Exron Global Procurement <rfq@exronglobal.com>` |
+| `ODOO_ENABLED`, `ODOO_URL`, `ODOO_DB`, `ODOO_USER`, `ODOO_API_KEY` | later | See `docs/odoo-integration.md` |
+
+## Launch checklist
+
+1. **Connect the site.** In Netlify, choose **Import from Git** and select this repository. The build settings come from `netlify.toml`.
+2. **Set the production branch.** Set it in Netlify and in `public/admin/config.yml` (`backend.branch`, currently `main`).
+3. **Add the domains.** Add `exronglobal.com` and `www.exronglobal.com` and point DNS at Netlify. Netlify issues HTTPS automatically.
+4. **Set up Resend.**
+   - Add `exronglobal.com` as a sending domain.
+   - Create the DNS records Resend lists: SPF (TXT), DKIM (TXT or CNAME) and the return-path MX record.
+   - Add a DMARC TXT record at `_dmarc.exronglobal.com`.
+5. **Add the environment variables** from the table above.
+6. **Turn on the form features.** Under **Forms**, enable form detection and set up reCAPTCHA. The forms already carry `data-netlify-recaptcha`.
+7. **Set up the content manager.**
+   - Enable **Identity** and set registration to **Invite only**.
+   - Enable **Git Gateway**.
+   - Invite the editors.
+8. **Replace every `[CONFIRM]` marker** through `/admin`, then deploy to production.
+
+## Security headers
+
+`netlify.toml` sets these headers for every response:
+
+- HSTS
+- `frame-ancestors 'none'` and `X-Frame-Options: DENY`
+- `nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy`
+
+The rest of the Content-Security-Policy is set in each page's `<head>`. The CMS at `/admin` needs a looser policy (Decap uses `eval` and loads from unpkg) than the public pages, and Netlify combines header rules rather than replacing them. Setting the policy per page keeps the two apart.

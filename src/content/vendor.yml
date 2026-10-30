@@ -1,0 +1,42 @@
+# Vendor information for contracting officers.
+# Every field stays hidden (show: false) until the client has verified it.
+# SAM.gov and CAGE/NCAGE are in process: if approved for display, show the
+# value "Registration in progress". Never enter a number before it is issued.
+
+legal_name:
+  label: Registered legal name
+  value: Exron Global General Trading LLC
+  show: false
+headquarters:
+  label: Headquarters
+  value: "[CONFIRM: city, country]"
+  show: false
+business_registration:
+  label: Business registration
+  value: "[CONFIRM: trade license or registration number and issuing authority]"
+  show: false
+sam_status:
+  label: SAM.gov registration
+  value: Registration in progress
+  show: false
+uei:
+  label: UEI
+  value: "[CONFIRM: issued once SAM.gov registration is complete]"
+  show: false
+cage:
+  label: CAGE / NCAGE code
+  value: Registration in progress
+  show: false
+naics:
+  label: NAICS codes
+  value: "[CONFIRM: NAICS codes]"
+  show: false
+capability_statement:
+  label: Capability statement
+  value: "[CONFIRM: upload the approved PDF to /documents/]"
+  file: ""
+  show: false
+procurement_contact:
+  label: Procurement contact
+  value: "[CONFIRM: name, title, email]"
+  show: false

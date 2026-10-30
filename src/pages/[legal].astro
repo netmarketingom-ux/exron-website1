@@ -1,0 +1,21 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from '../components/PageHead.astro';
+import { markConfirm } from '../lib/content';
+
+export function getStaticPaths() {
+  return ['privacy', 'terms'].map((legal) => ({ params: { legal } }));
+}
+
+const page = (await getEntry('pages', Astro.params.legal))!;
+const html = markConfirm(page.rendered?.html ?? '');
+---
+<BaseLayout title={page.data.seo_title} description={page.data.description} noindex={page.data.noindex}>
+  <PageHead eyebrow="Legal" title={page.data.title} summary={page.data.summary} />
+  <section class="section">
+    <div class="container">
+      <div class="prose" set:html={html} />
+    </div>
+  </section>
+</BaseLayout>

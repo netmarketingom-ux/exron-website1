@@ -1,0 +1,56 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { site, rich, isSet, procurementEmail, telHref, whatsappHref } from '../../lib/content';
+
+const page = (await getEntry('pages', 'contact'))!;
+const details = [
+  { label: 'Procurement and RFQs', value: site.procurement_email, href: procurementEmail && `mailto:${procurementEmail}` },
+  { label: 'Phone', value: site.phone, href: telHref },
+  { label: 'WhatsApp', value: site.whatsapp, href: whatsappHref },
+  { label: 'Office', value: site.address, href: '' },
+];
+---
+<BaseLayout title={page.data.seo_title} description={page.data.description} noindex={page.data.noindex}>
+  <PageHead eyebrow="Contact" title={page.data.title} summary={page.data.summary}>
+    <p class="contact-cta"><a class="btn btn--primary" href="/submit-rfq/">Submit an RFQ</a></p>
+  </PageHead>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="contact__details" id="contact-details">
+        <h2>Contact details</h2>
+        <dl>
+          {details.map((d) => (
+            <div>
+              <dt>{d.label}</dt>
+              <dd>{isSet(d.value) && d.href ? <a href={d.href}>{d.value}</a> : <span set:html={rich(d.value)} />}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="contact__notice small"><strong>Secure transmission.</strong> {site.secure_notice}</p>
+      </div>
+      <div class="contact__form">
+        <h2>General inquiry</h2>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-cta { margin-top: 2rem; }
+  .contact__details h2, .contact__form h2 { font-size: var(--step-3); margin-bottom: 1.25rem; }
+  .contact__details dl { margin: 0; border-top: 1px solid var(--rule); }
+  .contact__details dl > div { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+  .contact__details dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); }
+  .contact__details dd { margin: 0.25rem 0 0; overflow-wrap: anywhere; }
+  .contact__notice { margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--paper); border-left: 3px solid var(--red); }
+  .contact__form { margin-top: 3rem; }
+  @media (min-width: 1024px) {
+    .contact__details { grid-column: 1 / span 4; }
+    .contact__form { grid-column: 6 / span 7; margin-top: 0; }
+  }
+</style>
