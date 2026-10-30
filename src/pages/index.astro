@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
+import QuoteSheet from '../components/QuoteSheet.astro';
 import { home, site, rich, resolveImage } from '../lib/content';
 
 const { hero, strip, intro, government: gov, capabilities: caps, experience: exp, why, coverage, commercial, group, cta } = home;
@@ -81,7 +82,9 @@ const heroBg = heroImage ? await getImage({ src: heroImage, width: 1920, format:
           <p class="lead">{gov.lead}</p>
         </div>
         <div class="gov__photo">
-          <PhotoSlot image={gov.image} alt={gov.image_alt} note={gov.image_note} ratio="4 / 3" />
+          {gov.image
+            ? <PhotoSlot image={gov.image} alt={gov.image_alt} note={gov.image_note} ratio="4 / 3" />
+            : <QuoteSheet />}
         </div>
       </div>
     </div>
@@ -331,8 +334,8 @@ const heroBg = heroImage ? await getImage({ src: heroImage, width: 1920, format:
   .gov__photo :global(.photo-slot) { background: rgba(255, 255, 255, 0.06); border-color: var(--rule-on-navy); }
   .gov__photo :global(.photo-slot figcaption) { color: var(--on-navy-muted); }
   @media (min-width: 1024px) {
-    .gov__head { grid-column: 1 / span 7; }
-    .gov__photo { grid-column: 9 / span 4; margin-top: 0; align-self: end; }
+    .gov__head { grid-column: 1 / span 6; }
+    .gov__photo { grid-column: 8 / span 5; margin-top: 0; align-self: center; }
   }
   .gov__sheet {
     position: relative; margin-top: -4rem; margin-bottom: var(--section-y);
