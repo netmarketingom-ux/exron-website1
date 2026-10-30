@@ -25,7 +25,6 @@ export function resolveHref(href: string): string {
 export const isExternal = (href: string) => /^https?:\/\//.test(href);
 
 const tokens: Record<string, string> = {
-  responseTime: site.responseTime,
   email: site.email,
   phone: site.phone,
   whatsapp: site.whatsapp,
@@ -43,7 +42,7 @@ const esc = (s: string) =>
 
 /**
  * Turn a plain string from the content files into safe HTML:
- * - {responseTime}, {email}, {phone}... are replaced with values from site.json
+ * - {headquarters}, {email}, {phone}... are replaced with values from site.json
  * - [CLIENT TO PROVIDE: ...] markers are highlighted so they are easy to spot
  */
 export function rich(text = ''): string {
