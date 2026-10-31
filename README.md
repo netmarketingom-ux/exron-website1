@@ -67,10 +67,10 @@ scripts/check-placeholders.mjs
 
 `[CONFIRM: …]` marks information that only Exron Global can provide. On preview deploys these markers show as pale red boxes.
 
-The Netlify build runs `npm run check:placeholders`:
+The Netlify build runs `npm run check:placeholders`, which lists every marker still on the site.
 
-- **Production context:** the build fails while any marker remains in a rendered page.
-- **Deploy previews and branch deploys:** the markers are listed, and the build still succeeds.
+- **By default it only reports**, so the site can go live while the client's information is outstanding.
+- **To block deploys until every marker is replaced**, set the Netlify environment variable `STRICT_PLACEHOLDERS=true`.
 
 The `/brand` page is skipped by the check, because it shows a marker as an example.
 

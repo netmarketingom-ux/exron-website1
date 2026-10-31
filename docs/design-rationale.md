@@ -10,7 +10,7 @@ You can review the draft on these pages:
 
 The other pages exist only as outlines. As you asked, the remaining pages will not be built until you approve this direction.
 
-Wherever the site needs information that only you can confirm, it shows a highlighted `[CONFIRM: …]` marker. The site cannot go live while any marker remains: the production build stops until each one is replaced.
+Wherever the site needs information that only you can confirm, it shows a highlighted `[CONFIRM: …]` marker. Each build lists the markers that remain, so none is forgotten before launch.
 
 ---
 

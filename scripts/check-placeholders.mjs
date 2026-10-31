@@ -1,5 +1,6 @@
-// Fails a production build while any [CONFIRM: ...] placeholder is still rendered.
-// Deploy previews and branch deploys only report them.
+// Lists every placeholder still rendered on the site.
+// Reports only, unless STRICT_PLACEHOLDERS=true is set (or --strict is passed),
+// in which case any remaining placeholder fails the build.
 import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
@@ -36,9 +37,9 @@ for (const [file, hits] of found) {
   for (const h of hits) console.log(`    ${h}`);
 }
 
-const isProduction = process.env.CONTEXT === 'production' || process.argv.includes('--strict');
-if (isProduction) {
+const strict = process.env.STRICT_PLACEHOLDERS === 'true' || process.argv.includes('--strict');
+if (strict) {
   console.error('Production build stopped: replace every [CONFIRM] / [CLIENT TO PROVIDE] placeholder first.');
   process.exit(1);
 }
-console.log('Not a production build: continuing.');
+console.log('Reporting only: continuing. Set STRICT_PLACEHOLDERS=true to block deploys until these are replaced.');
