@@ -10,6 +10,22 @@ The corporate website for **Exron Global General Trading LLC**, built with Astro
 | `docs/sitemap.md` | Site structure and navigation |
 | `docs/odoo-integration.md` | RFQ adapters and how to switch on Odoo |
 
+## Homepage options (review only)
+
+Three homepage designs are online for the client to choose from. They use the same content from `src/content/home.yml`.
+
+| Option | Name | Where |
+| --- | --- | --- |
+| A | Specification sheet | `/` (`src/pages/index.astro`) |
+| B | Editorial | `/options/b/` (`src/pages/options/b.astro`) |
+| C | Command | `/options/c/` (`src/pages/options/c.astro`) |
+
+`/options/` compares the three.
+
+- All option pages are noindex and left out of the sitemap.
+- Once the client chooses, move the chosen layout into `src/pages/index.astro`.
+- Then delete `src/pages/options/` and `src/components/OptionBar.astro`, and remove the `/options/` entries from `astro.config.mjs`.
+
 ## Run locally
 
 ```bash

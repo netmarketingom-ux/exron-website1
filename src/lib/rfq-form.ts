@@ -24,6 +24,14 @@ export function initRfqForm() {
     if (radio) radio.checked = true;
   }
 
+  // Fields carried over from a short "start an RFQ" form elsewhere on the site
+  const params = new URLSearchParams(location.search);
+  for (const name of ['organization', 'email', 'solicitation_number']) {
+    const value = params.get(name)?.trim().slice(0, 200);
+    const input = form.querySelector<HTMLInputElement>(`input[name="${name}"]`);
+    if (value && input && !input.value) input.value = value;
+  }
+
   /* Line items repeater, serialised into one hidden field */
   const lines = $<HTMLElement>('[data-line-items]');
   const body = $<HTMLTableSectionElement>('[data-lines-body]');

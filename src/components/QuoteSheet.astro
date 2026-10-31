@@ -3,6 +3,9 @@
  * Illustrative sample of the quotation format, shown in the government
  * section until a photo is uploaded. No prices, so nothing reads as a real offer.
  */
+interface Props { tone?: 'navy' | 'light' }
+const { tone = 'navy' } = Astro.props;
+
 const lines = [
   { item: 'Split AC unit, 24,000 BTU, 220V, brand name or equal', qty: '12 EA', lead: '3 wks', note: 'Equal offered, data sheet attached', equal: true },
   { item: 'MCB circuit breaker, 2-pole, 32A', qty: '40 EA', lead: '10 days', note: 'As specified', equal: false },
@@ -10,7 +13,7 @@ const lines = [
   { item: 'Copper pipe, 3/4 in, Type L, 20 ft', qty: '60 LG', lead: '2 wks', note: 'As specified', equal: false },
 ];
 ---
-<figure class="sheet">
+<figure class:list={['sheet', `sheet--${tone}`]}>
   <div class="sheet__doc" aria-hidden="true">
     <div class="sheet__head">
       <p class="sheet__title">Quotation</p>
@@ -69,4 +72,6 @@ const lines = [
   .sheet__note.is-equal { color: var(--red); font-weight: 600; }
   .sheet__foot { margin: 0.75rem 0 0; font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
   figcaption { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: var(--on-navy-muted); }
+  .sheet--light .sheet__doc { border: 1px solid var(--rule); border-top: 4px solid var(--red); }
+  .sheet--light figcaption { color: var(--steel); }
 </style>

@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 const NOT_IN_SITEMAP = [
   '/about/', '/capabilities/', '/industries/', '/government-contracting/', '/contact/', '/contact/sent/',
   '/submit-rfq/received/', '/privacy/', '/terms/', '/brand/', '/404/',
+  '/options/', '/options/b/', '/options/c/',
 ];
 
 export default defineConfig({
