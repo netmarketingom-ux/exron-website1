@@ -65,10 +65,12 @@ const figures = [
   <!-- 02 Intro -->
   <section class="section" aria-labelledby="c-intro-title">
     <div class="container c-intro">
-      <p class="c-num mono">02</p>
-      <h2 id="c-intro-title">{intro.title}</h2>
-      <p class="lead" set:html={rich(intro.text)} />
-      <p class="c-intro__hq mono"><span>{intro.facts[0].label}</span> <span set:html={rich(intro.facts[0].value)} /></p>
+      <div>
+        <p class="c-num mono">02 · Who we are</p>
+        <h2 id="c-intro-title">{intro.title}</h2>
+        <p class="c-intro__hq mono"><span>{intro.facts[0].label}</span> <span set:html={rich(intro.facts[0].value)} /></p>
+      </div>
+      <p class="lead c-intro__text" set:html={rich(intro.text)} />
     </div>
   </section>
 
@@ -234,7 +236,7 @@ const figures = [
   .c-hero__grid { position: relative; display: grid; gap: 3rem; padding-block: clamp(3rem, 2rem + 6vw, 7rem) 3rem; align-items: center; }
   @media (min-width: 1024px) { .c-hero__grid { grid-template-columns: 7fr 4fr; gap: 4rem; min-height: min(78vh, 760px); } }
   .c-eyebrow { margin: 0 0 1.25rem; font-size: 0.875rem; letter-spacing: 0.24em; color: var(--on-navy-muted); }
-  .c-hero h1 { color: #fff; font-size: clamp(2.5rem, 1.5rem + 4.6vw, 5rem); line-height: 1; max-width: 15ch; font-stretch: 82%; }
+  .c-hero h1 { color: #fff; font-size: clamp(2.125rem, 1.4rem + 2.5vw, 3.5rem); line-height: 1.06; max-width: 22ch; }
   .c-tagline { list-style: none; margin: 2rem 0 0; display: grid; gap: 0.35rem; border-left: 3px solid var(--red); padding-left: 1rem; }
   .c-tagline li { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 650; font-size: var(--step-1); }
   .c-tagline .mono { font-size: 0.875rem; color: var(--on-navy-muted); margin-right: 0.75rem; font-weight: 400; }
@@ -266,8 +268,10 @@ const figures = [
   }
 
   /* Intro */
-  .c-intro { max-width: 60rem; }
+  .c-intro { display: grid; gap: 1.5rem 5rem; }
   .c-intro h2 { margin-bottom: 1.5rem; }
+  .c-intro__text { margin: 0; max-width: none; }
+  @media (min-width: 960px) { .c-intro { grid-template-columns: 5fr 7fr; align-items: start; } .c-intro__text { padding-top: 2.4rem; } }
   .c-intro__hq { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
 
   /* Government */
@@ -305,7 +309,7 @@ const figures = [
   /* Experience */
   .c-exp { display: grid; }
   .c-exp__panel { background: var(--navy-deep); color: #fff; padding: var(--section-y) var(--gutter); }
-  .c-exp__panel h2 { font-size: var(--step-5); max-width: 12ch; }
+  .c-exp__panel h2 { font-size: var(--step-4); max-width: 16ch; }
   .c-exp__body { padding: var(--section-y) var(--gutter); background: var(--paper); }
   .c-disclosure { margin-top: 2rem; padding: 1rem 1.25rem; background: var(--white); border-left: 3px solid var(--red); color: var(--steel); }
   .c-disclosure strong { color: var(--ink); }
