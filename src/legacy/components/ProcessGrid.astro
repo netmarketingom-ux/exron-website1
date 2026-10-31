@@ -1,0 +1,16 @@
+---
+/** Numbered process steps on a ruled grid, as on the homepage. */
+import { rich } from '../lib/site';
+interface Step { title: string; text: string; }
+interface Props { steps: Step[]; dark?: boolean; }
+const { steps, dark = false } = Astro.props;
+---
+<ol class:list={['process-grid', dark && 'process-grid--dark']}>
+  {steps.map((s, i) => (
+    <li>
+      <span class="process-grid__num">{String(i + 1).padStart(2, '0')}</span>
+      <h3 set:html={rich(s.title)} />
+      <p set:html={rich(s.text)} />
+    </li>
+  ))}
+</ol>

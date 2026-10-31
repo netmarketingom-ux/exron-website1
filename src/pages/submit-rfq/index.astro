@@ -1,48 +1,49 @@
 ---
 import { getEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHead from '../../components/PageHead.astro';
+import BaseLayout from '../../legacy/layouts/BaseLayout.astro';
+import PageHero from '../../legacy/components/PageHero.astro';
+import Icon from '../../legacy/components/Icon.astro';
 import RfqForm from '../../components/RfqForm.astro';
-import { home, site, rich, procurementEmail } from '../../lib/content';
+import { rich, site, isSet } from '../../legacy/lib/site';
+import { loadPage } from '../../legacy/lib/page';
+import capsRaw from '../../legacy/content/pages/capabilities.md?raw';
 
 const page = (await getEntry('pages', 'submit-rfq'))!;
-const next = home.government.steps.slice(0, 4);
+const next = loadPage(capsRaw).sourcing.steps.slice(0, 4);
+const secure = 'Do not send classified information, Controlled Unclassified Information (CUI) or export-controlled technical data through this website. If your requirement involves such information, contact us first to agree an appropriate secure method of transmission.';
 ---
 <BaseLayout title={page.data.seo_title} description={page.data.description} noindex={page.data.noindex}>
-  <PageHead eyebrow="RFQ intake" title={page.data.title} summary={page.data.summary} />
+  <PageHero eyebrow="RFQ Desk" title={page.data.title} lead={page.data.summary} crumb="Submit an RFQ" />
 
-  <section class="section rfq">
-    <div class="container grid">
-      <div class="rfq__form">
+  <section class="section rfq-page">
+    <div class="container rfq-page__grid">
+      <div class="form-scope">
         <RfqForm />
       </div>
 
-      <aside class="rfq__aside" aria-label="About this form">
-        <div class="aside-block">
-          <h2 class="aside-block__title">What happens next</h2>
-          <ol class="next">
+      <aside class="rfq-page__aside" aria-label="About this form">
+        <div class="data-card">
+          <p class="data-card__title">What happens next</p>
+          <ol class="rfq-next">
             {next.map((s: any, i: number) => (
               <li>
-                <span class="mono">{String(i + 1).padStart(2, '0')}</span>
+                <span class="rfq-next__num">{String(i + 1).padStart(2, '0')}</span>
                 <div><strong>{s.title}.</strong> {s.text}</div>
               </li>
             ))}
           </ol>
-          <p class="small">You receive an acknowledgment email with your reference number <span set:html={rich(site.rfq_acknowledgment)} />.</p>
+          <p class="data-card__note">You receive an acknowledgment email with your reference number <span set:html={rich('{rfqAcknowledgment}')} />.</p>
         </div>
 
-        <div class="aside-block aside-block--notice">
-          <h2 class="aside-block__title">Controlled information</h2>
-          <p class="small">{site.secure_notice}</p>
-        </div>
+        <p class="notice notice--warn"><Icon name="shield" /><span><strong>Controlled information.</strong> {secure}</span></p>
 
-        <div class="aside-block">
-          <h2 class="aside-block__title">Prefer email?</h2>
-          <p class="small">
+        <div class="data-card">
+          <p class="data-card__title">Prefer email?</p>
+          <p class="rfq-page__email">
             Send the solicitation and attachments to
-            {procurementEmail
-              ? <a href={`mailto:${procurementEmail}`}>{procurementEmail}</a>
-              : <span set:html={rich(site.procurement_email)} />}.
+            {isSet(site.procurementEmail)
+              ? <a href={`mailto:${site.procurementEmail}`}>{site.procurementEmail}</a>
+              : <span set:html={rich(site.procurementEmail)} />}.
             Put the RFQ number in the subject line.
           </p>
         </div>
@@ -52,17 +53,13 @@ const next = home.government.steps.slice(0, 4);
 </BaseLayout>
 
 <style>
-  .rfq { padding-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
-  .rfq__aside { margin-top: 3rem; display: grid; gap: 1.5rem; align-content: start; }
-  @media (min-width: 1024px) {
-    .rfq__form { grid-column: 1 / span 8; }
-    .rfq__aside { grid-column: 9 / span 4; margin-top: 0; }
-  }
-  .aside-block { padding: 1.5rem; background: var(--paper); border-top: 3px solid var(--navy); }
-  .aside-block--notice { border-top-color: var(--red); }
-  .aside-block__title { font-size: var(--step-1); margin-bottom: 1rem; }
-  .next { list-style: none; display: grid; gap: 0.9rem; margin-bottom: 1.25rem; font-size: 1rem; line-height: 1.5; }
-  .next li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.5rem; }
-  .next .mono { color: var(--red); font-size: 0.875rem; padding-top: 0.15rem; }
-  .next strong { color: var(--navy); }
+  .rfq-page__grid { display: grid; gap: 3rem; align-items: start; }
+  .rfq-page__grid > * { min-width: 0; }
+  @media (min-width: 1024px) { .rfq-page__grid { grid-template-columns: 1.6fr 0.9fr; gap: 3.5rem; } }
+  .rfq-page__aside { display: grid; gap: 1.5rem; }
+  .rfq-next { list-style: none; display: grid; gap: 1rem; padding: 1.25rem 1.5rem; font-size: 0.9375rem; line-height: 1.5; }
+  .rfq-next li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.5rem; }
+  .rfq-next__num { font-family: var(--font-mono); color: var(--red-600); font-size: 0.875rem; padding-top: 0.1rem; }
+  .rfq-next strong { color: var(--ink-900); }
+  .rfq-page__email { margin: 0; padding: 1.25rem 1.5rem; font-size: 0.9375rem; }
 </style>

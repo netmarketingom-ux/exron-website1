@@ -1,0 +1,15 @@
+---
+/** Labelled key/value card, as in the homepage company profile. */
+import { rich } from '../lib/site';
+interface Row { k: string; v: string; }
+interface Props { title: string; rows: Row[]; note?: string; id?: string; }
+const { title, rows, note, id } = Astro.props;
+---
+<div class="data-card" id={id}>
+  <p class="data-card__title">{title}</p>
+  <dl>
+    {rows.map((r) => <div><dt>{r.k}</dt><dd set:html={rich(r.v)} /></div>)}
+  </dl>
+  {note && <p class="data-card__note" set:html={rich(note)} />}
+  <slot />
+</div>
