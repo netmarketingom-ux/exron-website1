@@ -67,12 +67,12 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   }
   .site-header__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: var(--header-h); }
   .site-header__actions { display: flex; align-items: center; gap: 0.5rem; }
-  .site-header__rfq { min-height: 44px; padding: 0.55rem 1rem; font-size: 0.9375rem; white-space: nowrap; }
+  .site-header__rfq { min-height: 44px; padding: 0.55rem 1rem; font-size: 1rem; white-space: nowrap; }
 
   .nav-toggle {
     display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0 0.75rem;
     background: none; border: 1px solid var(--rule); border-radius: var(--radius);
-    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--navy); cursor: pointer;
   }
   .nav-toggle__bars, .nav-toggle__bars::before, .nav-toggle__bars::after {
@@ -120,7 +120,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     .nav__list { display: flex; gap: 0.25rem; padding: 0; }
     .nav__link {
       position: relative; padding: 0.5rem 0.65rem; border: 0;
-      font-size: 0.9375rem; font-stretch: 92%; font-weight: 600; white-space: nowrap; color: var(--ink);
+      font-size: 1rem; font-stretch: 92%; font-weight: 600; white-space: nowrap; color: var(--ink);
     }
     .nav__link:hover { color: var(--navy); }
     .nav__link.is-active { color: var(--navy); }

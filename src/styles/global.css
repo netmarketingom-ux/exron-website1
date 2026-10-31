@@ -11,7 +11,7 @@
 
   /* Text on navy backgrounds */
   --on-navy: #ffffff;
-  --on-navy-muted: #d4d4e4;
+  --on-navy-muted: #e1e1ec;
   --rule-on-navy: rgba(255, 255, 255, 0.22);
 
   --font-display: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
@@ -20,9 +20,9 @@
   --display-stretch: 88%;
 
   /* Modular scale, ratio 1.25 on an 17-18px base */
-  --step--1: 0.875rem;
-  --step-0: clamp(1.0625rem, 1.03rem + 0.15vw, 1.125rem);
-  --step-1: clamp(1.25rem, 1.19rem + 0.3vw, 1.406rem);
+  --step--1: 0.9375rem;
+  --step-0: 1.125rem;
+  --step-1: clamp(1.3125rem, 1.25rem + 0.3vw, 1.4375rem);
   --step-2: clamp(1.5rem, 1.38rem + 0.55vw, 1.758rem);
   --step-3: clamp(1.75rem, 1.55rem + 1vw, 2.197rem);
   --step-4: clamp(2rem, 1.68rem + 1.6vw, 2.747rem);
@@ -84,7 +84,7 @@ a:hover { color: var(--red); }
 .eyebrow {
   display: flex; flex-direction: column; gap: 0.75rem;
   margin: 0 0 1.25rem;
-  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500;
+  font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500;
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel);
 }
 .eyebrow::before { content: ''; width: 2.5rem; height: 3px; background: var(--red); }
@@ -123,7 +123,7 @@ a:hover { color: var(--red); }
 mark.confirm {
   background: #fbe9eb; color: #8a1a28; border: 1px solid #e7b3ba;
   padding: 0 0.3em; border-radius: var(--radius);
-  font-family: var(--font-mono); font-size: 0.85em; font-weight: 500;
+  font-family: var(--font-mono); font-size: 0.9em; font-weight: 500;
   box-decoration-break: clone; -webkit-box-decoration-break: clone;
 }
 
