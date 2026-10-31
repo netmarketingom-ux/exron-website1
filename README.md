@@ -10,20 +10,29 @@ The corporate website for **Exron Global General Trading LLC**, built with Astro
 | `docs/sitemap.md` | Site structure and navigation |
 | `docs/odoo-integration.md` | RFQ adapters and how to switch on Odoo |
 
+## Homepage
+
+The homepage at `/` uses the earlier approved design, which the client asked to keep as the default.
+
+- Its files are in `src/legacy/`: its own layout, header, footer, styles and content.
+- Its text is in `src/legacy/content/pages/home.md`.
+- Its contact details are in `src/legacy/data/site.json`.
+- Its placeholders are marked `[CLIENT TO PROVIDE: …]`. The placeholder check counts them as well as `[CONFIRM: …]`.
+
 ## Homepage options (review only)
 
 Three homepage designs are online for the client to choose from. They use the same content from `src/content/home.yml`.
 
 | Option | Name | Where |
 | --- | --- | --- |
-| A | Specification sheet | `/` (`src/pages/index.astro`) |
+| A | Specification sheet | `/options/a/` (`src/pages/options/a.astro`) |
 | B | Editorial | `/options/b/` (`src/pages/options/b.astro`) |
 | C | Command | `/options/c/` (`src/pages/options/c.astro`) |
 
 `/options/` compares the three.
 
 - All option pages are noindex and left out of the sitemap.
-- Once the client chooses, move the chosen layout into `src/pages/index.astro`.
+- If the client chooses one of these instead, move its layout into `src/pages/index.astro`.
 - Then delete `src/pages/options/` and `src/components/OptionBar.astro`, and remove the `/options/` entries from `astro.config.mjs`.
 
 ## Run locally

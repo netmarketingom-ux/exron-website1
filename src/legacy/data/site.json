@@ -1,0 +1,30 @@
+{
+  "_readme": "Company details used across the whole site. Replace any value that starts with [CLIENT TO PROVIDE ...] with verified information. Phone and WhatsApp must include the country code. Never enter registration numbers that have not been officially issued.",
+  "name": "Exron Global",
+  "legalName": "Exron Global General Trading LLC",
+  "positioning": "Government & Military Installation Support Procurement Specialists",
+  "tagline": ["Mission-Driven Procurement.", "Global Supply.", "Reliable Execution."],
+  "url": "https://exronglobal.com",
+  "email": "info@exronglobal.com",
+  "procurementEmail": "[CLIENT TO PROVIDE: procurement / RFQ email address]",
+  "phone": "[CLIENT TO PROVIDE: phone number]",
+  "whatsapp": "[CLIENT TO PROVIDE: WhatsApp number]",
+  "headquarters": "[CLIENT TO PROVIDE: headquarters city, country]",
+  "address": "[CLIENT TO PROVIDE: office address, city, country]",
+  "hours": "[CLIENT TO PROVIDE: business days, hours and time zone]",
+  "rfqAcknowledgment": "[CLIENT TO PROVIDE: e.g. same business day]",
+  "groupName": "[CLIENT TO PROVIDE: group / affiliated company name]",
+  "mapEmbedUrl": "",
+  "logo": "/images/exron-logo.png",
+  "vendor": {
+    "_readme": "Government vendor information. Status text only until each item is officially issued and verified.",
+    "samGov": "Registration in process",
+    "cage": "Registration in process",
+    "naics": "[CLIENT TO PROVIDE: NAICS codes]",
+    "registration": "[CLIENT TO PROVIDE: business registration / trade license no.]"
+  },
+  "topBar": "Government & Military Installation Support · Commercial & Industrial Procurement",
+  "footerIntro": "Exron Global General Trading LLC specializes in strategic sourcing, procurement, supply and logistics coordination for U.S. Government operations, military installations, defense support contractors and institutional customers, and serves commercial and industrial organizations.",
+  "disclaimer": "Exron Global General Trading LLC is a privately owned company. It is not a government agency and is not endorsed by the U.S. Government or any of its departments.",
+  "copyright": "© 2026 Exron Global General Trading LLC. All rights reserved."
+}

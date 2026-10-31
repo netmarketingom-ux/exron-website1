@@ -5,7 +5,7 @@ import { join, relative } from 'node:path';
 
 const DIST = 'dist';
 const SKIP = ['brand/'];  // the identity page shows a placeholder as an example
-const RE = /\[CONFIRM[^\]]*\]/g;
+const RE = /\[(?:CONFIRM|CLIENT TO PROVIDE)[^\]]*\]/g;
 
 async function* htmlFiles(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -38,7 +38,7 @@ for (const [file, hits] of found) {
 
 const isProduction = process.env.CONTEXT === 'production' || process.argv.includes('--strict');
 if (isProduction) {
-  console.error('Production build stopped: replace every [CONFIRM] placeholder first.');
+  console.error('Production build stopped: replace every [CONFIRM] / [CLIENT TO PROVIDE] placeholder first.');
   process.exit(1);
 }
 console.log('Not a production build: continuing.');
