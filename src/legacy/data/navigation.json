@@ -8,12 +8,12 @@
     { "label": "Government Contracting", "href": "/government-contracting/" },
     { "label": "Contact", "href": "/contact/" }
   ],
-  "quote": { "label": "Submit an RFQ", "href": "/contact/#rfq" },
+  "quote": { "label": "Submit an RFQ", "href": "/submit-rfq/" },
   "footerQuickLinks": [
-    { "label": "Submit an RFQ", "href": "/contact/#rfq" },
+    { "label": "Submit an RFQ", "href": "/submit-rfq/" },
     { "label": "Capability Statement", "href": "/government-contracting/#capability-statement" },
     { "label": "Vendor Information", "href": "/government-contracting/#vendor-information" },
-    { "label": "Privacy Policy", "href": "/privacy-policy/" },
-    { "label": "Terms of Use", "href": "/terms-of-use/" }
+    { "label": "Privacy Policy", "href": "/privacy/" },
+    { "label": "Terms of Use", "href": "/terms/" }
   ]
 }

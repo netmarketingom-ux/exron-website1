@@ -1,0 +1,31 @@
+---
+import { rich } from '../lib/content';
+import type { VendorField } from '../lib/content';
+
+interface Props { fields: (VendorField & { key: string })[]; compact?: boolean }
+const { fields, compact = false } = Astro.props;
+---
+<dl class:list={['vendor', compact && 'vendor--compact']}>
+  {fields.map((f) => (
+    <div class="vendor__row" id={f.key === 'capability_statement' ? 'capability-statement' : undefined}>
+      <dt>{f.label}</dt>
+      <dd>
+        {f.key === 'capability_statement' && f.file
+          ? <a href={f.file} download>Download capability statement (PDF)</a>
+          : <span set:html={rich(f.value)} />}
+      </dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .vendor { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+  .vendor__row { display: grid; gap: 0.25rem; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); }
+  .vendor dt { font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); }
+  .vendor dd { margin: 0; }
+  @media (min-width: 640px) { .vendor__row { grid-template-columns: 16rem 1fr; gap: 1.5rem; } }
+  .vendor--compact { border-color: var(--rule-on-navy); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem 2rem; border-top: 0; }
+  .vendor--compact .vendor__row { grid-template-columns: 1fr; border: 0; padding: 0; }
+  .vendor--compact dt { color: var(--on-navy-muted); font-size: 0.8125rem; }
+  .vendor--compact dd { color: #fff; }
+</style>

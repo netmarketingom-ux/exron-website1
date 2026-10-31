@@ -14,7 +14,7 @@ hero:
   heading: "Government & Military Installation Support Procurement Specialists"
   text: "Exron Global specializes in strategic sourcing, procurement, supply and logistics coordination for U.S. Government operations, military installations, defense support contractors and institutional customers, while also serving commercial and industrial organizations."
   buttons:
-    - { label: "Submit an RFQ", href: "/contact/#rfq" }
+    - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Government Contracting Information", href: "/government-contracting/" }
   panel:
     label: "RFQ Desk"
@@ -25,7 +25,7 @@ hero:
       - "Delivery destination and required date"
       - "Specifications and supporting documents (PDF, Excel, Word)"
     note: "Every RFQ is acknowledged on receipt."
-    button: { label: "Start an RFQ", href: "/contact/#rfq" }
+    button: { label: "Start an RFQ", href: "/submit-rfq/" }
 
 # Answers the four questions from feedback §2 within the first screen
 glance:
@@ -198,7 +198,7 @@ rfq:
     - "Technical specifications and supporting documents"
     - "Additional instructions or special requirements"
   buttons:
-    - { label: "Submit an RFQ", href: "/contact/#rfq" }
+    - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Contact the procurement team", href: "/contact/" }
   security: "Do not send classified information, Controlled Unclassified Information (CUI) or other controlled data through this website. If your requirement includes sensitive or controlled information, contact us first so it can be transmitted through an approved secure channel."
 ---

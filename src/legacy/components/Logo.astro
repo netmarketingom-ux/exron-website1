@@ -1,0 +1,36 @@
+---
+/**
+ * Temporary wordmark. Exron's approved logo replaces it: put the file in
+ * /public/images/ and set "logo" in src/data/site.json (e.g. "/images/exron-logo.svg").
+ * For the dark footer, also add "/images/exron-logo-white.svg" (see `inverse`).
+ */
+import { site } from '../lib/site';
+interface Props { inverse?: boolean; }
+const { inverse = false } = Astro.props;
+const src = site.logo && inverse ? site.logo.replace(/(\.\w+)$/, '-white$1') : site.logo;
+---
+<a href="/" class:list={['logo', inverse && 'logo--inverse']} aria-label={`${site.legalName} — home`}>
+  {src ? (
+    <img src={src} alt={site.legalName} width="868" height="212" />
+  ) : (
+    <span class="logo__word">
+      <span class="logo__main">EXRON</span>
+      <span class="logo__sub">GLOBAL</span>
+    </span>
+  )}
+</a>
+
+<style>
+  .logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .logo img { height: clamp(38px, 30px + 1.6vw, 52px); width: auto; }
+  .logo--inverse img { height: 56px; }
+  .logo__word {
+    display: inline-flex; align-items: baseline; gap: 0.3em;
+    font-family: var(--font-display); font-stretch: 118%; letter-spacing: 0.04em; line-height: 1;
+    font-size: clamp(0.95rem, 0.8rem + 0.8vw, 1.4rem);
+    padding-left: 0.6em; border-left: 4px solid var(--red-600);
+  }
+  .logo__main { font-weight: 800; color: var(--navy-700); }
+  .logo__sub { font-weight: 500; color: var(--navy-700); opacity: 0.8; }
+  .logo--inverse .logo__main, .logo--inverse .logo__sub { color: #fff; }
+</style>

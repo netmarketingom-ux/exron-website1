@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from '../components/PageHead.astro';
+import Logo from '../components/Logo.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+
+const colors = [
+  { token: '--navy', hex: '#3C3B6E', use: 'Dominant brand color: header, hero, section bands, headings.' },
+  { token: '--navy-deep', hex: '#2A2950', use: 'Footer, hover states, the RFQ strip under the hero.' },
+  { token: '--red', hex: '#B22234', use: 'Primary buttons, key labels, thin accent rules. Never large areas.' },
+  { token: '--white', hex: '#FFFFFF', use: 'Main background.' },
+  { token: '--paper', hex: '#F6F6F3', use: 'Alternate section background, photo placeholders.' },
+  { token: '--ink', hex: '#1E1E2A', use: 'Body text.' },
+  { token: '--steel', hex: '#5C6070', use: 'Secondary text, captions, mono labels.' },
+  { token: '--rule', hex: '#D9DAE0', use: 'Borders and hairline dividers. Decorative only, never text.' },
+];
+
+const lum = (hex: string) => {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const ratio = (a: string, b: string) => {
+  const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+};
+
+const pairs = [
+  { fg: '#1E1E2A', bg: '#FFFFFF', label: 'Ink on white', use: 'Body text' },
+  { fg: '#1E1E2A', bg: '#F6F6F3', label: 'Ink on paper', use: 'Body text on alternate sections' },
+  { fg: '#3C3B6E', bg: '#FFFFFF', label: 'Navy on white', use: 'Headings, links' },
+  { fg: '#3C3B6E', bg: '#F6F6F3', label: 'Navy on paper', use: 'Headings on alternate sections' },
+  { fg: '#5C6070', bg: '#FFFFFF', label: 'Steel on white', use: 'Captions, hints, mono labels' },
+  { fg: '#5C6070', bg: '#F6F6F3', label: 'Steel on paper', use: 'Captions on alternate sections' },
+  { fg: '#B22234', bg: '#FFFFFF', label: 'Red on white', use: 'Step numbers, "Required" labels, error text' },
+  { fg: '#FFFFFF', bg: '#B22234', label: 'White on red', use: 'Primary button text' },
+  { fg: '#FFFFFF', bg: '#941C2B', label: 'White on red (hover)', use: 'Primary button hover' },
+  { fg: '#FFFFFF', bg: '#3C3B6E', label: 'White on navy', use: 'Hero, section bands' },
+  { fg: '#E1E1EC', bg: '#3C3B6E', label: 'Muted white on navy', use: 'Supporting text on navy' },
+  { fg: '#FFFFFF', bg: '#2A2950', label: 'White on navy-deep', use: 'Footer links' },
+  { fg: '#E1E1EC', bg: '#2A2950', label: 'Muted white on navy-deep', use: 'Footer text, RFQ strip' },
+  { fg: '#8A1A28', bg: '#FBE9EB', label: 'Placeholder text', use: '[CONFIRM] markers on previews' },
+  { fg: '#B22234', bg: '#3C3B6E', label: 'Red on navy', use: 'Not used for text. Red only as a rule or button fill on navy.' },
+].map((p) => {
+  const r = ratio(p.fg, p.bg);
+  return { ...p, r: r.toFixed(2), pass: r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : r >= 3 ? 'AA large only' : 'Fail' };
+});
+
+const scale = [
+  { name: 'Display / H1', token: '--step-5', sample: 'Government & Military Installation Support', cls: 't-h1' },
+  { name: 'H2', token: '--step-4', sample: 'Experience that comes before the company', cls: 't-h2' },
+  { name: 'H3', token: '--step-2', sample: 'How an RFQ moves through Exron Global', cls: 't-h3' },
+  { name: 'Lead', token: '--step-1', sample: 'Installation requirements rarely arrive as a single item.', cls: 't-lead' },
+  { name: 'Body', token: '--step-0', sample: 'Each line is checked against the technical specification. Where we propose an equal to a named brand, we say so clearly and attach the data sheet.', cls: 't-body' },
+  { name: 'Mono label', token: '0.8125rem', sample: 'EXR-RFQ-261030-K7QM · STEP 04', cls: 't-mono' },
+];
+
+const photos = [
+  'Warehouse aisles with racked stock and pallet labels',
+  'Palletised cargo staged at a loading bay',
+  'Containers at a port, early light',
+  'Equipment being inspected against a packing list',
+  'Packing lists, invoices and proof-of-delivery paperwork',
+  'Freight trucks being loaded',
+  'Industrial tools and HVAC units on pallets',
+  'IT hardware being staged and labelled for dispatch',
+];
+const avoid = [
+  'Uniformed personnel, weapons, military vehicles or base signage',
+  'Eagles, seals, flags, stars-and-stripes patterns, insignia, camouflage, stencil type',
+  'Handshakes, people pointing at screens, globe-in-hand',
+  'AI-generated images, 3D renders, abstract network graphics, glowing world maps',
+];
+---
+<BaseLayout title="Visual identity | Exron Global" description="Exron Global visual identity for review: colors, typography, buttons, form fields and image direction." noindex>
+  <PageHead eyebrow="For review · not public" title="Visual identity" summary="The building blocks of the draft 2 design. The site should read like a well-made capability statement. Its strength comes from layout and type, not decoration." />
+
+  <section class="section">
+    <div class="container">
+      <Eyebrow num="01" text="Logo" />
+      <h2>Logo</h2>
+      <p>The approved logo is used as supplied, never redrawn or recolored. The white version is used on navy.</p>
+      <div class="logos">
+        <div class="logos__tile"><Logo height={64} link={false} /></div>
+        <div class="logos__tile logos__tile--navy"><Logo inverse height={64} link={false} /></div>
+      </div>
+      <p class="small note">An SVG version would render sharper at every size. Please supply one if available.</p>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <Eyebrow num="02" text="Color" />
+      <h2>Color</h2>
+      <p>Navy dominates, white gives the page room, and red is kept for action and emphasis. Red never fills a large area.</p>
+      <ul class="swatches">
+        {colors.map((c) => (
+          <li>
+            <span class="swatch" style={`background:${c.hex}`}></span>
+            <p class="mono swatch__token">{c.token}</p>
+            <p class="mono swatch__hex">{c.hex}</p>
+            <p class="small">{c.use}</p>
+          </li>
+        ))}
+      </ul>
+
+      <h3 class="sub">Contrast (WCAG 2.2)</h3>
+      <p>AA requires 4.5:1 for body text and 3:1 for large text (24px, or 19px bold).</p>
+      <div class="table-wrap">
+        <table class="contrast">
+          <thead><tr><th scope="col">Sample</th><th scope="col">Pair</th><th scope="col">Ratio</th><th scope="col">Result</th><th scope="col">Used for</th></tr></thead>
+          <tbody>
+            {pairs.map((p) => (
+              <tr>
+                <td><span class="sample" style={`color:${p.fg};background:${p.bg}`}>Aa</span></td>
+                <td>{p.label}<br /><span class="mono small">{p.fg} / {p.bg}</span></td>
+                <td class="mono">{p.r}:1</td>
+                <td class:list={['mono', p.pass === 'Fail' && 'fail']}>{p.pass}</td>
+                <td class="small">{p.use}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <Eyebrow num="03" text="Typography" />
+      <h2>Typography</h2>
+      <p>
+        Headings in <strong>Archivo</strong> at a slightly condensed width (88%) and weights 600 to 700. Body in <strong>Source Sans 3</strong>,
+        17 to 18px with a 1.6 line height. <strong>IBM Plex Mono</strong> for step numbers, reference numbers and small labels only.
+        All three are self-hosted. The scale is modular (ratio 1.25). Headings use sentence case.
+      </p>
+      <dl class="scale">
+        {scale.map((s) => (
+          <div>
+            <dt class="mono">{s.name} · {s.token}</dt>
+            <dd class={s.cls}>{s.sample}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <Eyebrow num="04" text="Components" />
+      <h2>Buttons and form fields</h2>
+      <p>Corners are square (2px). Primary actions are solid red. Secondary actions are a navy outline. Every control has a visible red or navy focus ring.</p>
+      <div class="buttons">
+        <a class="btn btn--primary" href="/submit-rfq/">Submit an RFQ</a>
+        <a class="btn btn--secondary" href="#">View our capabilities</a>
+      </div>
+      <div class="buttons buttons--navy on-navy">
+        <a class="btn btn--primary" href="/submit-rfq/">Submit an RFQ</a>
+        <a class="btn btn--secondary" href="#">Contact procurement</a>
+      </div>
+
+      <div class="fields">
+        <div class="demo-field">
+          <label for="demo-1">RFQ or solicitation number</label>
+          <span class="hint">If you have one</span>
+          <input id="demo-1" type="text" value="RFQ-26-0142" class="mono-input" />
+        </div>
+        <div class="demo-field">
+          <label for="demo-2">Delivery destination <span class="req">Required</span></label>
+          <span class="err">Enter the delivery destination.</span>
+          <input id="demo-2" type="text" aria-invalid="true" />
+        </div>
+      </div>
+      <p class="small note">The solicitation number above is a format example only.</p>
+
+      <h3 class="sub">Placeholders</h3>
+      <p>Information only Exron Global can confirm appears like this on previews: <mark class="confirm">[CONFIRM: city, country]</mark>. A production build fails while any remain.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="imgdir">
+        <Eyebrow num="05" text="Imagery" />
+        <h2>Image direction</h2>
+        <p>Real photography of the work: goods, paperwork and logistics. Exron's own photos take priority. Until photos are supplied, the site shows a neutral block describing the intended shot.</p>
+        <figure class="photo-demo"><figcaption class="mono">PHOTO: palletised supplies staged in a warehouse, morning light</figcaption></figure>
+      </div>
+      <div class="imglists">
+        <h3>Use</h3>
+        <ul>{photos.map((p) => <li>{p}</li>)}</ul>
+        <h3>Avoid</h3>
+        <ul class="avoid">{avoid.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h2 { margin-bottom: 1rem; }
+  .sub { font-size: var(--step-2); margin: 3rem 0 0.75rem; }
+  .note { color: var(--steel); }
+  .logos { display: grid; gap: 1rem; margin: 2rem 0 1rem; }
+  @media (min-width: 720px) { .logos { grid-template-columns: 1fr 1fr; } }
+  .logos__tile { display: grid; place-items: center; padding: 3rem 1.5rem; border: 1px solid var(--rule); }
+  .logos__tile--navy { background: var(--navy); border-color: var(--navy); }
+
+  .swatches { list-style: none; display: grid; gap: 1.5rem; margin-top: 2rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+  .swatch { display: block; height: 5.5rem; border: 1px solid var(--rule); margin-bottom: 0.75rem; }
+  .swatch__token { margin: 0; font-weight: 500; color: var(--navy); }
+  .swatch__hex { margin: 0 0 0.25rem; color: var(--steel); font-size: 0.875rem; }
+
+  .table-wrap { overflow-x: auto; margin-top: 1rem; }
+  .contrast { width: 100%; border-collapse: collapse; min-width: 40rem; background: var(--white); }
+  .contrast th { text-align: left; font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); padding: 0.75rem; border-bottom: 2px solid var(--navy); }
+  .contrast td { padding: 0.75rem; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+  .sample { display: inline-grid; place-items: center; width: 3rem; height: 2.25rem; font-weight: 700; border: 1px solid var(--rule); }
+  .fail { color: var(--red); font-weight: 600; }
+
+  .scale { margin: 2rem 0 0; border-top: 1px solid var(--rule); }
+  .scale > div { padding: 1.25rem 0; border-bottom: 1px solid var(--rule); }
+  .scale dt { font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.5rem; }
+  .scale dd { margin: 0; }
+  .t-h1, .t-h2, .t-h3 { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 700; color: var(--navy); line-height: 1.12; }
+  .t-h1 { font-size: var(--step-5); }
+  .t-h2 { font-size: var(--step-4); }
+  .t-h3 { font-size: var(--step-2); }
+  .t-lead { font-size: var(--step-1); }
+  .t-body { max-width: var(--measure); }
+  .t-mono { font-family: var(--font-mono); font-size: 0.875rem; letter-spacing: 0.1em; color: var(--steel); }
+
+  .buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; padding: 1.5rem; background: var(--white); border: 1px solid var(--rule); }
+  .buttons--navy { background: var(--navy); border-color: var(--navy); }
+  .fields { display: grid; gap: 1.5rem; margin-top: 2rem; }
+  @media (min-width: 720px) { .fields { grid-template-columns: 1fr 1fr; } }
+  .demo-field { display: grid; gap: 0.35rem; }
+  .demo-field label { font-weight: 650; }
+  .demo-field .hint { font-size: 1rem; color: var(--steel); }
+  .demo-field .err { font-size: 1rem; font-weight: 600; color: var(--red); }
+  .demo-field .req { margin-left: 0.4rem; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); }
+  .demo-field input { min-height: 48px; padding: 0.65rem 0.8rem; font: inherit; border: 1px solid #8b8e9c; border-radius: var(--radius); background: var(--white); }
+  .demo-field input[aria-invalid='true'] { border: 2px solid var(--red); }
+  .demo-field .mono-input { font-family: var(--font-mono); }
+
+  .photo-demo { margin: 2rem 0 0; aspect-ratio: 4 / 3; display: flex; align-items: flex-end; background: var(--paper); border: 1px solid var(--rule); }
+  .photo-demo figcaption { padding: 1rem 1.25rem; font-size: 0.875rem; color: var(--steel); }
+  .imglists { margin-top: 2.5rem; }
+  .imglists h3 { margin: 0 0 0.75rem; }
+  .imglists ul { list-style: none; border-top: 1px solid var(--rule); margin-bottom: 2rem; }
+  .imglists li { padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+  .avoid li { color: var(--steel); }
+  @media (min-width: 1024px) {
+    .imgdir { grid-column: 1 / span 6; }
+    .imglists { grid-column: 8 / span 5; margin-top: 0; }
+  }
+</style>

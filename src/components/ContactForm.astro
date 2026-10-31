@@ -1,0 +1,56 @@
+<form
+  class="cform"
+  name="contact"
+  method="POST"
+  action="/contact/sent/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-netlify-recaptcha="true"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="cform__hp" aria-hidden="true">
+    <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <div class="cform__row">
+    <div class="cform__field">
+      <label for="c-name">Name <span class="req">Required</span></label>
+      <input id="c-name" name="name" type="text" required maxlength="120" autocomplete="name" />
+    </div>
+    <div class="cform__field">
+      <label for="c-email">Email <span class="req">Required</span></label>
+      <input id="c-email" name="email" type="email" required maxlength="200" autocomplete="email" />
+    </div>
+  </div>
+  <div class="cform__field">
+    <label for="c-subject">Subject <span class="req">Required</span></label>
+    <input id="c-subject" name="subject" type="text" required maxlength="200" />
+  </div>
+  <div class="cform__field">
+    <label for="c-message">Message <span class="req">Required</span></label>
+    <textarea id="c-message" name="message" rows="6" required maxlength="5000"></textarea>
+  </div>
+  <label class="cform__check">
+    <input type="checkbox" name="privacy_consent" value="agreed" required />
+    <span>I agree that Exron Global may use these details to reply, as described in the <a href="/privacy/">Privacy Policy</a>.</span>
+  </label>
+  <div data-netlify-recaptcha="true"></div>
+  <div><button class="btn btn--primary" type="submit">Send message</button></div>
+</form>
+
+<style>
+  .cform { display: grid; gap: 1.25rem; }
+  .cform__hp { position: absolute; left: -9999px; }
+  .cform__row { display: grid; gap: 1.25rem; }
+  @media (min-width: 720px) { .cform__row { grid-template-columns: 1fr 1fr; } }
+  .cform__field { display: grid; gap: 0.35rem; }
+  .cform label { font-weight: 650; }
+  .req { margin-left: 0.4rem; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); }
+  .cform input[type='text'], .cform input[type='email'], .cform textarea {
+    width: 100%; min-height: 48px; padding: 0.65rem 0.8rem; font: inherit; color: var(--ink);
+    background: var(--white); border: 1px solid #8b8e9c; border-radius: var(--radius);
+  }
+  .cform textarea { resize: vertical; }
+  .cform input:focus-visible, .cform textarea:focus-visible { outline: 3px solid var(--navy); outline-offset: 0; }
+  .cform__check { display: flex; gap: 0.75rem; align-items: flex-start; font-weight: 400 !important; }
+  .cform__check input { width: 1.25rem; height: 1.25rem; margin-top: 0.15rem; accent-color: var(--navy); flex-shrink: 0; }
+</style>

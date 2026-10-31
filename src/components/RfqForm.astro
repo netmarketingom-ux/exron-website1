@@ -1,0 +1,272 @@
+---
+import { site } from '../lib/content';
+
+const divisions = [
+  { value: 'government', label: 'Government / military installation' },
+  { value: 'contractor', label: 'Prime or defense support contractor' },
+  { value: 'commercial', label: 'Commercial / industrial' },
+];
+const accept = '.pdf,.doc,.docx,.xls,.xlsx,.csv';
+---
+<form
+  class="form"
+  name="rfq"
+  method="POST"
+  action="/submit-rfq/received/"
+  enctype="multipart/form-data"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-netlify-recaptcha="true"
+  data-rfq-form
+>
+  <input type="hidden" name="form-name" value="rfq" />
+  <input type="hidden" name="reference" value="" data-reference />
+  <input type="hidden" name="line_items" value="" data-line-items-field />
+  <p class="form__hp" aria-hidden="true">
+    <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="form__summary" role="alert" tabindex="-1" hidden data-error-summary>
+    <p><strong>Please check the highlighted fields.</strong></p>
+    <ul data-error-list></ul>
+  </div>
+
+  <fieldset class="form__group">
+    <legend><span class="mono">01</span> Requesting organization</legend>
+
+    <fieldset class="field field--radios" data-field="division">
+      <legend class="field__label">Division <span class="req">Required</span></legend>
+      <div class="radios">
+        {divisions.map((d, i) => (
+          <label class="radio">
+            <input type="radio" name="division" value={d.value} required checked={i === 0} />
+            <span>{d.label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+
+    <div class="field" data-field="organization">
+      <label class="field__label" for="organization">Organization name <span class="req">Required</span></label>
+      <p class="field__hint" id="organization-hint">Company or government organization</p>
+      <input id="organization" name="organization" type="text" required maxlength="200" autocomplete="organization" aria-describedby="organization-hint" />
+    </div>
+
+    <div class="form__row">
+      <div class="field" data-field="contact_name">
+        <label class="field__label" for="contact_name">Contact person <span class="req">Required</span></label>
+        <input id="contact_name" name="contact_name" type="text" required maxlength="120" autocomplete="name" />
+      </div>
+      <div class="field" data-field="email">
+        <label class="field__label" for="email">Official email address <span class="req">Required</span></label>
+        <p class="field__hint" id="email-hint">Use your work or official address.</p>
+        <input id="email" name="email" type="email" required maxlength="200" autocomplete="email" aria-describedby="email-hint" />
+      </div>
+    </div>
+
+    <div class="field field--half" data-field="phone">
+      <label class="field__label" for="phone">Phone</label>
+      <p class="field__hint" id="phone-hint">Include country code</p>
+      <input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" aria-describedby="phone-hint" />
+    </div>
+  </fieldset>
+
+  <fieldset class="form__group">
+    <legend><span class="mono">02</span> Requirement</legend>
+
+    <div class="form__row">
+      <div class="field" data-field="solicitation_number">
+        <label class="field__label" for="solicitation_number">RFQ or solicitation number</label>
+        <p class="field__hint" id="sol-hint">If you have one</p>
+        <input id="solicitation_number" name="solicitation_number" type="text" maxlength="100" class="mono-input" aria-describedby="sol-hint" />
+      </div>
+      <div class="field" data-field="quote_due">
+        <label class="field__label" for="quote_due">Quotation due date</label>
+        <p class="field__hint" id="due-hint">The deadline for our response</p>
+        <input id="quote_due" name="quote_due" type="date" aria-describedby="due-hint" />
+      </div>
+    </div>
+
+    <div class="field" data-field="description">
+      <label class="field__label" for="description">Product or service description <span class="req">Required</span></label>
+      <p class="field__hint" id="desc-hint">What you need, including brand, part number or "brand name or equal" where it applies.</p>
+      <textarea id="description" name="description" rows="5" required maxlength="5000" aria-describedby="desc-hint"></textarea>
+    </div>
+
+    <div class="field lines" data-line-items hidden>
+      <p class="field__label" id="lines-label">Line items</p>
+      <p class="field__hint" id="lines-hint">Optional. Add one row per item. If you list items here, the quantities field below is optional.</p>
+      <table class="lines__table" aria-labelledby="lines-label" aria-describedby="lines-hint">
+        <thead>
+          <tr><th scope="col">#</th><th scope="col">Item</th><th scope="col">Quantity</th><th scope="col">Unit</th><th scope="col"><span class="sr-only">Remove</span></th></tr>
+        </thead>
+        <tbody data-lines-body></tbody>
+      </table>
+      <button type="button" class="btn btn--secondary btn--small" data-add-line>Add line item</button>
+      <template data-line-template>
+        <tr>
+          <td class="lines__num mono"></td>
+          <td><input type="text" maxlength="300" data-col="item" /></td>
+          <td><input type="text" inputmode="decimal" maxlength="20" data-col="qty" /></td>
+          <td><input type="text" maxlength="20" placeholder="EA" data-col="unit" /></td>
+          <td><button type="button" class="lines__remove" data-remove-line>Remove</button></td>
+        </tr>
+      </template>
+    </div>
+
+    <div class="field" data-field="quantities">
+      <label class="field__label" for="quantities">Required quantities <span class="req" data-quantities-req>Required</span></label>
+      <p class="field__hint" id="qty-hint">Quantity and unit for each item, for example "40 EA" or "12 rolls".</p>
+      <textarea id="quantities" name="quantities" rows="3" required maxlength="5000" aria-describedby="qty-hint"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset class="form__group">
+    <legend><span class="mono">03</span> Delivery</legend>
+    <div class="form__row">
+      <div class="field" data-field="destination">
+        <label class="field__label" for="destination">Delivery destination <span class="req">Required</span></label>
+        <p class="field__hint" id="dest-hint">Installation, city, country</p>
+        <input id="destination" name="destination" type="text" required maxlength="300" aria-describedby="dest-hint" />
+      </div>
+      <div class="field" data-field="delivery_date">
+        <label class="field__label" for="delivery_date">Requested delivery date</label>
+        <p class="field__hint" id="deliv-hint">Required on site by</p>
+        <input id="delivery_date" name="delivery_date" type="date" aria-describedby="deliv-hint" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="form__group">
+    <legend><span class="mono">04</span> Specifications and documents</legend>
+    <p class="field__hint" id="files-hint">
+      Up to three files: PDF, Word, Excel or CSV, 8 MB in total. For larger files, submit the form and we will send you a secure upload link.
+    </p>
+    <div class="files" data-field="attachments">
+      {[1, 2, 3].map((n) => (
+        <div class="field">
+          <label class="field__label" for={`attachment_${n}`}>Document {n}</label>
+          <input id={`attachment_${n}`} name={`attachment_${n}`} type="file" accept={accept} aria-describedby="files-hint" data-file />
+        </div>
+      ))}
+    </div>
+    <p class="field__error" id="files-error" data-files-error hidden></p>
+
+    <div class="field" data-field="instructions">
+      <label class="field__label" for="instructions">Additional instructions</label>
+      <p class="field__hint" id="instr-hint">Packing, marking, receiving hours, gate access, required forms or anything else we should know.</p>
+      <textarea id="instructions" name="instructions" rows="4" maxlength="5000" aria-describedby="instr-hint"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset class="form__group">
+    <legend><span class="mono">05</span> Confirm and send</legend>
+    <div class="field" data-field="no_controlled_info">
+      <label class="check">
+        <input type="checkbox" name="no_controlled_info" value="confirmed" required />
+        <span>I confirm this submission does not contain classified, CUI or export-controlled information. <span class="req">Required</span></span>
+      </label>
+    </div>
+    <div class="field" data-field="privacy_consent">
+      <label class="check">
+        <input type="checkbox" name="privacy_consent" value="agreed" required />
+        <span>I agree that Exron Global may process this information to prepare a quotation, as described in the <a href="/privacy/">Privacy Policy</a>. <span class="req">Required</span></span>
+      </label>
+    </div>
+
+    <div class="form__captcha" data-netlify-recaptcha="true"></div>
+
+    <div class="form__submit">
+      <button class="btn btn--primary" type="submit" data-submit>Submit RFQ</button>
+      <p class="small form__status" role="status" data-status></p>
+    </div>
+    <p class="form__error small" role="alert" data-send-error hidden>
+      The form could not be sent. Check your connection and try again, or email the RFQ to
+      <span data-fallback-email>{site.procurement_email}</span>.
+    </p>
+  </fieldset>
+</form>
+
+<script>
+  import { initRfqForm } from '../lib/rfq-form';
+  initRfqForm();
+</script>
+
+<style>
+  .form { display: grid; gap: 1.5rem; }
+  .form__hp { position: absolute; left: -9999px; }
+  .form__group { margin: 0; padding: 0 0 1.75rem; border: 0; border-bottom: 1px solid var(--rule); display: grid; gap: 1.25rem; min-width: 0; }
+  .form__group > legend {
+    padding: 0; margin-bottom: 1.25rem; font-family: var(--font-display); font-stretch: var(--display-stretch);
+    font-weight: 700; font-size: var(--step-2); color: var(--navy);
+  }
+  .form__group > legend .mono { font-size: 0.875rem; font-weight: 500; color: var(--red); margin-right: 0.5rem; letter-spacing: 0.04em; }
+  .form__row { display: grid; gap: 1.25rem; }
+  @media (min-width: 720px) {
+    .form__row { grid-template-columns: 1fr 1fr; align-items: end; }
+    .field--half { max-width: calc(50% - 0.625rem); }
+  }
+
+  .field { display: grid; gap: 0.35rem; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .field__label { font-weight: 650; color: var(--ink); margin: 0; padding: 0; }
+  .req {
+    margin-left: 0.4rem; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--red);
+  }
+  .field__hint { margin: 0; font-size: 1rem; color: var(--steel); }
+  .field__error { margin: 0; font-size: 1rem; font-weight: 600; color: var(--red); }
+
+  .form :global(input[type='text']), .form :global(input[type='email']), .form :global(input[type='tel']),
+  .form :global(input[type='date']), .form :global(textarea) {
+    width: 100%; min-height: 48px; padding: 0.65rem 0.8rem;
+    font: inherit; color: var(--ink); background: var(--white);
+    border: 1px solid #8b8e9c; border-radius: var(--radius);
+  }
+  .form :global(textarea) { resize: vertical; min-height: 7rem; }
+  .form :global(input:focus-visible), .form :global(textarea:focus-visible) { outline: 3px solid var(--navy); outline-offset: 0; border-color: var(--navy); }
+  .form :global([aria-invalid='true']) { border-color: var(--red) !important; border-width: 2px !important; }
+  .mono-input { font-family: var(--font-mono) !important; }
+  .form :global(input[type='file']) { font: inherit; font-size: 1rem; max-width: 100%; }
+  .form :global(input[type='file']::file-selector-button) {
+    margin-right: 0.75rem; padding: 0.55rem 0.9rem; font: inherit; font-weight: 600;
+    background: var(--paper); color: var(--navy); border: 1px solid var(--navy); border-radius: var(--radius); cursor: pointer;
+  }
+
+  .radios { display: grid; gap: 0.5rem; }
+  .radio, .check { display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; }
+  .radio { padding: 0.8rem 1rem; border: 1px solid var(--rule); border-radius: var(--radius); }
+  .radio:has(input:checked) { border-color: var(--navy); background: #f1f1f7; }
+  .radio input, .check input { width: 1.25rem; height: 1.25rem; margin: 0.15rem 0 0; accent-color: var(--navy); flex-shrink: 0; }
+  @media (min-width: 900px) { .radios { grid-template-columns: repeat(3, 1fr); } }
+
+  .files { display: grid; gap: 1rem; }
+
+  .lines__table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 0.75rem; }
+  .lines__table th {
+    text-align: left; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--steel); padding: 0.4rem 0.4rem 0.4rem 0; border-bottom: 1px solid var(--rule);
+  }
+  .lines__table td { padding: 0.4rem 0.4rem 0.4rem 0; vertical-align: middle; }
+  .lines__table th:nth-child(1), .lines__table td:nth-child(1) { width: 2rem; }
+  .lines__table th:nth-child(3), .lines__table td:nth-child(3) { width: 18%; }
+  .lines__table th:nth-child(4), .lines__table td:nth-child(4) { width: 15%; }
+  .lines__table th:nth-child(5), .lines__table td:nth-child(5) { width: 4.5rem; }
+  .lines__num { font-size: 0.875rem; color: var(--steel); }
+  .lines__remove { background: none; border: 0; padding: 0.5rem 0; font: inherit; font-size: 0.875rem; color: var(--red); text-decoration: underline; cursor: pointer; min-height: 44px; }
+  :global(.btn--small) { min-height: 44px; padding: 0.5rem 1rem; font-size: 1rem; justify-self: start; }
+  @media (max-width: 559px) {
+    .lines__table thead { display: none; }
+    .lines__table tr { display: grid; grid-template-columns: 2rem 1fr 1fr; gap: 0.4rem; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+    .lines__table td { width: auto !important; padding: 0; }
+    .lines__table td:nth-child(2) { grid-column: 2 / -1; }
+    .lines__table td:nth-child(3) { grid-column: 2; }
+    .lines__table td:nth-child(5) { grid-column: 2 / -1; }
+  }
+
+  .form__summary { padding: 1rem 1.25rem; border: 2px solid var(--red); background: #fbe9eb; }
+  .form__summary ul { padding-left: 1.25rem; margin-top: 0.5rem; }
+  .form__summary a { color: #8a1a28; font-weight: 600; }
+  .form__submit { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+  .form__status { margin: 0; color: var(--steel); }
+  .form__error { margin: 0; padding: 0.75rem 1rem; border-left: 3px solid var(--red); background: #fbe9eb; }
+</style>

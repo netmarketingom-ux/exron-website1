@@ -1,0 +1,36 @@
+---
+/** Review-only bar shown on the alternative homepage designs. */
+interface Props { current: 'A' | 'B' | 'C' }
+const { current } = Astro.props;
+const options = [
+  { id: 'A', name: 'Specification sheet', href: '/options/a/' },
+  { id: 'B', name: 'Editorial', href: '/options/b/' },
+  { id: 'C', name: 'Command', href: '/options/c/' },
+];
+---
+<div class="optbar" role="note" aria-label="Design review">
+  <div class="container optbar__inner">
+    <p class="optbar__label mono">Homepage design for review</p>
+    <ul>
+      {options.map((o) => (
+        <li>
+          <a href={o.href} aria-current={o.id === current ? 'page' : undefined}>
+            <span class="mono">Option {o.id}</span> {o.name}
+          </a>
+        </li>
+      ))}
+      <li><a href="/options/">Compare</a></li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .optbar { background: var(--ink); color: #fff; font-size: 0.875rem; }
+  .optbar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 1.5rem; padding-block: 0.5rem; }
+  .optbar__label { margin: 0; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; color: #c9c9d6; }
+  .optbar ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+  .optbar a { color: #fff; text-decoration: none; padding: 0.35rem 0; display: inline-block; }
+  .optbar a:hover { text-decoration: underline; color: #fff; }
+  .optbar a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 0.35em; }
+  .optbar .mono { font-size: 0.8125rem; color: #c9c9d6; }
+</style>

@@ -1,0 +1,28 @@
+---
+interface Props { summary: string }
+const { summary } = Astro.props;
+---
+<section class="section">
+  <div class="container stub">
+    <p class="stub__label mono">In preparation</p>
+    <p class="lead">{summary}</p>
+    <div class="stub__cta">
+      <p>Have a requirement now? You do not need to wait for this page.</p>
+      <div class="stub__actions">
+        <a class="btn btn--primary" href="/submit-rfq/">Submit an RFQ</a>
+        <a class="btn btn--secondary" href="/">Back to the homepage</a>
+      </div>
+    </div>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .stub { max-width: 52rem; }
+  .stub__label {
+    display: inline-block; margin-bottom: 1.25rem; padding: 0.25rem 0.6rem; border: 1px solid var(--rule);
+    font-size: 0.875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel);
+  }
+  .stub__cta { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+  .stub__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+</style>

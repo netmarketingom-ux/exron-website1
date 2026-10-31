@@ -1,61 +1,85 @@
 ---
-import '@fontsource-variable/inter';
-import '@fontsource-variable/archivo/wdth.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
+import archivo from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import sourceSans from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
+import plex400 from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
+import plex500 from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2?url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import WhatsAppFloat from '../components/WhatsAppFloat.astro';
-import { site, plain } from '../lib/site';
+import { site, plain, isSet, procurementEmail } from '../lib/content';
 
 interface Props {
   title: string;
   description: string;
-  schema?: object[]; // extra JSON-LD blocks (e.g. FAQPage)
   noindex?: boolean;
 }
-const { title, description, schema = [], noindex = false } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL('/images/og-exron.png', site.url).href;
+const metaDescription = plain(description);
 
-const org = {
+// Only verified fields go into structured data.
+const org: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: site.legalName,
+  name: site.legal_name,
   alternateName: site.name,
   url: site.url,
-  email: site.email,
-  slogan: site.tagline.join(' '),
-  description: site.footerIntro,
+  logo: new URL('/images/exron-logo.png', site.url).href,
 };
+if (procurementEmail) org.email = procurementEmail;
+if (isSet(site.address)) org.address = site.address;
+
+const unicodeLatin =
+  'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
+const fontFaces = `
+@font-face{font-family:'Archivo Variable';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(${archivo}) format('woff2');unicode-range:${unicodeLatin}}
+@font-face{font-family:'Source Sans 3 Variable';font-style:normal;font-display:swap;font-weight:200 900;src:url(${sourceSans}) format('woff2');unicode-range:${unicodeLatin}}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:400;src:url(${plex400}) format('woff2');unicode-range:${unicodeLatin}}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:500;src:url(${plex500}) format('woff2');unicode-range:${unicodeLatin}}
+`;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
     <title>{title}</title>
-    <meta name="description" content={plain(description)} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#3C3B6E" />
+    <link rel="preload" href={archivo} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sourceSans} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaces} />
+    <slot name="head" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={site.legalName} />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={plain(description)} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Exron Global logo on a navy background" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
     <script type="application/ld+json" set:html={JSON.stringify(org)} />
-    {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <slot name="top" />
     <Header />
     <main id="main">
       <slot />
     </main>
     <Footer />
-    <WhatsAppFloat />
   </body>
 </html>

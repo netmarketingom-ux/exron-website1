@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from '../components/PageHead.astro';
+---
+<BaseLayout title="Page not found | Exron Global" description="The page you requested does not exist." noindex>
+  <PageHead eyebrow="Error 404" title="Page not found" summary="The address may be mistyped, or the page may have moved during the site rebuild." />
+  <section class="section">
+    <div class="container">
+      <p><a class="text-link" href="/">Go to the homepage</a></p>
+      <p><a class="text-link" href="/submit-rfq/">Submit an RFQ</a></p>
+    </div>
+  </section>
+</BaseLayout>

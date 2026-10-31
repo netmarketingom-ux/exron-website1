@@ -1,0 +1,77 @@
+---
+/**
+ * Illustrative sample of the quotation format, shown in the government
+ * section until a photo is uploaded. No prices, so nothing reads as a real offer.
+ */
+interface Props { tone?: 'navy' | 'light' }
+const { tone = 'navy' } = Astro.props;
+
+const lines = [
+  { item: 'Split AC unit, 24,000 BTU, 220V, brand name or equal', qty: '12 EA', lead: '3 wks', note: 'Equal offered, data sheet attached', equal: true },
+  { item: 'MCB circuit breaker, 2-pole, 32A', qty: '40 EA', lead: '10 days', note: 'As specified', equal: false },
+  { item: 'Safety helmet, ANSI Z89.1 Type I', qty: '150 EA', lead: '2 wks', note: 'As specified', equal: false },
+  { item: 'Copper pipe, 3/4 in, Type L, 20 ft', qty: '60 LG', lead: '2 wks', note: 'As specified', equal: false },
+];
+---
+<figure class:list={['sheet', `sheet--${tone}`]}>
+  <div class="sheet__doc" aria-hidden="true">
+    <div class="sheet__head">
+      <p class="sheet__title">Quotation</p>
+      <p class="sheet__ref mono">EXR-RFQ-261030-K7QM</p>
+    </div>
+    <dl class="sheet__meta mono">
+      <div><dt>Solicitation</dt><dd>RFQ-26-0142</dd></div>
+      <div><dt>Validity</dt><dd>30 days</dd></div>
+      <div><dt>Delivery</dt><dd>Installation receiving</dd></div>
+    </dl>
+    <ol class="sheet__lines">
+      {lines.map((l, i) => (
+        <li>
+          <span class="sheet__num mono">{String(i + 1).padStart(2, '0')}</span>
+          <span class="sheet__item">{l.item}</span>
+          <span class="sheet__qty mono">{l.qty}</span>
+          <span class="sheet__lead mono">{l.lead}</span>
+          <span class:list={['sheet__note', l.equal && 'is-equal']}>{l.note}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="sheet__foot mono">Packing list · Invoice · Proof of delivery</p>
+  </div>
+  <figcaption>
+    Illustrative sample of our quotation format: each line priced against the specification, with lead time and any proposed equal stated.
+    Not a real quotation.
+  </figcaption>
+</figure>
+
+<style>
+  .sheet { margin: 0; }
+  .sheet__doc {
+    background: var(--white); color: var(--ink); border-top: 4px solid var(--red);
+    padding: 1.25rem 1.25rem 1rem; font-size: 0.875rem; line-height: 1.4;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  }
+  .sheet__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--navy); }
+  .sheet__title {
+    margin: 0; font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 700;
+    font-size: 1.25rem; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .sheet__ref { margin: 0; font-size: 0.875rem; color: var(--steel); }
+  .sheet__meta { margin: 0; display: grid; grid-template-columns: repeat(3, auto); gap: 0.5rem 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--rule); font-size: 0.8125rem; }
+  .sheet__meta dt { color: var(--steel); text-transform: uppercase; letter-spacing: 0.08em; }
+  .sheet__meta dd { margin: 0.1rem 0 0; color: var(--ink); }
+  .sheet__lines { list-style: none; }
+  .sheet__lines li {
+    display: grid; grid-template-columns: 1.75rem 1fr auto; gap: 0.15rem 0.5rem;
+    padding: 0.6rem 0; border-bottom: 1px solid var(--rule);
+  }
+  .sheet__num { color: var(--red); font-size: 0.875rem; grid-row: span 2; padding-top: 0.05rem; }
+  .sheet__item { font-weight: 600; color: var(--navy); }
+  .sheet__qty { font-size: 0.875rem; text-align: right; }
+  .sheet__lead { font-size: 0.8125rem; color: var(--steel); text-align: right; grid-column: 3; grid-row: 2; }
+  .sheet__note { font-size: 0.875rem; color: var(--steel); grid-column: 2; grid-row: 2; }
+  .sheet__note.is-equal { color: var(--red); font-weight: 600; }
+  .sheet__foot { margin: 0.75rem 0 0; font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
+  figcaption { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: var(--on-navy-muted); }
+  .sheet--light .sheet__doc { border: 1px solid var(--rule); border-top: 4px solid var(--red); }
+  .sheet--light figcaption { color: var(--steel); }
+</style>

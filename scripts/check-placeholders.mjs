@@ -1,0 +1,45 @@
+// Lists every placeholder still rendered on the site.
+// Reports only, unless STRICT_PLACEHOLDERS=true is set (or --strict is passed),
+// in which case any remaining placeholder fails the build.
+import { readdir, readFile } from 'node:fs/promises';
+import { join, relative } from 'node:path';
+
+const DIST = 'dist';
+const SKIP = ['brand/'];  // the identity page shows a placeholder as an example
+const RE = /\[(?:CONFIRM|CLIENT TO PROVIDE)[^\]]*\]/g;
+
+async function* htmlFiles(dir) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) yield* htmlFiles(path);
+    else if (entry.name.endsWith('.html')) yield path;
+  }
+}
+
+const found = new Map();
+for await (const file of htmlFiles(DIST)) {
+  const rel = relative(DIST, file);
+  if (SKIP.some((s) => rel.startsWith(s))) continue;
+  const text = (await readFile(file, 'utf8')).replace(/<[^>]+>/g, ' ');
+  const hits = [...new Set(text.match(RE) ?? [])];
+  if (hits.length) found.set(rel, hits);
+}
+
+const total = [...found.values()].reduce((n, h) => n + h.length, 0);
+if (!total) {
+  console.log('check:placeholders: no [CONFIRM] placeholders found.');
+  process.exit(0);
+}
+
+console.log(`check:placeholders: ${total} open placeholder(s)`);
+for (const [file, hits] of found) {
+  console.log(`  ${file}`);
+  for (const h of hits) console.log(`    ${h}`);
+}
+
+const strict = process.env.STRICT_PLACEHOLDERS === 'true' || process.argv.includes('--strict');
+if (strict) {
+  console.error('Production build stopped: replace every [CONFIRM] / [CLIENT TO PROVIDE] placeholder first.');
+  process.exit(1);
+}
+console.log('Reporting only: continuing. Set STRICT_PLACEHOLDERS=true to block deploys until these are replaced.');

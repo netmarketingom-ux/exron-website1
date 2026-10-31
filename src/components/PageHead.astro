@@ -1,0 +1,21 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import { rich } from '../lib/content';
+
+interface Props { eyebrow: string; title: string; summary?: string }
+const { eyebrow, title, summary } = Astro.props;
+---
+<section class="page-head on-navy">
+  <div class="container">
+    <Eyebrow text={eyebrow} />
+    <h1>{title}</h1>
+    {summary && <p class="lead" set:html={rich(summary)} />}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-head { background: var(--navy); color: #fff; padding-block: clamp(2.75rem, 2rem + 3vw, 4.5rem); border-bottom: 4px solid var(--red); }
+  .page-head h1 { color: #fff; font-size: var(--step-5); max-width: 20ch; }
+  .page-head .lead { margin-top: 1.25rem; color: var(--on-navy-muted); }
+</style>

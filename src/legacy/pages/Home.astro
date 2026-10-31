@@ -1,0 +1,424 @@
+---
+import yaml from 'js-yaml';
+import homeRaw from '../content/pages/home.md?raw';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import CoverageMap from '../components/CoverageMap.astro';
+import { site, rich } from '../lib/site';
+
+// Front matter of home.md holds the page content.
+const d = yaml.load(homeRaw.split(/^---\s*$/m)[1]) as any;
+---
+<BaseLayout title={d.seoTitle} description={d.seoDescription}>
+
+  <!-- 1. Opening banner -->
+  <section class="hero">
+    <div class="hero__stripes" aria-hidden="true"></div>
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="hero__kicker">{d.hero.kicker}</p>
+        <h1 set:html={rich(d.hero.heading)} />
+        <p class="hero__tagline">
+          {site.tagline.map((t) => <span>{t}</span>)}
+        </p>
+        <p class="hero__text" set:html={rich(d.hero.text)} />
+        <div class="btn-row btn-row--stack">
+          <Button href={d.hero.buttons[0].href} variant="quote" size="lg" icon="file">{d.hero.buttons[0].label}</Button>
+          <Button href={d.hero.buttons[1].href} variant="ghost" size="lg" iconAfter="arrow-right">{d.hero.buttons[1].label}</Button>
+        </div>
+      </div>
+
+      <aside class="rfq-panel" aria-label={d.hero.panel.label}>
+        <p class="rfq-panel__label"><span class="dot" aria-hidden="true"></span>{d.hero.panel.label}</p>
+        <div class="rfq-panel__body">
+          <h2>{d.hero.panel.heading}</h2>
+          <ul class="check-list">
+            {d.hero.panel.items.map((i: string) => <li><Icon name="check" />{i}</li>)}
+          </ul>
+          <p class="rfq-panel__note"><Icon name="check-circle" size={18} />{d.hero.panel.note}</p>
+          <Button href={d.hero.panel.button.href} variant="primary" iconAfter="arrow-right" class="rfq-panel__btn">{d.hero.panel.button.label}</Button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Four questions answered at a glance -->
+  <nav class="glance" aria-label="Exron Global at a glance">
+    <div class="container">
+      <ol class="glance__list">
+        {d.glance.map((g: any) => (
+          <li>
+            <a href={g.href}>
+              <span class="glance__q">{g.q}</span>
+              <span class="glance__a" set:html={rich(g.a)} />
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- 2. Introduction -->
+  <section class="section" id="about">
+    <div class="container split split--wide-left intro">
+      <div>
+        <SectionHead eyebrow={d.intro.eyebrow} heading={d.intro.heading} />
+        {d.intro.paragraphs.map((p: string) => <p class="lead" set:html={rich(p)} />)}
+        <a class="link-arrow intro__link" href={d.intro.link.href}>{d.intro.link.label}<Icon name="arrow-right" /></a>
+      </div>
+      <div class="profile">
+        <p class="profile__title">{d.intro.profile.title}</p>
+        <dl>
+          {d.intro.profile.rows.map((r: any) => (
+            <div><dt>{r.k}</dt><dd set:html={rich(r.v)} /></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Government & military installation support (primary focus) -->
+  <section class="section section--dark gov" id="government">
+    <div class="container">
+      <SectionHead eyebrow={d.government.eyebrow} heading={d.government.heading} intro={d.government.lead} />
+      <div class="gov__grid">
+        <div class="gov__side">
+          <h3 class="gov__subhead">{d.government.audienceTitle}</h3>
+          <ul class="check-list gov__audience">
+            {d.government.audience.map((a: string) => <li><Icon name="check" />{a}</li>)}
+          </ul>
+          <div class="vendor">
+            <p class="vendor__title">{d.government.vendor.title}</p>
+            <dl>
+              {d.government.vendor.rows.map((r: any) => (
+                <div><dt>{r.k}</dt><dd set:html={rich(r.v)} /></div>
+              ))}
+            </dl>
+            <p class="vendor__note">{d.government.vendor.note}</p>
+            <a class="link-arrow" href={d.government.vendor.link.href}>{d.government.vendor.link.label}<Icon name="arrow-right" /></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="gov__subhead">{d.government.practicesTitle}</h3>
+          <ul class="practices">
+            {d.government.practices.map((p: any) => (
+              <li>
+                <span class="icon-badge"><Icon name={p.icon} /></span>
+                <h4 set:html={rich(p.title)} />
+                <p set:html={rich(p.text)} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Core procurement capabilities -->
+  <section class="section" id="capabilities">
+    <div class="container">
+      <SectionHead eyebrow={d.capabilities.eyebrow} heading={d.capabilities.heading} intro={d.capabilities.lead} />
+      <ul class="caps">
+        {d.capabilities.items.map((c: any) => (
+          <li class="caps__item">
+            <Icon name={c.icon} class="caps__icon" />
+            <h3 set:html={rich(c.title)} />
+            <p set:html={rich(c.text)} />
+          </li>
+        ))}
+        <li class="caps__item caps__item--cta">
+          <a href={d.capabilities.link.href}>
+            <span>{d.capabilities.link.label}</span>
+            <Icon name="arrow-right" />
+          </a>
+        </li>
+      </ul>
+
+      <div class="process">
+        <h3 class="process__title">{d.capabilities.processTitle}</h3>
+        <ol class="process__list">
+          {d.capabilities.process.map((s: any, i: number) => (
+            <li>
+              <span class="process__num">{String(i + 1).padStart(2, '0')}</span>
+              <h4 set:html={rich(s.title)} />
+              <p set:html={rich(s.text)} />
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Management experience -->
+  <section class="section section--alt" id="experience">
+    <div class="container split">
+      <div class="exp__media">
+        <ImagePlaceholder label={d.experience.image.label} alt={d.experience.image.alt} ratio="1/1" />
+        <p class="exp__team" set:html={rich(d.experience.team)} />
+      </div>
+      <div>
+        <SectionHead eyebrow={d.experience.eyebrow} heading={d.experience.heading} />
+        {d.experience.paragraphs.map((p: string) => <p set:html={rich(p)} />)}
+        <ul class="tags">
+          {d.experience.areas.map((a: string) => <li>{a}</li>)}
+        </ul>
+        <p class="notice"><Icon name="shield" /><span set:html={rich(d.experience.notice)} /></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Why consider Exron Global -->
+  <section class="section" id="why">
+    <div class="container">
+      <SectionHead eyebrow={d.why.eyebrow} heading={d.why.heading} intro={d.why.lead} />
+      <ul class="why">
+        {d.why.items.map((w: any) => (
+          <li>
+            <h3 set:html={rich(w.title)} />
+            <p set:html={rich(w.text)} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. International sourcing & coverage -->
+  <section class="section section--deep coverage" id="coverage">
+    <div class="container">
+      <SectionHead eyebrow={d.coverage.eyebrow} heading={d.coverage.heading} intro={d.coverage.text} />
+      <div class="coverage__map">
+        <CoverageMap markers={d.coverage.markers} />
+      </div>
+      <dl class="coverage__rows">
+        {d.coverage.rows.map((r: any) => (
+          <div><dt>{r.k}</dt><dd set:html={rich(r.v)} /></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 8. Commercial & industrial division -->
+  <section class="section" id="commercial">
+    <div class="container split split--reverse">
+      <div>
+        <SectionHead eyebrow={d.commercial.eyebrow} heading={d.commercial.heading} />
+        <p class="lead" set:html={rich(d.commercial.text)} />
+        <ul class="commercial__list">
+          {d.commercial.items.map((i: any) => (
+            <li><span class="icon-badge"><Icon name={i.icon} /></span>{i.text}</li>
+          ))}
+        </ul>
+        <a class="link-arrow" href={d.commercial.link.href}>{d.commercial.link.label}<Icon name="arrow-right" /></a>
+      </div>
+      <ImagePlaceholder label={d.commercial.image.label} alt={d.commercial.image.alt} ratio="4/3" />
+    </div>
+  </section>
+
+  <!-- 9. Group affiliation -->
+  <section class="section section--alt" id="group">
+    <div class="container split group">
+      <div>
+        <SectionHead eyebrow={d.group.eyebrow} heading={d.group.heading} />
+        <p class="lead" set:html={rich(d.group.text)} />
+        <p class="notice"><Icon name="shield" /><span set:html={rich(d.group.notice)} /></p>
+      </div>
+      <ul class="sectors">
+        {d.group.sectors.map((s: any) => (
+          <li><Icon name={s.icon} /><span>{s.title}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10. Submit an RFQ -->
+  <section class="section section--dark rfq" id="rfq">
+    <div class="container rfq__grid">
+      <div>
+        <SectionHead eyebrow={d.rfq.eyebrow} heading={d.rfq.heading} intro={d.rfq.text} />
+        <div class="btn-row btn-row--stack">
+          <Button href={d.rfq.buttons[0].href} variant="quote" size="lg" icon="file">{d.rfq.buttons[0].label}</Button>
+          <Button href={d.rfq.buttons[1].href} variant="ghost" size="lg">{d.rfq.buttons[1].label}</Button>
+        </div>
+        <p class="notice rfq__security"><Icon name="shield" /><span><strong>Security notice.</strong> <span set:html={rich(d.rfq.security)} /></span></p>
+      </div>
+      <div class="rfq__checklist">
+        <p class="rfq__checklist-title">{d.rfq.checklistTitle}</p>
+        <ul class="check-list">
+          {d.rfq.checklist.map((c: string) => <li><Icon name="check" />{c}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- 1. Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden; color: var(--on-dark-2);
+    background: linear-gradient(160deg, var(--navy-700) 0%, var(--navy-800) 55%, var(--navy-900) 100%);
+    padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+    border-top: 4px solid var(--red-600);
+  }
+  /* Restrained nod to the flag: faint horizontal stripes on the right edge */
+  .hero__stripes {
+    position: absolute; inset: 0 0 0 auto; width: 45%; pointer-events: none;
+    background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0 28px, transparent 28px 56px);
+    mask-image: linear-gradient(90deg, transparent, #000 60%);
+  }
+  .hero__grid { position: relative; display: grid; gap: 2.5rem; align-items: center; }
+  .hero__grid > * { min-width: 0; }
+  @media (min-width: 1024px) { .hero__grid { grid-template-columns: 1.35fr 0.85fr; gap: 4rem; } }
+  .hero__kicker {
+    margin: 0 0 1rem; font-family: var(--font-display); font-stretch: 118%; font-weight: 800;
+    font-size: 0.9375rem; letter-spacing: 0.22em; text-transform: uppercase; color: #fff;
+    display: inline-flex; align-items: center; gap: 0.75rem;
+  }
+  .hero__kicker::before { content: ''; width: 32px; height: 3px; background: var(--red-600); }
+  .hero h1 { color: #fff; font-size: var(--fs-display); line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 1.5rem; max-width: 17ch; }
+  .hero__tagline {
+    display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0 0 1.5rem;
+    font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600;
+    font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); color: #fff;
+  }
+  .hero__tagline span { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .hero__tagline span::before { content: ''; width: 8px; height: 8px; background: var(--red-600); flex-shrink: 0; }
+  .hero__text { font-size: var(--fs-lead); line-height: 1.6; max-width: 60ch; margin-bottom: 2rem; color: var(--on-dark-2); }
+
+  .rfq-panel { background: #fff; color: var(--ink-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; }
+  .rfq-panel__label {
+    display: flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.75rem 1.5rem;
+    background: var(--navy-900); color: #fff; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .rfq-panel__label .dot { width: 8px; height: 8px; border-radius: 50%; background: #3ccf7a; box-shadow: 0 0 0 3px rgba(60, 207, 122, 0.25); }
+  .rfq-panel__body { padding: 1.5rem; display: grid; gap: 1.125rem; }
+  .rfq-panel h2 { font-size: 1.375rem; margin: 0; }
+  .rfq-panel .check-list { font-size: 0.9375rem; color: var(--ink-700); }
+  .rfq-panel__note { display: flex; align-items: center; gap: 0.5rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.875rem; font-weight: 600; color: var(--navy-700); }
+  .rfq-panel__note :global(svg) { color: #1f7a46; }
+  .rfq-panel :global(.rfq-panel__btn) { width: 100%; }
+
+  /* ---------- Glance strip (4 questions) ---------- */
+  .glance { background: #fff; border-bottom: 1px solid var(--line); }
+  .glance__list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); counter-reset: q; }
+  @media (min-width: 960px) { .glance__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .glance__list li { counter-increment: q; min-width: 0; border-bottom: 1px solid var(--line); }
+  .glance__list li:nth-child(odd) { border-right: 1px solid var(--line); }
+  @media (min-width: 960px) {
+    .glance__list li { border-bottom: 0; border-right: 1px solid var(--line); }
+    .glance__list li:last-child { border-right: 0; }
+  }
+  .glance__list a { display: grid; gap: 0.375rem; height: 100%; padding: 1.25rem 1rem; text-decoration: none; color: var(--ink-700); transition: background var(--transition); }
+  @media (min-width: 960px) { .glance__list a { padding: 1.75rem 1.5rem; } }
+  .glance__list a:hover { background: var(--navy-50); }
+  .glance__q { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red-600); }
+  .glance__q::before { content: counter(q, decimal-leading-zero) ' / '; color: var(--ink-500); }
+  .glance__a { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600; font-size: 0.9375rem; line-height: 1.4; color: var(--ink-900); }
+
+  /* ---------- 2. Intro ---------- */
+  .intro .lead + .lead { margin-top: 1rem; }
+  .intro__link { margin-top: 1.5rem; }
+  .profile { border: 1px solid var(--line); border-top: 4px solid var(--navy-700); background: #fff; }
+  .profile__title { margin: 0; padding: 1rem 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy-700); border-bottom: 1px solid var(--line); background: var(--navy-50); }
+  dl { margin: 0; }
+  .profile dl > div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 1rem; padding: 0.875rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .profile dl > div:last-child { border-bottom: 0; }
+  dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-500); padding-top: 0.15rem; }
+  dd { margin: 0; font-weight: 600; color: var(--ink-900); font-size: 0.9375rem; overflow-wrap: anywhere; }
+
+  /* ---------- 3. Government ---------- */
+  .gov { background: linear-gradient(180deg, var(--navy-700), var(--navy-800)); border-top: 4px solid var(--red-600); }
+  .gov :global(.section-head) { max-width: 900px; }
+  .gov :global(.section-head h2) { font-size: clamp(1.875rem, 1.4rem + 2vw, 3rem); }
+  .gov__grid { display: grid; gap: 3rem; }
+  .gov__grid > * { min-width: 0; }
+  @media (min-width: 1024px) { .gov__grid { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; } }
+  .gov__subhead { font-family: var(--font-mono); font-stretch: normal; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-dark-3) !important; margin-bottom: 1.25rem; }
+  .gov__audience { margin-bottom: 2.5rem; font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600; font-size: 1.125rem; color: #fff; gap: 0.875rem; }
+  .vendor { background: var(--navy-900); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; display: grid; gap: 1rem; }
+  .vendor__title { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-300); }
+  .vendor dl > div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.625rem 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.15); }
+  .vendor dt { color: var(--on-dark-3); }
+  .vendor dd { color: #fff; font-family: var(--font-mono); font-weight: 500; font-size: 0.8125rem; text-align: right; }
+  .vendor__note { margin: 0; font-size: 0.8125rem; color: var(--on-dark-3); }
+  .practices { list-style: none; display: grid; gap: 1px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.12); }
+  @media (min-width: 640px) { .practices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .practices li { background: var(--navy-700); padding: 1.75rem 1.5rem; display: grid; gap: 0.75rem; align-content: start; }
+  .practices h4 { color: #fff; font-size: 1.125rem; margin: 0.25rem 0 0; }
+  .practices p { margin: 0; color: var(--on-dark-2); font-size: 0.9375rem; }
+
+  /* ---------- 4. Capabilities ---------- */
+  .caps { list-style: none; display: grid; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  @media (min-width: 640px) { .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .caps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1200px) { .caps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .caps__item { padding: 1.5rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; gap: 0.5rem; align-content: start; transition: background var(--transition); }
+  .caps__item:hover { background: var(--navy-50); }
+  .caps__item :global(.caps__icon) { color: var(--red-600); width: 28px; height: 28px; margin-bottom: 0.5rem; }
+  .caps__item h3 { font-size: 1.0625rem; margin: 0; }
+  .caps__item p { margin: 0; font-size: 0.9375rem; color: var(--ink-500); }
+  .caps__item--cta { padding: 0; background: var(--navy-700); }
+  .caps__item--cta:hover { background: var(--navy-900); }
+  .caps__item--cta a { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; height: 100%; min-height: 140px; padding: 1.5rem; color: #fff; text-decoration: none; font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 650; font-size: 1.125rem; }
+
+  .process { margin-top: clamp(3rem, 2rem + 3vw, 5rem); }
+  .process__title { font-size: var(--fs-h3); margin-bottom: 1.5rem; }
+  .process__list { list-style: none; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (min-width: 640px) { .process__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .process__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .process__list li { background: var(--paper); padding: 1.25rem 1.25rem 1.5rem; display: grid; gap: 0.375rem; align-content: start; }
+  .process__num { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 500; color: var(--red-600); line-height: 1; margin-bottom: 0.5rem; }
+  .process__list h4 { font-size: 1rem; margin: 0; line-height: 1.3; }
+  .process__list p { margin: 0; font-size: 0.875rem; color: var(--ink-500); }
+
+  /* ---------- 5. Experience ---------- */
+  .exp__media { display: grid; gap: 1rem; }
+  .exp__team { margin: 0; font-size: 0.875rem; }
+  .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+  .tags li { padding: 0.4rem 0.75rem; border: 1px solid var(--navy-200); background: #fff; font-size: 0.8125rem; font-weight: 600; color: var(--navy-700); }
+
+  /* ---------- 6. Why ---------- */
+  .why { list-style: none; display: grid; column-gap: 3rem; border-top: 1px solid var(--line); }
+  @media (min-width: 768px) { .why { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .why li { position: relative; padding: 1.5rem 0 1.5rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .why li::before { content: ''; position: absolute; left: 0; top: 1.85rem; width: 8px; height: 8px; background: var(--red-600); }
+  .why h3 { font-size: 1.125rem; margin-bottom: 0.375rem; }
+  .why p { margin: 0; color: var(--ink-500); font-size: 0.9375rem; }
+
+  /* ---------- 7. Coverage ---------- */
+  .coverage { overflow: hidden; }
+  .coverage__map { margin-inline: calc(var(--gutter) * -1); }
+  @media (min-width: 768px) { .coverage__map { margin-inline: 0; } }
+  .coverage__rows { display: grid; gap: 1px; margin-top: 2rem; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.12); }
+  @media (min-width: 640px) { .coverage__rows { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .coverage__rows { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .coverage__rows > div { background: var(--navy-900); padding: 1.25rem 1.5rem; display: grid; gap: 0.375rem; align-content: start; }
+  .coverage__rows dt { color: var(--red-300); }
+  .coverage__rows dd { color: #fff; font-family: var(--font-display); font-stretch: var(--display-stretch); font-size: 1rem; }
+
+  /* ---------- 8. Commercial ---------- */
+  .commercial__list { list-style: none; display: grid; gap: 0.75rem; margin: 1.75rem 0; }
+  @media (min-width: 640px) { .commercial__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .commercial__list li { display: flex; align-items: center; gap: 0.75rem; font-weight: 600; color: var(--ink-900); font-size: 0.9375rem; }
+
+  /* ---------- 9. Group ---------- */
+  .group .notice { margin-top: 1.5rem; }
+  .sectors { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .sectors li { display: grid; gap: 1rem; padding: 2rem 1.5rem; background: #fff; }
+  .sectors li :global(svg) { width: 32px; height: 32px; color: var(--navy-700); }
+  .sectors span { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 650; font-size: 1.125rem; color: var(--ink-900); }
+
+  /* ---------- 10. RFQ ---------- */
+  .rfq { background: var(--navy-700); border-top: 4px solid var(--red-600); }
+  .rfq__grid { display: grid; gap: 3rem; align-items: start; }
+  .rfq__grid > * { min-width: 0; }
+  @media (min-width: 1024px) { .rfq__grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; } }
+  .rfq :global(.section-head h2) { font-size: clamp(1.875rem, 1.4rem + 2vw, 3rem); }
+  .rfq__security { margin-top: 2rem; }
+  .rfq__checklist { background: #fff; padding: 1.75rem; border-radius: var(--radius-lg); color: var(--ink-700); }
+  .rfq__checklist-title { margin: 0 0 1.25rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy-700); }
+  .rfq__checklist .check-list { font-size: 0.9375rem; }
+  .rfq__checklist .check-list :global(svg) { color: var(--red-600); }
+</style>

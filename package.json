@@ -6,19 +6,26 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:placeholders": "node scripts/check-placeholders.mjs",
     "preview": "astro preview",
-    "placeholders": "grep -rnoE \"\\[CLIENT TO PROVIDE[^]]*\\]\" src | sort"
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/archivo": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/source-sans-3": "^5.3.1",
     "@fontsource/ibm-plex-mono": "^5.3.0",
-    "astro": "^5.18.2"
+    "astro": "^5.18.2",
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.20.5",
     "d3-geo": "^3.1.1",
     "topojson-client": "^3.1.0",
+    "typescript": "^5.9.3",
     "world-atlas": "^2.0.2"
   }
 }

@@ -1,0 +1,231 @@
+# Decap CMS. Sign-in uses Netlify Identity (invite only) with Git Gateway.
+# Every save creates a commit; Netlify rebuilds the site automatically.
+backend:
+  name: git-gateway
+  branch: main
+
+site_url: https://exronglobal.com
+logo_url: /images/exron-logo.png
+media_folder: src/assets/images
+public_folder: /src/assets/images
+
+collections:
+  - name: settings
+    label: Site content
+    editor: { preview: false }
+    files:
+      - name: home
+        label: Homepage
+        file: src/content/home.yml
+        format: yml
+        fields:
+          - label: Search engines
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Meta description, name: description, widget: text }
+          - label: 01 Opening banner
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Tagline, name: tagline, widget: string }
+              - { label: Supporting line, name: text, widget: text }
+              - { label: Primary button, name: primary_label, widget: string }
+              - { label: Secondary button, name: secondary_label, widget: string }
+              - { label: Background photo, name: image, widget: image, required: false }
+              - { label: Photo description (alt text), name: image_alt, widget: string, required: false }
+              - { label: Placeholder note (shown until a photo is added), name: image_note, widget: string }
+              - { label: Panel title, name: panel_title, widget: string }
+              - label: Panel rows
+                name: panel
+                widget: list
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Value, name: value, widget: string }
+          - label: RFQ strip under the banner
+            name: strip
+            widget: object
+            fields:
+              - { label: Text, name: text, widget: text }
+              - { label: Link label, name: link_label, widget: string }
+          - label: 02 Introduction
+            name: intro
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - label: Facts
+                name: facts
+                widget: list
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: Value, name: value, widget: string }
+          - label: 03 Government & military installation support
+            name: government
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Lead paragraph, name: lead, widget: text }
+              - { label: Photo, name: image, widget: image, required: false }
+              - { label: Photo description (alt text), name: image_alt, widget: string, required: false }
+              - { label: Placeholder note, name: image_note, widget: string }
+              - { label: Steps heading, name: steps_title, widget: string }
+              - label: Steps
+                name: steps
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Text, name: text, widget: text }
+              - { label: Link label, name: link_label, widget: string }
+          - label: 04 Capabilities
+            name: capabilities
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Intro, name: intro, widget: string }
+              - label: Categories
+                name: items
+                widget: list
+                fields:
+                  - { label: Category, name: name, widget: string }
+                  - { label: Examples, name: examples, widget: string }
+              - { label: Footnote, name: footnote, widget: text }
+              - { label: Link label, name: link_label, widget: string }
+          - label: 05 Management experience
+            name: experience
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Paragraphs, name: body, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+              - { label: Disclosure (always shown), name: disclosure, widget: text }
+              - { label: Show leadership row, name: show_leadership, widget: boolean, default: false }
+              - label: Leadership
+                name: leadership
+                widget: list
+                fields:
+                  - { label: Name, name: name, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: One-line background, name: background, widget: string }
+                  - { label: Photo, name: photo, widget: image, required: false }
+          - label: 06 Why choose Exron Global
+            name: why
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - label: Reasons
+                name: items
+                widget: list
+                fields:
+                  - { label: Claim, name: claim, widget: string }
+                  - { label: What it means in practice, name: detail, widget: string }
+          - label: 07 Coverage
+            name: coverage
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Deliver-to heading, name: deliver_title, widget: string }
+              - { label: Deliver to, name: deliver, widget: list }
+              - { label: Source-from heading, name: source_title, widget: string }
+              - { label: Source from, name: source, widget: list }
+          - label: 08 Commercial & industrial division
+            name: commercial
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Sectors, name: sectors, widget: list }
+              - { label: Button label, name: button_label, widget: string }
+              - { label: Photo, name: image, widget: image, required: false }
+              - { label: Photo description (alt text), name: image_alt, widget: string, required: false }
+              - { label: Placeholder note, name: image_note, widget: string }
+          - label: 09 Group affiliation
+            name: group
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Show logo row, name: show_logos, widget: boolean, default: false }
+              - label: Group company logos
+                name: logos
+                widget: list
+                fields:
+                  - { label: Company name, name: name, widget: string }
+                  - { label: Logo, name: image, widget: image, required: false }
+          - label: 10 Closing call to action
+            name: cta
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Primary button, name: primary_label, widget: string }
+              - { label: Secondary button, name: secondary_label, widget: string }
+
+      - name: site
+        label: Company and contact details
+        file: src/content/site.json
+        format: json
+        fields:
+          - { label: Short name, name: name, widget: string }
+          - { label: Legal name, name: legal_name, widget: string }
+          - { label: Website address, name: url, widget: string }
+          - { label: Footer description, name: description, widget: text }
+          - { label: Procurement email, name: procurement_email, widget: string }
+          - { label: Phone (with country code), name: phone, widget: string }
+          - { label: WhatsApp (with country code), name: whatsapp, widget: string }
+          - { label: Office address, name: address, widget: string }
+          - { label: Headquarters (city, country), name: headquarters, widget: string }
+          - { label: RFQ acknowledgment time, name: rfq_acknowledgment, widget: string, hint: 'Completes the sentence "Every request is acknowledged ...", e.g. "within one business day"' }
+          - { label: Disclaimer, name: disclaimer, widget: text }
+          - { label: Secure transmission notice, name: secure_notice, widget: text }
+          - { label: Copyright year, name: copyright_year, widget: string }
+
+      - name: vendor
+        label: Vendor information
+        file: src/content/vendor.yml
+        format: yml
+        fields:
+          - &vendor_field
+            label: Registered legal name
+            name: legal_name
+            widget: object
+            hint: Leave "Show" off until the value has been officially issued and verified.
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Value, name: value, widget: string }
+              - { label: Show on site, name: show, widget: boolean, default: false }
+          - { <<: *vendor_field, label: Headquarters, name: headquarters }
+          - { <<: *vendor_field, label: Business registration, name: business_registration }
+          - { <<: *vendor_field, label: SAM.gov registration, name: sam_status }
+          - { <<: *vendor_field, label: UEI, name: uei }
+          - { <<: *vendor_field, label: CAGE / NCAGE code, name: cage }
+          - { <<: *vendor_field, label: NAICS codes, name: naics }
+          - label: Capability statement
+            name: capability_statement
+            widget: object
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Value, name: value, widget: string }
+              - { label: PDF file, name: file, widget: file, required: false, media_folder: /public/documents, public_folder: /documents }
+              - { label: Show on site, name: show, widget: boolean, default: false }
+          - { <<: *vendor_field, label: Procurement contact, name: procurement_contact }
+
+  - name: pages
+    label: Other pages
+    folder: src/content/pages
+    extension: md
+    format: frontmatter
+    create: false
+    fields:
+      - { label: Page heading, name: title, widget: string }
+      - { label: Browser and search title, name: seo_title, widget: string }
+      - { label: Meta description, name: description, widget: text }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Hide from search engines, name: noindex, widget: boolean, default: true }
+      - { label: Body, name: body, widget: markdown, required: false }
