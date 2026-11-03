@@ -144,7 +144,7 @@ body {
 .price-list strong {
   font-size: 1.3rem;
   white-space: nowrap;
-  direction: ltr;          /* keep numbers in normal order in Arabic */
+  unicode-bidi: isolate;   /* keeps the number and currency together */
 }
 
 /* ----- 7. Chart ----- */
