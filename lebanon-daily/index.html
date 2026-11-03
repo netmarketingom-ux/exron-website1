@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+  Lebanon Daily - main page.
+  The page starts in Arabic (lang="ar", dir="rtl").
+  app.js switches lang/dir when the visitor presses the language button.
+  Any element with a data-i18n="key" attribute gets its text from the
+  TEXT object in app.js, so you edit wording there, not here.
+-->
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lebanon Daily | لبنان اليوم</title>
+  <meta name="description" content="USD to LBP market rate and fuel prices in Lebanon, updated daily.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header: site name + language button ===== -->
+  <header class="site-header">
+    <h1 class="site-title" data-i18n="siteTitle">لبنان اليوم</h1>
+    <button id="lang-toggle" class="lang-toggle" type="button">English</button>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== Card 1: Dollar rate ===== -->
+    <section class="card">
+      <h2 class="card-title" data-i18n="dollarTitle">سعر الدولار في السوق</h2>
+
+      <p class="big-number">
+        <span id="dollar-rate">—</span>
+        <span class="unit" data-i18n="lbp">ل.ل.</span>
+      </p>
+      <p class="sub-text" data-i18n="perDollar">مقابل 1 دولار أميركي</p>
+
+      <!-- 7-day chart. app.js draws an SVG inside this box. -->
+      <h3 class="chart-title" data-i18n="chartTitle">آخر 7 أيام</h3>
+      <div id="dollar-chart" class="chart" role="img" aria-label="Dollar rate chart"></div>
+
+      <p class="updated">
+        <span data-i18n="lastUpdated">آخر تحديث:</span>
+        <span id="dollar-updated">—</span>
+      </p>
+    </section>
+
+    <!-- ===== Card 2: Fuel prices ===== -->
+    <section class="card">
+      <h2 class="card-title" data-i18n="fuelTitle">أسعار المحروقات اليوم</h2>
+
+      <ul class="price-list">
+        <li>
+          <span data-i18n="gasoline95">بنزين 95 أوكتان</span>
+          <strong id="gasoline95">—</strong>
+        </li>
+        <li>
+          <span data-i18n="gasoline98">بنزين 98 أوكتان</span>
+          <strong id="gasoline98">—</strong>
+        </li>
+        <li>
+          <span data-i18n="diesel">مازوت</span>
+          <strong id="diesel">—</strong>
+        </li>
+        <li>
+          <span data-i18n="gasCylinder">قارورة غاز</span>
+          <strong id="gasCylinder">—</strong>
+        </li>
+      </ul>
+      <p class="sub-text" data-i18n="fuelNote">الأسعار بالليرة اللبنانية</p>
+
+      <p class="updated">
+        <span data-i18n="lastUpdated">آخر تحديث:</span>
+        <span id="fuel-updated">—</span>
+      </p>
+    </section>
+
+    <!-- Shown only if data.json could not be loaded -->
+    <p id="error-box" class="error" hidden></p>
+
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="disclaimer">الأسعار للاطلاع فقط وقد تختلف من مكان لآخر.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
