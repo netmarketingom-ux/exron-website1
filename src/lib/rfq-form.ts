@@ -26,10 +26,10 @@ export function initRfqForm() {
 
   // Fields carried over from a short "start an RFQ" form elsewhere on the site
   const params = new URLSearchParams(location.search);
-  for (const name of ['organization', 'email', 'solicitation_number']) {
-    const value = params.get(name)?.trim().slice(0, 200);
-    const input = form.querySelector<HTMLInputElement>(`input[name="${name}"]`);
-    if (value && input && !input.value) input.value = value;
+  for (const name of ['organization', 'email', 'solicitation_number', 'description']) {
+    const value = params.get(name)?.trim().slice(0, name === 'description' ? 2000 : 200);
+    const field = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${name}"]`);
+    if (value && field && !field.value) field.value = value;
   }
 
   /* Line items repeater, serialised into one hidden field */

@@ -13,7 +13,7 @@
   "address": "[CLIENT TO PROVIDE: office address, city, country]",
   "hours": "[CLIENT TO PROVIDE: business days, hours and time zone]",
   "rfqAcknowledgment": "[CLIENT TO PROVIDE: e.g. same business day]",
-  "groupName": "[CLIENT TO PROVIDE: group / affiliated company name]",
+  "groupName": "Hydropower Group",
   "mapEmbedUrl": "",
   "logo": "/images/exron-logo.png",
   "vendor": {
