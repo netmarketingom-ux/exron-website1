@@ -10,9 +10,20 @@ The corporate website for **Exron Global General Trading LLC**, built with Astro
 | `docs/sitemap.md` | Site structure and navigation |
 | `docs/odoo-integration.md` | RFQ adapters and how to switch on Odoo |
 
-## Homepage
+## Site design
 
-The homepage at `/` uses the earlier approved design, which the client asked to keep as the default.
+The homepage at `/` uses the earlier approved design, which the client asked to keep as the default. All public pages share that design.
+
+| Page | Text | Layout |
+| --- | --- | --- |
+| Home | `src/legacy/content/pages/home.md` | `src/legacy/pages/Home.astro` |
+| About Exron | `src/legacy/content/pages/about.md` | `src/legacy/pages/About.astro` |
+| Capabilities | `src/legacy/content/pages/capabilities.md` | `src/legacy/pages/Capabilities.astro` |
+| Industries We Serve | `src/legacy/content/pages/industries.md` | `src/legacy/pages/Industries.astro` |
+| Government Contracting | `src/legacy/content/pages/government-contracting.md` | `src/legacy/pages/GovernmentContracting.astro` |
+| Contact | `src/legacy/content/pages/contact.md` | `src/legacy/pages/Contact.astro` |
+
+Submit an RFQ, the confirmation pages, Privacy, Terms and the 404 page also use this design.
 
 - Its files are in `src/legacy/`: its own layout, header, footer, styles and content.
 - Its text is in `src/legacy/content/pages/home.md`.

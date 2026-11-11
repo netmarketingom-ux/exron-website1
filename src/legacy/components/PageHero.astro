@@ -1,0 +1,69 @@
+---
+/**
+ * Opening banner for inner pages, in the same style as the homepage hero.
+ * Optional right-hand panel goes in the "aside" slot.
+ */
+import Button from './Button.astro';
+import { rich } from '../lib/site';
+
+interface Btn { label: string; href: string; }
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  buttons?: Btn[];
+  crumb?: string;
+}
+const { eyebrow, title, lead, buttons = [], crumb } = Astro.props;
+const hasAside = Astro.slots.has('aside');
+---
+<section class="page-hero">
+  <div class="page-hero__stripes" aria-hidden="true"></div>
+  <div class:list={['container', 'page-hero__grid', hasAside && 'page-hero__grid--aside']}>
+    <div class="page-hero__copy">
+      <nav class="page-hero__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">{crumb ?? title}</span>
+      </nav>
+      <p class="page-hero__eyebrow">{eyebrow}</p>
+      <h1 set:html={rich(title)} />
+      {lead && <p class="page-hero__lead" set:html={rich(lead)} />}
+      {buttons.length > 0 && (
+        <div class="btn-row btn-row--stack">
+          {buttons.map((b, i) => (
+            <Button href={b.href} variant={i === 0 ? 'quote' : 'ghost'} size="lg" icon={i === 0 && b.href.startsWith('/submit-rfq') ? 'file' : undefined}>{b.label}</Button>
+          ))}
+        </div>
+      )}
+    </div>
+    {hasAside && <div class="page-hero__aside"><slot name="aside" /></div>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative; overflow: hidden; color: var(--on-dark-2);
+    background: linear-gradient(160deg, var(--navy-700) 0%, var(--navy-800) 55%, var(--navy-900) 100%);
+    padding-block: clamp(2.5rem, 1.75rem + 3.5vw, 4.75rem);
+    border-top: 4px solid var(--red-600);
+  }
+  .page-hero__stripes {
+    position: absolute; inset: 0 0 0 auto; width: 45%; pointer-events: none;
+    background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0 28px, transparent 28px 56px);
+    mask-image: linear-gradient(90deg, transparent, #000 60%);
+  }
+  .page-hero__grid { position: relative; display: grid; gap: 2.5rem; align-items: center; }
+  .page-hero__grid > * { min-width: 0; }
+  @media (min-width: 1024px) { .page-hero__grid--aside { grid-template-columns: 1.3fr 0.9fr; gap: 4rem; } }
+  .page-hero__crumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--on-dark-3); }
+  .page-hero__crumbs a { color: var(--on-dark-2); text-decoration: none; }
+  .page-hero__crumbs a:hover { color: #fff; text-decoration: underline; }
+  .page-hero__eyebrow {
+    margin: 0 0 1rem; font-family: var(--font-display); font-stretch: 118%; font-weight: 800;
+    font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; color: #fff;
+    display: inline-flex; align-items: center; gap: 0.75rem;
+  }
+  .page-hero__eyebrow::before { content: ''; width: 32px; height: 3px; background: var(--red-600); }
+  .page-hero h1 { color: #fff; font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 1.25rem; max-width: 22ch; }
+  .page-hero__lead { font-size: var(--fs-lead); line-height: 1.6; max-width: 62ch; margin-bottom: 2rem; color: var(--on-dark-2); }
+  .page-hero__lead:last-child { margin-bottom: 0; }
+</style>

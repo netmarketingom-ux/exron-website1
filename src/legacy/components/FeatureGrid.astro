@@ -1,0 +1,28 @@
+---
+/**
+ * Bordered grid of items: icon, title, text and an optional list of examples.
+ * Used for capability categories, sectors and values.
+ */
+import Icon from './Icon.astro';
+import { rich } from '../lib/site';
+
+interface Item { icon?: string; title: string; text?: string; examples?: string[]; id?: string; link?: { label: string; href: string } }
+interface Props { items: Item[]; columns?: 2 | 3 | 4; dark?: boolean; examplesLabel?: string; }
+const { items, columns = 3, dark = false, examplesLabel = 'Typical items' } = Astro.props;
+---
+<ul class:list={['feature-grid', `feature-grid--${columns}`, dark && 'feature-grid--dark']}>
+  {items.map((it) => (
+    <li id={it.id}>
+      {it.icon && <span class="icon-badge"><Icon name={it.icon} /></span>}
+      <h3 set:html={rich(it.title)} />
+      {it.text && <p set:html={rich(it.text)} />}
+      {it.examples && (
+        <div class="feature-grid__examples">
+          <p class="feature-grid__label">{examplesLabel}</p>
+          <ul>{it.examples.map((e) => <li set:html={rich(e)} />)}</ul>
+        </div>
+      )}
+      {it.link && <a class="link-arrow" href={it.link.href}>{it.link.label}<Icon name="arrow-right" /></a>}
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQ from '../components/FAQ.astro';
+import Icon from '../components/Icon.astro';
+import { rich } from '../lib/site';
+import { loadPage } from '../lib/page';
+import { faqSchema } from '../lib/faq';
+import raw from '../content/pages/industries.md?raw';
+
+const d = loadPage(raw);
+---
+<BaseLayout title={d.seoTitle} description={d.seoDescription} schema={[faqSchema(d.faq)]}>
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Industries We Serve" />
+
+  <section class="section section--dark ind-gov" id="government">
+    <div class="container">
+      <SectionHead eyebrow={d.government.eyebrow} heading={d.government.heading} intro={d.government.lead} />
+      <FeatureGrid items={d.government.sectors} columns={3} dark examplesLabel="Typical requirements" />
+      <p class="notice ind-note"><Icon name="shield" /><span set:html={rich(d.government.note)} /></p>
+    </div>
+  </section>
+
+  <section class="section" id="commercial">
+    <div class="container">
+      <SectionHead eyebrow={d.commercial.eyebrow} heading={d.commercial.heading} intro={d.commercial.lead} />
+      <FeatureGrid items={d.commercial.sectors} columns={4} examplesLabel="Typical requirements" />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHead eyebrow={d.approach.eyebrow} heading={d.approach.heading} />
+      <ul class="claim-list claim-list--2">
+        {d.approach.items.map((c: any) => <li><h3 set:html={rich(c.title)} /><p set:html={rich(c.text)} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container"><FAQ items={d.faq} heading="Questions from buyers" /></div>
+  </section>
+
+  <CTABand heading={d.cta.heading} text={d.cta.text} buttons={d.cta.buttons} />
+</BaseLayout>
+
+<style>
+  .ind-gov { background: linear-gradient(180deg, var(--navy-700), var(--navy-800)); border-top: 4px solid var(--red-600); }
+  .ind-gov :global(.feature-grid__examples li) { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); color: #fff; }
+  .ind-gov :global(.feature-grid__label) { color: var(--on-dark-3) !important; }
+  .ind-gov :global(.feature-grid__examples) { border-color: rgba(255, 255, 255, 0.2); }
+  .ind-note { margin-top: 2rem; }
+</style>

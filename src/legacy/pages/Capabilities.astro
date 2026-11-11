@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import ProcessGrid from '../components/ProcessGrid.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQ from '../components/FAQ.astro';
+import Icon from '../components/Icon.astro';
+import { rich } from '../lib/site';
+import { loadPage } from '../lib/page';
+import { faqSchema } from '../lib/faq';
+import raw from '../content/pages/capabilities.md?raw';
+
+const d = loadPage(raw);
+---
+<BaseLayout title={d.seoTitle} description={d.seoDescription} schema={[faqSchema(d.faq)]}>
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Capabilities" />
+
+  <nav class="jump-nav" aria-label="On this page">
+    <div class="container">
+      <ul>{d.jump.map((j: any) => <li><a href={j.href}>{j.label}</a></li>)}</ul>
+    </div>
+  </nav>
+
+  <section class="section" id="categories">
+    <div class="container">
+      <SectionHead eyebrow={d.categories.eyebrow} heading={d.categories.heading} intro={d.categories.lead} />
+      <FeatureGrid items={d.categories.items} columns={3} />
+    </div>
+  </section>
+
+  <CTABand variant="banner" heading={d.banner.heading} text={d.banner.text} buttons={d.banner.buttons} />
+
+  <section class="section section--alt" id="sourcing">
+    <div class="container">
+      <SectionHead eyebrow={d.sourcing.eyebrow} heading={d.sourcing.heading} intro={d.sourcing.lead} />
+      <ProcessGrid steps={d.sourcing.steps} />
+    </div>
+  </section>
+
+  <section class="section" id="compliance">
+    <div class="container">
+      <SectionHead eyebrow={d.compliance.eyebrow} heading={d.compliance.heading} />
+      <ul class="claim-list claim-list--2">
+        {d.compliance.items.map((c: any) => <li><h3 set:html={rich(c.title)} /><p set:html={rich(c.text)} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="logistics">
+    <div class="container split">
+      <div>
+        <SectionHead eyebrow={d.logistics.eyebrow} heading={d.logistics.heading} intro={d.logistics.lead} />
+        <ul class="check-list caps-logistics">{d.logistics.points.map((p: string) => <li><Icon name="check" />{p}</li>)}</ul>
+      </div>
+      <ImagePlaceholder label={d.logistics.image.label} alt={d.logistics.image.alt} ratio="4/3" tone="dark" />
+    </div>
+  </section>
+
+  <section class="section section--alt" id="faq">
+    <div class="container"><FAQ items={d.faq} heading="Questions about our capabilities" /></div>
+  </section>
+
+  <CTABand heading={d.cta.heading} text={d.cta.text} buttons={d.cta.buttons} />
+</BaseLayout>
+
+<style>
+  .caps-logistics { color: #fff; font-weight: 500; }
+</style>

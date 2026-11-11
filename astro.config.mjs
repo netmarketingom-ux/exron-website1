@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // Pages marked noindex in this draft. Keep in step with each page's noindex setting.
 const NOT_IN_SITEMAP = [
-  '/about/', '/capabilities/', '/industries/', '/government-contracting/', '/contact/', '/contact/sent/',
+  '/contact/sent/',
   '/submit-rfq/received/', '/privacy/', '/terms/', '/brand/', '/404/',
   '/options/', '/options/a/', '/options/b/', '/options/c/',
 ];

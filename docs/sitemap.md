@@ -16,15 +16,15 @@
 /admin                    Content manager (noindex, invite only)
 ```
 
-## Status in draft 2
+## Status
 
 | Page | Status | In search engines |
 | --- | --- | --- |
-| `/` | Complete | Yes |
+| `/` | Complete (approved homepage design) | Yes |
+| `/about`, `/capabilities`, `/industries`, `/government-contracting`, `/contact` | Complete, in the homepage design, awaiting client review | Yes |
 | `/submit-rfq` | Complete and working | Yes |
-| `/about`, `/capabilities`, `/industries`, `/government-contracting` | Outline only: title, one sentence on the planned content, RFQ link | No, until built |
-| `/contact` | Contact details and a working general inquiry form | No, until approved |
 | `/privacy`, `/terms` | Drafts awaiting legal review | No, until approved |
+| `/options/` | Alternative homepage designs, review only | Never |
 | `/brand` | Review only | Never |
 
 ## Main navigation (all devices)
