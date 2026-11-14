@@ -1,5 +1,6 @@
 ---
 import { site, isSet } from '../legacy/lib/site';
+import { CPANEL, netlifyFormAttrs } from '../lib/hosting';
 
 const divisions = [
   { value: 'government', label: 'Government / military installation' },
@@ -14,14 +15,13 @@ const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : sit
   class="form"
   name="rfq"
   method="POST"
-  action="/submit-rfq/received/"
+  action={CPANEL ? '/forms/rfq.php' : '/submit-rfq/received/'}
   enctype="multipart/form-data"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  data-netlify-recaptcha="true"
+  {...netlifyFormAttrs()}
   data-rfq-form
 >
   <input type="hidden" name="form-name" value="rfq" />
+  <input type="hidden" name="started" value="" data-started />
   <input type="hidden" name="reference" value="" data-reference />
   <input type="hidden" name="line_items" value="" data-line-items-field />
   <p class="form__hp" aria-hidden="true">
@@ -176,7 +176,7 @@ const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : sit
       </label>
     </div>
 
-    <div class="form__captcha" data-netlify-recaptcha="true"></div>
+    {!CPANEL && <div class="form__captcha" data-netlify-recaptcha="true"></div>}
 
     <div class="form__submit">
       <button class="btn btn--primary" type="submit" data-submit>Submit RFQ</button>
