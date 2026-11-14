@@ -1,13 +1,16 @@
+---
+import { CPANEL, netlifyFormAttrs } from '../lib/hosting';
+---
 <form
   class="cform"
   name="contact"
   method="POST"
-  action="/contact/sent/"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  data-netlify-recaptcha="true"
+  action={CPANEL ? '/forms/contact.php' : '/contact/sent/'}
+  {...netlifyFormAttrs()}
+  data-contact-form
 >
   <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="started" value="" data-started />
   <p class="cform__hp" aria-hidden="true">
     <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
   </p>
@@ -33,9 +36,14 @@
     <input type="checkbox" name="privacy_consent" value="agreed" required />
     <span>I agree that Exron Global may use these details to reply, as described in the <a href="/privacy/">Privacy Policy</a>.</span>
   </label>
-  <div data-netlify-recaptcha="true"></div>
+  {!CPANEL && <div data-netlify-recaptcha="true"></div>}
   <div><button class="btn btn--primary" type="submit">Send message</button></div>
 </form>
+
+<script>
+  // Time the form was opened: the server treats submissions sent within seconds as automated.
+  document.querySelectorAll<HTMLInputElement>('[data-contact-form] [data-started]').forEach((el) => { el.value = String(Date.now()); });
+</script>
 
 <style>
   .cform { display: grid; gap: 1.25rem; }

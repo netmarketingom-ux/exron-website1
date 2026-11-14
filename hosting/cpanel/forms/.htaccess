@@ -1,0 +1,4 @@
+# Only rfq.php and contact.php are public; settings and shared code are not.
+<FilesMatch "^(config\.php|lib\.php|site\.json)$">
+  Require all denied
+</FilesMatch>
