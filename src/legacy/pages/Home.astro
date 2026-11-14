@@ -6,7 +6,7 @@ import SectionHead from '../components/SectionHead.astro';
 import DataCard from '../components/DataCard.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
 import CoverageMap from '../components/CoverageMap.astro';
-import { rich } from '../lib/site';
+import { rich, site } from '../lib/site';
 import { loadPage } from '../lib/page';
 import raw from '../content/pages/home.md?raw';
 import capsRaw from '../content/pages/capabilities.md?raw';
@@ -25,10 +25,8 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
     <div class="container intro-hero__grid">
       <div>
         <p class="intro-hero__kicker">{d.hero.kicker}</p>
-        <h1 id="home-title" set:html={rich(d.hero.heading)} />
-        <ol class="intro-hero__tagline">
-          {d.hero.tagline.map((t: string, i: number) => <li><span>{pad(i)}</span>{t}</li>)}
-        </ol>
+        <h1 id="home-title">{d.hero.heading.map((line: string) => <span>{line}</span>)}</h1>
+        <p class="intro-hero__positioning">{d.hero.positioning}</p>
         <p class="intro-hero__text" set:html={rich(d.hero.text)} />
         <div class="btn-row btn-row--stack">
           <Button href={d.hero.buttons[0].href} variant="quote" size="lg" icon="file">{d.hero.buttons[0].label}</Button>
@@ -118,10 +116,14 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
       </div>
       <aside class="group-card" aria-labelledby="group-title">
         <p class="group-card__label">{d.coverage.group.label}</p>
+        {d.coverage.group.logo && <img class="group-card__logo" src={d.coverage.group.logo} alt={`${site.groupName} logo`} loading="lazy" />}
         <h3 id="group-title" set:html={rich(d.coverage.group.heading)} />
         <p set:html={rich(d.coverage.group.text)} />
         <p class="group-card__notice"><Icon name="shield" size={18} /><span set:html={rich(d.coverage.group.notice)} /></p>
-        <a class="link-arrow" href={d.coverage.group.link.href}>{d.coverage.group.link.label}<Icon name="arrow-right" /></a>
+        <div class="group-card__links">
+          <a class="link-arrow" href={d.coverage.group.link.href}>{d.coverage.group.link.label}<Icon name="arrow-right" /></a>
+          {d.coverage.group.website && <a class="link-arrow" href={d.coverage.group.website} target="_blank" rel="noopener">Group website<Icon name="arrow-right" /></a>}
+        </div>
       </aside>
     </div>
   </section>
@@ -169,10 +171,13 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
     display: inline-flex; align-items: center; gap: 0.75rem;
   }
   .intro-hero__kicker::before { content: ''; width: 32px; height: 3px; background: var(--red-600); }
-  .intro-hero h1 { color: #fff; font-size: clamp(2.125rem, 1.4rem + 2.6vw, 3.5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; max-width: 20ch; }
-  .intro-hero__tagline { list-style: none; display: grid; gap: 0.35rem; margin: 0 0 1.5rem; padding-left: 1rem; border-left: 3px solid var(--red-600); }
-  .intro-hero__tagline li { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600; font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem); color: #fff; }
-  .intro-hero__tagline span { font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 400; color: var(--on-dark-3); margin-right: 0.75rem; }
+  .intro-hero h1 { color: #fff; font-size: clamp(2.125rem, 1.4rem + 2.8vw, 3.75rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .intro-hero h1 span { display: block; }
+  .intro-hero__positioning {
+    margin: 0 0 1.25rem; padding-left: 1rem; border-left: 3px solid var(--red-600);
+    font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600;
+    font-size: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem); line-height: 1.35; color: #fff; max-width: 34ch;
+  }
   .intro-hero__text { font-size: var(--fs-lead); line-height: 1.6; max-width: 56ch; margin-bottom: 2rem; color: var(--on-dark-2); }
 
   .quick { background: #fff; color: var(--ink-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; }
@@ -198,13 +203,13 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
   .quick__note :global(svg) { color: #1f7a46; flex-shrink: 0; margin-top: 0.1rem; }
 
   .figures { background: var(--navy-700); border-bottom: 1px solid var(--navy-800); }
-  .figures__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: auto; }
+  .figures__grid { display: grid; grid-template-columns: 1fr; margin-inline: auto; }
   .figures__grid > div { display: flex; flex-direction: column-reverse; gap: 0.35rem; padding: 1.5rem 1rem 1.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
   .figures dd { margin: 0; font-family: var(--font-mono); font-size: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem); font-weight: 500; line-height: 1; color: #fff; }
   .figures dd.is-text { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 700; font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); }
   .figures dt { font-size: 0.9375rem; color: var(--on-dark-2); max-width: 24ch; }
   @media (min-width: 900px) {
-    .figures__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .figures__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .figures__grid > div { border-bottom: 0; padding: 2rem 1.5rem; border-left: 1px solid rgba(255, 255, 255, 0.12); }
     .figures__grid > div:first-child { border-left: 0; padding-left: 0; }
   }
@@ -249,6 +254,8 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
   .group-card__notice { display: flex; gap: 0.5rem; align-items: flex-start; padding: 0.875rem 1rem; background: var(--navy-50); border-left: 3px solid var(--navy-700); font-size: 0.875rem; }
   .group-card__notice :global(svg) { color: var(--navy-700); flex-shrink: 0; margin-top: 0.1rem; }
   .group-card :global(.link-arrow) { color: var(--navy-700); }
+  .group-card__logo { max-height: 56px; width: auto; }
+  .group-card__links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
 
   /* 06 RFQ submission */
   .rfq-close { border-top: 4px solid var(--red-600); background: var(--paper); }

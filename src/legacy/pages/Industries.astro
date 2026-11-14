@@ -31,15 +31,6 @@ const d = loadPage(raw);
     </div>
   </section>
 
-  <section class="section section--alt">
-    <div class="container">
-      <SectionHead eyebrow={d.approach.eyebrow} heading={d.approach.heading} />
-      <ul class="claim-list claim-list--2">
-        {d.approach.items.map((c: any) => <li><h3 set:html={rich(c.title)} /><p set:html={rich(c.text)} /></li>)}
-      </ul>
-    </div>
-  </section>
-
   <section class="section" id="faq">
     <div class="container"><FAQ items={d.faq} heading="Questions from buyers" /></div>
   </section>

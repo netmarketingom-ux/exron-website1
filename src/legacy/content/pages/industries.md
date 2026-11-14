@@ -8,15 +8,15 @@ seoDescription: "Procurement and supply for U.S. Government operations, military
 hero:
   eyebrow: "Industries We Serve"
   title: "Built for government and military installation requirements"
-  lead: "Government and military installation support is our primary focus. The same sourcing team also serves construction, infrastructure, industrial and commercial buyers through our second division."
+  lead: "The customers we are set up to serve, and what each typically needs from a supplier. Government and military installation buyers come first."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "View capabilities", href: "/capabilities/" }
 
 government:
-  eyebrow: "Division One · Primary focus"
-  heading: "Government & military installation support"
-  lead: "Customers who buy against a solicitation, with a stated specification, a delivery destination with its own receiving rules, and a deadline."
+  eyebrow: "Primary focus"
+  heading: "Government & military buyers"
+  lead: "Buyers who purchase against a solicitation, with a stated specification, a delivery destination with its own receiving rules, and a deadline."
   sectors:
     - id: government-operations
       icon: building
@@ -36,9 +36,9 @@ government:
   note: "Exron Global is a privately owned company. It is not a government agency and is not affiliated with or endorsed by the U.S. Government."
 
 commercial:
-  eyebrow: "Division Two"
-  heading: "Commercial & industrial procurement"
-  lead: "The same RFQ discipline, supplier evaluation and delivery coordination, applied to commercial and industrial requirements."
+  eyebrow: "Commercial & industrial"
+  heading: "Commercial & industrial buyers"
+  lead: "Project, plant and business buyers who need several categories from one accountable supplier."
   sectors:
     - id: construction
       icon: hardhat
@@ -61,24 +61,13 @@ commercial:
       text: "Companies within our business group, supplied on the same commercial terms and process as external customers."
       examples: ["Project materials", "Equipment", "Operational supplies"]
 
-approach:
-  eyebrow: "What every customer gets"
-  heading: "The same process, whoever is buying"
-  items:
-    - { title: "A reference number and a named contact", text: "Every RFQ is acknowledged and tracked by one person from quote to delivery." }
-    - { title: "An itemized quotation", text: "Unit prices, lead times and validity for every line, in the format you ask for." }
-    - { title: "Sourcing to specification", text: "Exact items, or clearly identified equals with data sheets, supplied only with approval." }
-    - { title: "Delivery documentation", text: "Packing lists, invoices and proof of delivery, plus any forms your order requires." }
-
 faq:
   - q: "Do you work with prime contractors and subcontractors?"
     a: "Yes. We are set up to supply contractors who support government and installation requirements, as well as government buyers directly."
-  - q: "Can you meet government documentation requirements?"
-    a: "We provide itemized quotations, invoices, packing lists and delivery records. Tell us any specific forms, standards or marking your contract requires and we will confirm before quoting."
   - q: "Where can you deliver?"
     a: "Our primary market is the Middle East. We also take on requirements in other international markets where we can perform reliably. Tell us the delivery destination in your RFQ."
-  - q: "Do commercial customers follow a different process?"
-    a: "No. Commercial and industrial requests follow the same RFQ steps: acknowledgment, sourcing, itemized quotation, order execution and documented delivery."
+  - q: "Can you supply contractors working outside the Middle East?"
+    a: "Yes, where we can perform reliably. Tell us the delivery destination and required date in your RFQ and we will confirm before quoting."
 
 cta:
   heading: "Supporting a government or installation requirement?"

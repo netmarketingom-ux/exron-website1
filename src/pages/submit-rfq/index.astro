@@ -6,10 +6,10 @@ import Icon from '../../legacy/components/Icon.astro';
 import RfqForm from '../../components/RfqForm.astro';
 import { rich, site, isSet } from '../../legacy/lib/site';
 import { loadPage } from '../../legacy/lib/page';
-import capsRaw from '../../legacy/content/pages/capabilities.md?raw';
+import rfqRaw from '../../legacy/content/pages/rfq.md?raw';
 
 const page = (await getEntry('pages', 'submit-rfq'))!;
-const next = loadPage(capsRaw).sourcing.steps.slice(0, 4);
+const next = loadPage(rfqRaw).next;
 const secure = 'Do not send classified information, Controlled Unclassified Information (CUI) or export-controlled technical data through this website. If your requirement involves such information, contact us first to agree an appropriate secure method of transmission.';
 ---
 <BaseLayout title={page.data.seo_title} description={page.data.description} noindex={page.data.noindex}>
