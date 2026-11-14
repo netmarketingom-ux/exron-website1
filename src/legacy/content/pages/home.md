@@ -12,9 +12,9 @@ seoDescription: "Exron Global sources, supplies and delivers for U.S. Government
 # 01 Introduction ------------------------------------------------------------
 hero:
   kicker: "Exron Global"
-  heading: "Government & Military Installation Support Procurement Specialists"
-  tagline: ["Mission-Driven Procurement.", "Global Supply.", "Reliable Execution."]
-  text: "Strategic sourcing, supply and logistics coordination for U.S. Government operations, military installations and defense support contractors."
+  heading: ["Mission-Driven Procurement.", "Global Sourcing.", "Reliable Delivery."]
+  positioning: "Government & Military Installation Support Procurement Specialists"
+  text: "Sourcing, supply and logistics coordination for U.S. Government operations, military installations and defense support contractors."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Government Contracting", href: "/government-contracting/" }
@@ -25,7 +25,6 @@ hero:
     note: "Every RFQ is acknowledged {rfqAcknowledgment}, with a reference number and a named contact."
     button: "Continue to the full RFQ"
   figures:
-    - { value: "2", label: "Divisions: government first, commercial second" }
     - { value: "{categories}", label: "Supply categories quoted in one response" }
     - { value: "Middle East", label: "Primary market, with international coverage" }
     - { value: "1", label: "Named contact per RFQ, from quote to delivery" }
@@ -35,16 +34,14 @@ overview:
   eyebrow: "02 · Company overview"
   heading: "A procurement partner for installation requirements"
   paragraphs:
-    - "Exron Global General Trading LLC is a privately owned procurement and supply company. We source and deliver the supplies, equipment and materials that government operations and military installations order, and we stay responsible for each requirement from RFQ to proof of delivery."
-    - "Our principal division serves contracting officers, installation purchasing teams and prime contractors. A second division applies the same discipline to commercial and industrial buyers."
+    - "Exron Global General Trading LLC is a privately owned procurement and supply company. We source and deliver what government operations and military installations order, from RFQ to proof of delivery."
   link: { label: "About Exron", href: "/about/" }
   profile:
     title: "Company profile"
     rows:
       - { k: "Legal name", v: "Exron Global General Trading LLC" }
       - { k: "Headquarters", v: "{headquarters}" }
-      - { k: "Primary division", v: "Government & Military Installation Support" }
-      - { k: "Second division", v: "Commercial & Industrial Procurement" }
+      - { k: "Focus", v: "Government & military installation support" }
       - { k: "SAM.gov / CAGE", v: "Registration in process" }
     link: { label: "Vendor information", href: "/government-contracting/" }
 
@@ -52,7 +49,7 @@ overview:
 capabilities:
   eyebrow: "03 · Capabilities"
   heading: "What we supply"
-  lead: "Mixed requirements are quoted together in one itemized response. These are the main areas; the Capabilities page lists every category with typical items."
+  lead: "Mixed requirements quoted together in one itemized response."
   items:
     - { icon: "package", title: "General supplies & commodities", link: { label: "Details", href: "/capabilities/#general-supplies" } }
     - { icon: "wrench", title: "Equipment, tools & machinery", link: { label: "Details", href: "/capabilities/#industrial-equipment" } }
@@ -68,14 +65,14 @@ strengths:
   heading: "Why contracting officers work with us"
   items:
     - title: "Management experience"
-      text: "Our managers have spent [CLIENT TO PROVIDE: number] years in procurement, trading and logistics coordination, including supporting U.S. military installation requirements across the Middle East at Expedition Trading & Services."
+      text: "Our managers bring [CLIENT TO PROVIDE: number] years of procurement and U.S. military installation support in the Middle East."
     - title: "Diverse requirements, one quotation"
-      text: "General supplies, equipment, IT, PPE and hard-to-find items sourced together. Named brands, or clearly identified equals with data sheets."
+      text: "From general supplies to hard-to-find items, quoted together to the specification."
     - title: "Logistics coordination"
-      text: "Freight forwarding, customs clearance coordination and delivery scheduled to the installation's receiving rules, with packing lists and proof of delivery."
+      text: "Freight, customs clearance and delivery to the installation's receiving rules."
     - title: "Accuracy and accountability"
-      text: "Every RFQ gets a reference number and a named contact. The quotation matches the specification, or states exactly where it does not."
-  notice: "The experience described here was gained by members of our management team in previous roles. Contracts and past performance of Expedition Trading & Services belong to that company and are not represented as those of Exron Global."
+      text: "A reference number, a named contact and a quotation that matches the specification."
+  notice: "Management experience was gained in previous roles, including at Expedition Trading & Services. That company's contracts and past performance are not represented as Exron Global's."
 
 # 05 Geographic coverage & group affiliation -----------------------------------
 coverage:
@@ -94,6 +91,9 @@ coverage:
     text: "Exron Global is affiliated with {groupName}, whose companies work in [CLIENT TO PROVIDE: sectors, e.g. engineering, infrastructure, energy, construction]. The group adds market knowledge, supplier relationships and commercial backing."
     notice: "Each group company is a separate legal entity. Exron Global does not present their contracts or capabilities as its own."
     link: { label: "About the group", href: "/about/#group" }
+    # Shown only once management approves: logo file in public/images/, and the group's website address.
+    logo: ""
+    website: ""
 
 # 06 RFQ submission ---------------------------------------------------------------
 rfq:
@@ -108,6 +108,6 @@ rfq:
     - "RFQ or solicitation number, if you have one"
     - "Line items and quantities"
     - "Delivery destination and required date"
-    - "Specifications or documents (PDF, Word, Excel, up to 8 MB)"
+    - "Specifications or documents (PDF, Word, Excel, CSV or images, up to 8 MB)"
   security: "Do not send classified information, Controlled Unclassified Information (CUI) or export-controlled technical data through this website. If your requirement involves such information, contact us first to agree an appropriate secure method of transmission."
 ---

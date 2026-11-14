@@ -1,0 +1,14 @@
+---
+/**
+ * A genuine company photograph. Renders nothing until `src` is set, so no
+ * placeholder or stock image ever appears on the live site.
+ * Put the file in public/images/ and set src to "/images/<file>.jpg" in the page's content file.
+ */
+interface Props { src?: string; alt: string; ratio?: string; }
+const { src, alt, ratio = '4/3' } = Astro.props;
+---
+{src && <img class="photo" src={src} alt={alt} loading="lazy" decoding="async" style={`aspect-ratio:${ratio}`} />}
+
+<style>
+  .photo { width: 100%; height: auto; object-fit: cover; border-radius: var(--radius-lg); }
+</style>

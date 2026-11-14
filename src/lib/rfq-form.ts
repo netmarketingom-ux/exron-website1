@@ -11,7 +11,6 @@ export function initRfqForm() {
   const summary = $<HTMLElement>('[data-error-summary]');
   const summaryList = $<HTMLUListElement>('[data-error-list]');
   const status = $<HTMLElement>('[data-status]');
-  const sendError = $<HTMLElement>('[data-send-error]');
   const submit = $<HTMLButtonElement>('[data-submit]');
   const filesError = $<HTMLElement>('[data-files-error]');
   const quantities = $<HTMLTextAreaElement>('#quantities');
@@ -93,7 +92,7 @@ export function initRfqForm() {
       const file = input.files?.[0];
       if (!file) continue;
       if (!ALLOWED_EXTENSIONS.includes(extensionOf(file.name))) {
-        return `"${file.name}" is not an accepted file type. Use PDF, Word, Excel or CSV.`;
+        return `"${file.name}" is not an accepted file type. Use PDF, Word, Excel, CSV, JPG or PNG.`;
       }
       total += file.size;
     }
@@ -196,32 +195,26 @@ export function initRfqForm() {
     if (el.getAttribute('aria-invalid') === 'true' && el.type !== 'file' && !messageFor(el)) clearError(el);
   });
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    sendError.hidden = true;
+  // The form is posted the standard way (not with fetch): Netlify Forms handles file
+  // uploads and reCAPTCHA most reliably that way, and it also works without JavaScript.
+  let sending = false;
+  form.addEventListener('submit', (e) => {
+    if (sending) {
+      e.preventDefault();
+      return;
+    }
     if (!validate()) {
+      e.preventDefault();
       summary.focus();
       return;
     }
 
     const reference = makeReference();
     $<HTMLInputElement>('[data-reference]').value = reference;
+    try { sessionStorage.setItem('exron-rfq-ref', reference); } catch { /* storage unavailable */ }
 
-    submit.disabled = true;
-    status.textContent = 'Sending your RFQ and documents…';
-
-    try {
-      const data = new FormData(form);
-      // Line item rows are captured in the hidden line_items field only.
-      const res = await fetch('/', { method: 'POST', body: data });
-      if (!res.ok) throw new Error(String(res.status));
-      try { sessionStorage.setItem('exron-rfq-ref', reference); } catch { /* storage unavailable */ }
-      location.assign(`/submit-rfq/received/?ref=${encodeURIComponent(reference)}`);
-    } catch {
-      submit.disabled = false;
-      status.textContent = '';
-      sendError.hidden = false;
-      sendError.focus?.();
-    }
+    sending = true;
+    submit.setAttribute('aria-disabled', 'true');
+    status.textContent = `Sending RFQ ${reference} and your documents…`;
   });
 }

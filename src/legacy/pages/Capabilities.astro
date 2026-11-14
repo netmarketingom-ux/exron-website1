@@ -3,8 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
-import ProcessGrid from '../components/ProcessGrid.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Photo from '../components/Photo.astro';
 import CTABand from '../components/CTABand.astro';
 import FAQ from '../components/FAQ.astro';
 import Icon from '../components/Icon.astro';
@@ -33,13 +32,6 @@ const d = loadPage(raw);
 
   <CTABand variant="banner" heading={d.banner.heading} text={d.banner.text} buttons={d.banner.buttons} />
 
-  <section class="section section--alt" id="sourcing">
-    <div class="container">
-      <SectionHead eyebrow={d.sourcing.eyebrow} heading={d.sourcing.heading} intro={d.sourcing.lead} />
-      <ProcessGrid steps={d.sourcing.steps} />
-    </div>
-  </section>
-
   <section class="section" id="compliance">
     <div class="container">
       <SectionHead eyebrow={d.compliance.eyebrow} heading={d.compliance.heading} />
@@ -50,12 +42,12 @@ const d = loadPage(raw);
   </section>
 
   <section class="section section--dark" id="logistics">
-    <div class="container split">
+    <div class:list={['container', d.logistics.image.src && 'split']}>
       <div>
         <SectionHead eyebrow={d.logistics.eyebrow} heading={d.logistics.heading} intro={d.logistics.lead} />
         <ul class="check-list caps-logistics">{d.logistics.points.map((p: string) => <li><Icon name="check" />{p}</li>)}</ul>
       </div>
-      <ImagePlaceholder label={d.logistics.image.label} alt={d.logistics.image.alt} ratio="4/3" tone="dark" />
+      <Photo src={d.logistics.image.src} alt={d.logistics.image.alt} />
     </div>
   </section>
 

@@ -1,6 +1,6 @@
 /** Rules shared by the browser form and the submission-created function. */
 
-export const ALLOWED_EXTENSIONS = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv'];
+export const ALLOWED_EXTENSIONS = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'jpg', 'jpeg', 'png'];
 export const MAX_FILES = 3;
 /** Netlify Forms accepts up to 8 MB per submission, fields included. */
 export const MAX_TOTAL_BYTES = 8 * 1024 * 1024 - 256 * 1024;

@@ -1,12 +1,14 @@
 ---
-import { site } from '../lib/content';
+import { site, isSet } from '../legacy/lib/site';
 
 const divisions = [
   { value: 'government', label: 'Government / military installation' },
   { value: 'contractor', label: 'Prime or defense support contractor' },
   { value: 'commercial', label: 'Commercial / industrial' },
 ];
-const accept = '.pdf,.doc,.docx,.xls,.xlsx,.csv';
+const accept = '.pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png';
+// Email fallback: the procurement address once confirmed, the general address until then.
+const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : site.email;
 ---
 <form
   class="form"
@@ -140,7 +142,7 @@ const accept = '.pdf,.doc,.docx,.xls,.xlsx,.csv';
   <fieldset class="form__group">
     <legend><span class="mono">04</span> Specifications and documents</legend>
     <p class="field__hint" id="files-hint">
-      Up to three files: PDF, Word, Excel or CSV, 8 MB in total. For larger files, submit the form and we will send you a secure upload link.
+      Up to three files: PDF, Word, Excel, CSV or images (JPG, PNG), 8 MB in total. For larger files, submit the form and we will send you a secure upload link.
     </p>
     <div class="files" data-field="attachments">
       {[1, 2, 3].map((n) => (
@@ -180,9 +182,9 @@ const accept = '.pdf,.doc,.docx,.xls,.xlsx,.csv';
       <button class="btn btn--primary" type="submit" data-submit>Submit RFQ</button>
       <p class="small form__status" role="status" data-status></p>
     </div>
-    <p class="form__error small" role="alert" data-send-error hidden>
-      The form could not be sent. Check your connection and try again, or email the RFQ to
-      <span data-fallback-email>{site.procurement_email}</span>.
+    <p class="form__fallback small">
+      Problem sending the form? Email the RFQ and documents to
+      <a href={`mailto:${fallbackEmail}?subject=RFQ`}>{fallbackEmail}</a> with the RFQ number in the subject line.
     </p>
   </fieldset>
 </form>
@@ -268,5 +270,5 @@ const accept = '.pdf,.doc,.docx,.xls,.xlsx,.csv';
   .form__summary a { color: #8a1a28; font-weight: 600; }
   .form__submit { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
   .form__status { margin: 0; color: var(--steel); }
-  .form__error { margin: 0; padding: 0.75rem 1rem; border-left: 3px solid var(--red); background: #fbe9eb; }
+  .form__fallback { margin: 0; color: var(--steel); }
 </style>

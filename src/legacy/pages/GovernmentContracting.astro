@@ -5,28 +5,60 @@ import DataCard from '../components/DataCard.astro';
 import SectionHead from '../components/SectionHead.astro';
 import ProcessGrid from '../components/ProcessGrid.astro';
 import CTABand from '../components/CTABand.astro';
-import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
-import { rich } from '../lib/site';
+import { rich, site, isSet } from '../lib/site';
 import { loadPage } from '../lib/page';
 import raw from '../content/pages/government-contracting.md?raw';
 
 const d = loadPage(raw);
+const reg = d.registrations;
+const requestTo = isSet(site.procurementEmail) ? site.procurementEmail : site.email;
+const requestHref = `mailto:${requestTo}?subject=${encodeURIComponent(d.statement.requestSubject)}`;
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription}>
   <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Government Contracting">
-    <DataCard slot="aside" id="vendor-information" title={d.vendor.title} rows={d.vendor.rows} note={d.vendor.note} />
+    <div slot="aside" class="cs-card" id="capability-statement">
+      <p class="cs-card__label"><Icon name="file" size={16} />PDF download</p>
+      <h2 class="cs-card__title">{d.statement.title}</h2>
+      <p class="cs-card__text">{d.statement.text}</p>
+      {d.statement.file ? (
+        <>
+          <a class="btn btn--quote btn--lg cs-card__btn" href={d.statement.file} download><Icon name="download" />Download capability statement</a>
+          {d.statement.updated && <p class="cs-card__meta">Last updated {d.statement.updated}</p>}
+        </>
+      ) : (
+        <>
+          <p class="cs-card__pending">{d.statement.pending}</p>
+          <a class="btn btn--primary btn--lg cs-card__btn" href={requestHref}><Icon name="mail" />Request a copy</a>
+        </>
+      )}
+    </div>
   </PageHero>
 
-  <section class="section" id="capability-statement">
-    <div class="container split">
+  <section class="section" id="vendor-information">
+    <div class="container reg-grid">
       <div>
-        <SectionHead eyebrow={d.statement.eyebrow} heading={d.statement.heading} intro={d.statement.text} />
-        {d.statement.file
-          ? <Button href={d.statement.file} variant="quote" size="lg" icon="file">Download capability statement (PDF)</Button>
-          : <p class="notice"><Icon name="file" /><span set:html={rich(d.statement.pending)} /></p>}
+        <SectionHead eyebrow={reg.eyebrow} heading={reg.heading} intro={reg.lead} />
+        <table class="reg">
+          <thead>
+            <tr><th scope="col">Registration</th><th scope="col">Status</th><th scope="col">Number / codes</th></tr>
+          </thead>
+          <tbody>
+            {reg.items.map((r: any) => (
+              <tr>
+                <th scope="row"><span class="reg__name">{r.name}</span><span class="reg__about">{r.about}</span></th>
+                <td><span class:list={['chip', `chip--${r.status}`]}>{reg.statusLabels[r.status] ?? r.status}</span></td>
+                <td class="reg__value">{r.value ? <span set:html={rich(r.value)} /> : <span class="reg__none">Not yet issued</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="reg__checked">Status last confirmed: <span set:html={rich(reg.checked)} /></p>
       </div>
-      <DataCard title={d.contact.title} rows={d.contact.rows} />
+      <div class="reg-side">
+        <DataCard title={d.identity.title} rows={d.identity.rows} />
+        <DataCard title={d.contact.title} rows={d.contact.rows} />
+      </div>
     </div>
   </section>
 
@@ -67,6 +99,39 @@ const d = loadPage(raw);
 </BaseLayout>
 
 <style>
+  /* Capability statement card in the banner */
+  .cs-card { background: #fff; color: var(--ink-700); border-top: 4px solid var(--red-600); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 1.75rem; display: grid; gap: 0.875rem; scroll-margin-top: calc(var(--header-h) + 16px); }
+  .cs-card__label { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy-700); }
+  .cs-card__title { margin: 0; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); color: var(--ink-900); }
+  .cs-card__text { margin: 0; }
+  .cs-card__pending { margin: 0; padding: 0.75rem 1rem; background: var(--navy-50); border-left: 3px solid var(--navy-700); font-size: 0.9375rem; }
+  .cs-card__btn { width: 100%; white-space: normal; }
+  .cs-card__meta { margin: 0; font-size: 0.8125rem; color: var(--ink-500); }
+
+  /* Registration status */
+  .reg-grid { display: grid; gap: 3rem; align-items: start; }
+  .reg-grid > * { min-width: 0; }
+  @media (min-width: 1024px) { .reg-grid { grid-template-columns: 1.35fr 0.65fr; gap: 3.5rem; } }
+  .reg-side { display: grid; gap: 1.5rem; }
+  .reg { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: #fff; }
+  .reg thead th { text-align: left; padding: 0.85rem 1rem; background: var(--navy-700); color: #fff; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .reg td, .reg tbody th { padding: 1rem; border-top: 1px solid var(--line); text-align: left; vertical-align: middle; }
+  .reg__name { display: block; font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 700; font-size: 1.0625rem; color: var(--ink-900); }
+  .reg__about { display: block; margin-top: 0.15rem; font-size: 0.8125rem; font-weight: 400; color: var(--ink-500); }
+  .reg__value { font-family: var(--font-mono); font-size: 0.9375rem; color: var(--ink-900); }
+  .reg__none { font-family: var(--font-sans); font-size: 0.875rem; color: var(--ink-500); }
+  .reg__checked { margin-top: 1rem; font-size: 0.875rem; color: var(--ink-500); }
+  .chip { display: inline-block; padding: 0.3rem 0.6rem; border-radius: 2px; font-size: 0.8125rem; font-weight: 600; line-height: 1.3; }
+  .chip--active { background: #e3f4ea; color: #155d33; border: 1px solid #9fd3b3; }
+  .chip--in-process { background: #fff4d6; color: #6b4a00; border: 1px solid #e0b64d; }
+  .chip--pending { background: var(--navy-50); color: var(--navy-700); border: 1px solid var(--navy-200); }
+  .chip--to-confirm { background: #fff; color: var(--ink-500); border: 1px dashed var(--line-strong); }
+  @media (max-width: 639px) {
+    .reg thead { display: none; }
+    .reg tr { display: grid; gap: 0.5rem; padding: 1rem; border-top: 1px solid var(--line); }
+    .reg td, .reg tbody th { padding: 0; border: 0; }
+  }
+
   .gc-solicit { background: linear-gradient(180deg, var(--navy-700), var(--navy-800)); border-top: 4px solid var(--red-600); }
   .gc-security { margin-top: 2rem; }
   .gc-supply { align-items: start; }

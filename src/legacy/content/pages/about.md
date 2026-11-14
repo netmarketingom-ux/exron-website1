@@ -26,11 +26,11 @@ hero:
 
 who:
   eyebrow: "Who we are"
-  heading: "One accountable team from RFQ to delivery"
+  heading: "Built by people who have done this work"
   paragraphs:
-    - "Exron Global is a procurement, sourcing and supply company. We take a requirement from the solicitation or item list through supplier identification, technical review, quotation, purchase order, freight, customs and delivery, and we stay responsible for it after it arrives."
-    - "Our work is organized around the way installation requirements arrive: mixed line items, a stated specification, a delivery destination with its own receiving rules, and a deadline. The same discipline applies to the commercial and industrial customers served by our second division."
-  image: { label: "Exron Global office or warehouse (real photograph)", alt: "Exron Global procurement team at work" }
+    - "Exron Global General Trading LLC is a privately owned procurement, sourcing and supply company. It was set up to serve U.S. Government operations, military installations and the contractors who support them, drawing on the experience its management built in that work across the Middle East."
+    - "Sourcing, supplier coordination and logistics are handled by our own team, which stays the single point of contact for each customer requirement."
+  image: { label: "Exron Global office or warehouse (real photograph)", alt: "Exron Global procurement team at work", src: "" }
 
 experience:
   eyebrow: "Management experience"
@@ -43,7 +43,7 @@ experience:
     - "Trading & supplier coordination"
     - "Logistics & customs coordination"
     - "Military installation requirements in the Middle East"
-  team: "[CLIENT TO PROVIDE: management names, titles and short backgrounds, if approved for publication]"
+  photo: ""
   notice: "The experience described here was gained by members of our management team in previous roles. Contracts and past performance of Expedition Trading & Services belong to that company and are not represented as those of Exron Global."
 
 mission:
@@ -85,6 +85,9 @@ group:
   eyebrow: "Group affiliation"
   heading: "Part of a wider business group"
   text: "Exron Global is affiliated with {groupName}, whose companies work in [CLIENT TO PROVIDE: sectors, e.g. engineering, infrastructure, energy, construction]. The group gives us market knowledge, supplier relationships and commercial backing."
+  # Shown only once management approves: logo file in public/images/, and the group's website address.
+  logo: ""
+  website: ""
   notice: "Each company in the group is a separate legal entity and operates independently. Exron Global does not present their contracts or capabilities as its own, unless those resources are available to Exron under an established arrangement."
 
 cta:

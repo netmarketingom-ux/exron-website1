@@ -4,10 +4,10 @@ import PageHero from '../components/PageHero.astro';
 import DataCard from '../components/DataCard.astro';
 import SectionHead from '../components/SectionHead.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Photo from '../components/Photo.astro';
 import CTABand from '../components/CTABand.astro';
 import Icon from '../components/Icon.astro';
-import { rich } from '../lib/site';
+import { rich, site } from '../lib/site';
 import { loadPage } from '../lib/page';
 import raw from '../content/pages/about.md?raw';
 
@@ -20,22 +20,19 @@ const divisions = [d.divisions.primary, d.divisions.secondary];
   </PageHero>
 
   <section class="section">
-    <div class="container split split--wide-left">
-      <div>
+    <div class:list={['container', d.who.image.src && 'split split--wide-left']}>
+      <div class="about-who">
         <SectionHead eyebrow={d.who.eyebrow} heading={d.who.heading} />
         {d.who.paragraphs.map((p: string) => <p class="lead" set:html={rich(p)} />)}
       </div>
-      <ImagePlaceholder label={d.who.image.label} alt={d.who.image.alt} ratio="4/3" />
+      <Photo src={d.who.image.src} alt={d.who.image.alt} />
     </div>
   </section>
 
   <section class="section section--alt" id="experience">
-    <div class="container split">
-      <div class="about-exp__media">
-        <ImagePlaceholder label="Exron Global management team (real photograph)" alt="Exron Global management team" ratio="1/1" />
-        <p class="about-exp__team" set:html={rich(d.experience.team)} />
-      </div>
-      <div>
+    <div class:list={['container', d.experience.photo && 'split']}>
+      {d.experience.photo && <Photo src={d.experience.photo} alt="Exron Global management team" ratio="1/1" />}
+      <div class="about-exp">
         <SectionHead eyebrow={d.experience.eyebrow} heading={d.experience.heading} />
         {d.experience.paragraphs.map((p: string) => <p set:html={rich(p)} />)}
         <ul class="tag-list about-exp__tags">{d.experience.areas.map((a: string) => <li>{a}</li>)}</ul>
@@ -77,7 +74,9 @@ const divisions = [d.divisions.primary, d.divisions.secondary];
     <div class="container split">
       <div>
         <SectionHead eyebrow={d.group.eyebrow} heading={d.group.heading} />
+        {d.group.logo && <img class="about-group__logo" src={d.group.logo} alt={`${site.groupName} logo`} loading="lazy" />}
         <p class="lead" set:html={rich(d.group.text)} />
+        {d.group.website && <a class="link-arrow" href={d.group.website} target="_blank" rel="noopener">Visit the group website<Icon name="arrow-right" /></a>}
       </div>
       <p class="notice"><Icon name="shield" /><span set:html={rich(d.group.notice)} /></p>
     </div>
@@ -87,8 +86,8 @@ const divisions = [d.divisions.primary, d.divisions.secondary];
 </BaseLayout>
 
 <style>
-  .about-exp__media { display: grid; gap: 1rem; }
-  .about-exp__team { margin: 0; font-size: 0.875rem; }
+  .about-who, .about-exp { max-width: 820px; }
+  .about-group__logo { max-height: 64px; width: auto; margin-bottom: 1.25rem; }
   .about-exp__tags { margin: 1.5rem 0; }
   .mission { max-width: 860px; padding-left: 1.5rem; border-left: 4px solid var(--red-600); margin-bottom: 3rem; }
   .mission__statement { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600; font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem); line-height: 1.35; color: var(--navy-700); margin: 0; }

@@ -3,9 +3,9 @@ import BaseLayout from '../../legacy/layouts/BaseLayout.astro';
 import PageHero from '../../legacy/components/PageHero.astro';
 import { rich, site, isSet } from '../../legacy/lib/site';
 import { loadPage } from '../../legacy/lib/page';
-import capsRaw from '../../legacy/content/pages/capabilities.md?raw';
+import rfqRaw from '../../legacy/content/pages/rfq.md?raw';
 
-const steps = loadPage(capsRaw).sourcing.steps.slice(1, 4);
+const steps = loadPage(rfqRaw).next.slice(1);
 const procurementEmail = isSet(site.procurementEmail) ? site.procurementEmail : '';
 ---
 <BaseLayout

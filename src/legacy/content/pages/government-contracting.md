@@ -8,31 +8,45 @@ seoDescription: "Vendor information for contracting officers: registration statu
 
 hero:
   eyebrow: "Government Contracting"
-  title: "Information for contracting officers and procurement professionals"
-  lead: "Company and vendor details, the status of our registrations, how we respond to solicitations, and who to contact. Details appear here only once they have been issued and verified."
+  title: "Information for contracting officers"
+  lead: "Our registration status, capability statement, how we respond to solicitations, what we can supply and who to contact. Everything a contracting officer needs for the vendor file, on one page."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Contact procurement", href: "/contact/" }
 
-vendor:
-  title: "Vendor information"
+statement:
+  title: "Capability statement"
+  text: "One page with our supply categories, coverage, registration status and contact details, for your vendor file."
+  # When the approved PDF is ready: put it in public/documents/ and set file, e.g. "/documents/exron-capability-statement.pdf"
+  file: ""
+  updated: ""
+  pending: "Our approved capability statement is being finalized. Request a copy and we will email it to you."
+  requestSubject: "Capability statement request"
+
+identity:
+  title: "Company details"
   rows:
     - { k: "Legal name", v: "Exron Global General Trading LLC" }
+    - { k: "Business type", v: "Privately owned company" }
     - { k: "Headquarters", v: "{headquarters}" }
     - { k: "Business registration", v: "[CLIENT TO PROVIDE: trade license or registration number and issuing authority]" }
-    - { k: "SAM.gov", v: "Registration in process" }
-    - { k: "UEI", v: "Issued on completion of SAM.gov registration" }
-    - { k: "CAGE / NCAGE", v: "Registration in process" }
-    - { k: "NAICS codes", v: "{naics}" }
-    - { k: "Business type", v: "Privately owned company" }
-  note: "Registration numbers are published only after they have been officially issued and verified."
 
-statement:
-  eyebrow: "Capability statement"
-  heading: "Capability statement"
-  text: "A one-page summary of Exron Global's supply categories, coverage, process and company details, for your vendor file."
-  file: ""
-  pending: "Our capability statement will be published here once approved. Need it now? Email {email} and we will send it."
+registrations:
+  eyebrow: "Registration status"
+  heading: "U.S. Government registrations"
+  lead: "Numbers appear here only once they have been officially issued and verified. Until then, the status shows where each registration stands."
+  # status: active | in-process | pending | to-confirm. Add the number to value once issued.
+  items:
+    - { name: "SAM.gov", about: "System for Award Management entity registration", status: "in-process", value: "" }
+    - { name: "UEI", about: "Unique Entity ID, assigned through SAM.gov", status: "pending", value: "" }
+    - { name: "CAGE / NCAGE", about: "Commercial and Government Entity code", status: "in-process", value: "" }
+    - { name: "NAICS codes", about: "Industry classification codes", status: "to-confirm", value: "" }
+  statusLabels:
+    active: "Active"
+    in-process: "Registration in process"
+    pending: "Issued after SAM.gov registration"
+    to-confirm: "To be confirmed"
+  checked: "[CLIENT TO PROVIDE: date this status was last confirmed]"
 
 solicitations:
   eyebrow: "Responding to solicitations"

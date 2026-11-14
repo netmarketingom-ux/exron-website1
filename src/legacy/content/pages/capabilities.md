@@ -8,14 +8,13 @@ seoDescription: "Supply categories, sourcing process and logistics coordination 
 hero:
   eyebrow: "Capabilities"
   title: "Procurement, supply and logistics capabilities"
-  lead: "Eleven supply categories, one sourcing process and freight, customs and delivery coordination. A requirement can be a single line item or a mixed RFQ across several categories, quoted together in one response."
+  lead: "What we source and supply, how we handle specifications and brands, and how we get it delivered. A requirement can be one line item or a mixed RFQ across several categories, quoted together."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Government Contracting", href: "/government-contracting/" }
 
 jump:
   - { label: "Supply categories", href: "#categories" }
-  - { label: "How we source", href: "#sourcing" }
   - { label: "Specification compliance", href: "#compliance" }
   - { label: "Logistics & delivery", href: "#logistics" }
   - { label: "FAQ", href: "#faq" }
@@ -87,30 +86,14 @@ banner:
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
 
-sourcing:
-  eyebrow: "How we source"
-  heading: "How a requirement moves through Exron Global"
-  lead: "Every RFQ follows the same eight steps, from acknowledgment to after-sales support."
-  steps:
-    - { title: "Acknowledge", text: "Every RFQ is logged, given a reference number and acknowledged. We confirm the response deadline, delivery destination and anything we need to clarify." }
-    - { title: "Identify suppliers", text: "We go to manufacturers and authorized distributors that can supply the exact item, brand or equivalent the specification allows." }
-    - { title: "Check compliance", text: "Each line is checked against the technical specification. Where we propose an equal to a named brand, we say so and attach the data sheet." }
-    - { title: "Price and propose", text: "You receive an itemized quotation with unit prices, lead times and validity period, in the format the solicitation asks for." }
-    - { title: "Execute the order", text: "When a purchase order or award arrives, we place supplier orders, confirm production and dispatch dates, and track each one." }
-    - { title: "Coordinate freight and customs", text: "Freight forwarding, shipping documents and customs clearance are coordinated with our logistics partners." }
-    - { title: "Deliver and document", text: "Deliveries are scheduled to the receiving site's requirements, with packing lists, invoices and proof of delivery." }
-    - { title: "Follow through", text: "After delivery we handle discrepancies, replacements and warranty questions, and remain your single point of contact." }
-
 compliance:
   eyebrow: "Specification compliance"
   heading: "Quoted to the specification, line by line"
   items:
-    - { title: "Read the whole solicitation", text: "Specifications, quantities, delivery terms, required forms and deadlines are reviewed before we quote." }
     - { title: "Brand name or equal", text: "Where we offer an equal to a named brand, the quotation identifies it clearly with the data sheet. Alternates are supplied only with written approval." }
     - { title: "Supplier selection", text: "We prefer manufacturers and authorized distributors, and assess suppliers on compliance, reliability and documentation." }
     - { title: "Confirmed lead times", text: "Lead times are confirmed with the supplier before we quote, not estimated after award." }
     - { title: "Total landed cost", text: "Sources are compared on freight and duty as well as unit price, so the price we submit holds." }
-    - { title: "Questions raised early", text: "If the requirement is unclear, we ask before the response deadline rather than after award." }
 
 logistics:
   eyebrow: "Logistics & delivery"
@@ -122,7 +105,7 @@ logistics:
     - "Delivery scheduled to the installation's or site's receiving requirements"
     - "Packing lists, commercial invoices and proof of delivery"
     - "Certificates of origin and conformity where the order requires them"
-  image: { label: "Palletised cargo at a loading bay (real photograph)", alt: "Palletised supplies staged for delivery at a loading bay" }
+  image: { label: "Palletised cargo at a loading bay (real photograph)", alt: "Palletised supplies staged for delivery at a loading bay", src: "" }
 
 faq:
   - q: "Can you quote items that are not listed here?"
