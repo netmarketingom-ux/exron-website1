@@ -213,7 +213,7 @@ const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : sit
   .field__label { font-weight: 650; color: var(--ink); margin: 0; padding: 0; }
   .req {
     margin-left: 0.4rem; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--red);
+    letter-spacing: 0; text-transform: none; color: var(--red);
   }
   .field__hint { margin: 0; font-size: 1rem; color: var(--steel); }
   .field__error { margin: 0; font-size: 1rem; font-weight: 600; color: var(--red); }
@@ -245,8 +245,8 @@ const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : sit
 
   .lines__table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 0.75rem; }
   .lines__table th {
-    text-align: left; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--steel); padding: 0.4rem 0.4rem 0.4rem 0; border-bottom: 1px solid var(--rule);
+    text-align: left; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0;
+    text-transform: none; color: var(--steel); padding: 0.4rem 0.4rem 0.4rem 0; border-bottom: 1px solid var(--rule);
   }
   .lines__table td { padding: 0.4rem 0.4rem 0.4rem 0; vertical-align: middle; }
   .lines__table th:nth-child(1), .lines__table td:nth-child(1) { width: 2rem; }

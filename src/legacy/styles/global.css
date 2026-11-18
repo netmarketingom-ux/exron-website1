@@ -63,10 +63,9 @@ ul, ol { margin: 0; padding: 0; }
 /* ---------- Typography helpers ---------- */
 .eyebrow {
   display: inline-flex; align-items: center; gap: var(--space-3);
-  font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--red-600); margin: 0 0 var(--space-3);
+  font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 500; letter-spacing: 0; text-transform: none;
+  color: var(--navy-600); margin: 0 0 var(--space-3);
 }
-.eyebrow::before { content: ''; width: 28px; height: 2px; background: currentColor; }
 :is(.section--dark, .section--deep, .hero) .eyebrow { color: var(--red-300); }
 .lead { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-700); max-width: 64ch; }
 .section-head { max-width: 780px; margin-bottom: var(--space-7); }
@@ -81,7 +80,7 @@ ul, ol { margin: 0; padding: 0; }
   --btn-bg: var(--navy-700); --btn-fg: #fff; --btn-border: var(--btn-bg);
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
   min-height: 48px; padding: 0.75rem 1.375rem;
-  font: 650 0.9375rem/1.2 var(--font-display); font-stretch: var(--display-stretch); letter-spacing: 0.01em; text-decoration: none; white-space: nowrap;
+  font: 600 0.9375rem/1.2 var(--font-display); letter-spacing: 0; text-decoration: none; white-space: nowrap;
   color: var(--btn-fg); background: var(--btn-bg); border: 1.5px solid var(--btn-border); border-radius: var(--radius);
   cursor: pointer; transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
 }
@@ -89,11 +88,17 @@ ul, ol { margin: 0; padding: 0; }
 .btn:active { transform: translateY(1px); }
 .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .btn--primary:hover { --btn-bg: var(--navy-900); }
-.btn--quote { --btn-bg: var(--red-600); }
-.btn--quote:hover { --btn-bg: var(--red-700); }
+.btn--quote { --btn-bg: var(--navy-700); }
+.btn--quote:hover { --btn-bg: var(--navy-950); }
+/* On navy backgrounds the primary action is white, so it stays the most visible button. */
+:is(.section--dark, .section--deep, .page-hero, .intro-hero, .cta--closing, .cta--banner, .site-footer) .btn--quote { --btn-bg: #fff; --btn-fg: var(--navy-700); --btn-border: #fff; }
+:is(.section--dark, .section--deep, .page-hero, .intro-hero, .cta--closing, .cta--banner, .site-footer) .btn--quote:hover { --btn-bg: var(--navy-100); --btn-border: var(--navy-100); }
+/* White cards inside navy areas go back to the navy button. */
+:is(.page-hero, .intro-hero, .section--dark) :is(.quick, .cs-card, .data-card, .ref) .btn--quote { --btn-bg: var(--navy-700); --btn-fg: #fff; --btn-border: var(--navy-700); }
+:is(.page-hero, .intro-hero, .section--dark) :is(.quick, .cs-card, .data-card, .ref) .btn--quote:hover { --btn-bg: var(--navy-950); --btn-border: var(--navy-950); }
 .btn--secondary { --btn-bg: transparent; --btn-fg: var(--navy-700); --btn-border: var(--navy-700); }
 .btn--secondary:hover { --btn-bg: var(--navy-700); --btn-fg: #fff; }
-.btn--ghost { --btn-bg: transparent; --btn-fg: #fff; --btn-border: rgba(255, 255, 255, 0.5); }
+.btn--ghost { --btn-bg: transparent; --btn-fg: #fff; --btn-border: var(--navy-300); }
 .btn--ghost:hover { --btn-bg: #fff; --btn-fg: var(--navy-800); --btn-border: #fff; }
 .btn--whatsapp { --btn-bg: #1f7a46; }
 .btn--whatsapp:hover { --btn-bg: #18633a; }
