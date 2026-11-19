@@ -18,7 +18,7 @@ Photos are added to the site only after client approval
 | Supply Capabilities (alt.) | #20 | Brass fittings, close-up | https://unsplash.com/photos/a-close-up-of-many-screws-and-nuts-Dh3EHnVJuR4 | Alternative |
 | Regional Presence | #28 | Abu Dhabi Corniche skyline at night | https://unsplash.com/photos/a-city-skyline-at-night-6gg5bY6U0lE | Proposed, awaiting approval |
 | Regional Presence (alt.) / About Us (alt.) | #26 | Abu Dhabi skyline by day from the beach | https://unsplash.com/photos/city-skyline-across-the-sea-during-daytime-hNg-zO_mHQk | Alternative |
-| About Us banner | #30 | Etihad Towers, cropped to remove hotel signs | [link to add] | Proposed, awaiting approval |
+| About Us banner | #30 | Etihad Towers, cropped to remove hotel signs | https://unsplash.com/photos/modern-skyscrapers-against-a-clear-blue-sky-3f87sYAHI1s | Proposed, awaiting approval |
 | Capabilities banner | #32 | Container ship at sea, seen from above | [link to add] | Proposed, awaiting approval |
 
 Where a link cannot be found, record: "Unsplash, downloaded November 2026".
