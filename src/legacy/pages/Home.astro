@@ -12,6 +12,7 @@ const group = d.coverage.group;
 
   <!-- Section 1: Main introduction -->
   <section class="intro-hero" aria-labelledby="home-title">
+    <img class="intro-hero__bg" src="/images/photos/home-banner.jpg" alt="" fetchpriority="high" decoding="async" />
     <div class="container intro-hero__grid">
       <div>
         <h1 id="home-title">{d.hero.heading}</h1>
@@ -41,20 +42,22 @@ const group = d.coverage.group;
 
   <!-- Section 2: Company overview -->
   <section class="section" id="overview">
-    <div class="container two-col">
-      <h2>{d.overview.heading}</h2>
+    <div class="container media-row">
       <div>
+        <h2>{d.overview.heading}</h2>
         {d.overview.paragraphs.map((p: string) => <p class="lead">{p}</p>)}
         <Button href={d.overview.button.href} variant="secondary">{d.overview.button.label}</Button>
       </div>
+      <img class="media-row__img" src="/images/photos/procurement-partner.jpg" alt="A hand signing a document" loading="lazy" decoding="async" width="1200" height="900" />
     </div>
   </section>
 
   <!-- Section 3: Capabilities overview -->
   <section class="section section--alt" id="capabilities">
-    <div class="container two-col">
-      <h2>{d.capabilities.heading}</h2>
+    <div class="container media-row media-row--flip">
+      <img class="media-row__img" src="/images/photos/supply-capabilities.jpg" alt="Industrial pipework and valves" loading="lazy" decoding="async" width="1200" height="900" />
       <div>
+        <h2>{d.capabilities.heading}</h2>
         {d.capabilities.paragraphs.map((p: string) => <p class="lead">{p}</p>)}
         <ul class="cat-list">
           {d.capabilities.categories.map((c: string) => <li>{c}</li>)}
@@ -86,12 +89,15 @@ const group = d.coverage.group;
         <h2>{d.coverage.heading}</h2>
         {d.coverage.paragraphs.map((p: string) => <p class="lead">{p}</p>)}
       </div>
+      <div class="coverage__side">
+        <img class="coverage__img" src="/images/photos/regional-presence.jpg" alt="Abu Dhabi skyline at night" loading="lazy" decoding="async" width="1200" height="800" />
       <aside class="group" aria-label={group.label}>
         <h3 class="group__label">{group.label}</h3>
         {group.logo && <img class="group__logo" src={group.logo} alt={`${site.groupName} logo`} loading="lazy" />}
         <p set:html={rich(group.statement)} />
         {group.website && <a class="link-arrow" href={group.website} target="_blank" rel="noopener">Group website</a>}
       </aside>
+      </div>
     </div>
   </section>
 
@@ -107,7 +113,10 @@ const group = d.coverage.group;
 
 <style>
   /* Section 1 */
-  .intro-hero { background: var(--navy-700); color: var(--on-dark-2); padding-block: clamp(3rem, 2rem + 4vw, 5.5rem); }
+  .intro-hero { position: relative; overflow: hidden; background: var(--navy-700); color: var(--on-dark-2); padding-block: clamp(3rem, 2rem + 4vw, 5.5rem); }
+  .intro-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .intro-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(16, 35, 56, 0.74); }
+  .intro-hero__grid { position: relative; z-index: 2; }
   .intro-hero__grid { display: grid; gap: 2.5rem; align-items: center; }
   .intro-hero__grid > * { min-width: 0; }
   @media (min-width: 1024px) { .intro-hero__grid { grid-template-columns: 1.35fr 0.85fr; gap: 4rem; } }
@@ -142,6 +151,18 @@ const group = d.coverage.group;
   .cat-list { list-style: none; display: grid; margin: 1.5rem 0 0.5rem; border-top: 1px solid var(--line); }
   @media (min-width: 640px) { .cat-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; } }
   .cat-list li { padding: 0.8rem 0; border-bottom: 1px solid var(--line); font-weight: 500; color: var(--ink-900); }
+
+  /* Sections 2 and 3: text beside a photo */
+  .media-row { display: grid; gap: 2rem 4rem; align-items: center; }
+  .media-row > * { min-width: 0; }
+  @media (min-width: 960px) { .media-row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 959px) { .media-row--flip .media-row__img { order: 2; } }
+  .media-row h2 { margin: 0 0 1.25rem; }
+  .media-row .lead { margin-bottom: 1rem; }
+  .media-row :global(.btn) { margin-top: 1rem; }
+  .media-row__img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+  .coverage__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+  .coverage__side { display: grid; gap: 1.5rem; }
 
   /* Section 4 */
   .section-title { margin-bottom: 2rem; }

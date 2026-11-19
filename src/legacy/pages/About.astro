@@ -15,7 +15,7 @@ const d = loadPage(raw);
 const divisions = [d.divisions.primary, d.divisions.secondary];
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription}>
-  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="About Us">
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="About Us" image="/images/photos/about-banner.jpg" imagePosition="center top">
     <DataCard slot="aside" title={d.hero.profile.title} rows={d.hero.profile.rows} />
   </PageHero>
 

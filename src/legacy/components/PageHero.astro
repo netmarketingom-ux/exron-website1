@@ -13,11 +13,15 @@ interface Props {
   lead?: string;
   buttons?: Btn[];
   crumb?: string;
+  /** Optional background photo, shown under a flat navy tint. */
+  image?: string;
+  imagePosition?: string;
 }
-const { eyebrow, title, lead, buttons = [], crumb } = Astro.props;
+const { eyebrow, title, lead, buttons = [], crumb, image, imagePosition = 'center' } = Astro.props;
 const hasAside = Astro.slots.has('aside');
 ---
-<section class="page-hero">
+<section class:list={['page-hero', image && 'page-hero--photo']}>
+  {image && <img class="page-hero__bg" src={image} alt="" fetchpriority="high" decoding="async" style={`object-position:${imagePosition}`} />}
   <div class:list={['container', 'page-hero__grid', hasAside && 'page-hero__grid--aside']}>
     <div class="page-hero__copy">
       <nav class="page-hero__crumbs" aria-label="Breadcrumb">
@@ -43,7 +47,10 @@ const hasAside = Astro.slots.has('aside');
     position: relative; color: var(--on-dark-2); background: var(--navy-700);
     padding-block: clamp(2.5rem, 1.75rem + 3vw, 4.5rem);
   }
-  .page-hero__grid { position: relative; display: grid; gap: 2.5rem; align-items: center; }
+  .page-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .page-hero--photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(16, 35, 56, 0.74); }
+  .page-hero--photo { overflow: hidden; }
+  .page-hero__grid { position: relative; z-index: 2; display: grid; gap: 2.5rem; align-items: center; }
   .page-hero__grid > * { min-width: 0; }
   @media (min-width: 1024px) { .page-hero__grid--aside { grid-template-columns: 1.3fr 0.9fr; gap: 4rem; } }
   .page-hero__crumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--on-dark-3); }
