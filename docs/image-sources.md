@@ -10,7 +10,7 @@ Photos are added to the site only after client approval
 | Placement | Ref | Description | Source | Status |
 |---|---|---|---|---|
 | Homepage banner | #2 | Container ship at the quay with red cranes, seen from above | https://unsplash.com/photos/cargo-ship-loaded-with-colorful-containers-at-a-port-w8VfTO3TGs8 | Proposed, awaiting approval |
-| Homepage banner (alt.) / Capabilities banner (alt.) | #1 | Container terminal at golden hour | [link to add] | Alternative |
+| Homepage banner (alt.) / Capabilities banner (alt.) | #1 | Container terminal at golden hour | https://unsplash.com/photos/aerial-view-of-city-buildings-during-daytime-6p0JBES_65E (to confirm: must be the golden-hour terminal, not the PSA terminal) | Alternative |
 | Your Procurement Partner | #16 | Hand signing a document | https://unsplash.com/photos/man-writing-on-paper-OQMZwNd3ThU | Proposed, awaiting approval |
 | Your Procurement Partner (alt.) | #15 | Two businessmen reviewing documents, faces not shown | https://unsplash.com/photos/two-men-sitting-at-a-table-with-papers-and-a-pen-Mqc-m8kgxkg | Alternative |
 | Your Procurement Partner (alt.) | #8 | White desk with blank papers | [link to add] | Alternative |
@@ -19,6 +19,6 @@ Photos are added to the site only after client approval
 | Regional Presence | #28 | Abu Dhabi Corniche skyline at night | https://unsplash.com/photos/a-city-skyline-at-night-6gg5bY6U0lE | Proposed, awaiting approval |
 | Regional Presence (alt.) / About Us (alt.) | #26 | Abu Dhabi skyline by day from the beach | https://unsplash.com/photos/city-skyline-across-the-sea-during-daytime-hNg-zO_mHQk | Alternative |
 | About Us banner | #30 | Etihad Towers, cropped to remove hotel signs | https://unsplash.com/photos/modern-skyscrapers-against-a-clear-blue-sky-3f87sYAHI1s | Proposed, awaiting approval |
-| Capabilities banner | #32 | Container ship at sea, seen from above | [link to add] | Proposed, awaiting approval |
+| Capabilities banner | #32 | Container ship at sea, seen from above | https://unsplash.com/photos/aerial-view-of-boat-on-water-1cqIcrWFQBI | Proposed, awaiting approval |
 
 Where a link cannot be found, record: "Unsplash, downloaded November 2026".
