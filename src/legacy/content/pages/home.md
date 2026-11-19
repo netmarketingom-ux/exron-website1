@@ -1,113 +1,83 @@
 ---
-# HOME PAGE (final design, per client reply of November 2026).
-# Six sections: introduction, company overview, capabilities, competitive strengths,
-# coverage and group affiliation, RFQ submission. Each section says something different;
-# detail lives on the inner pages it links to.
-# {tokens} such as {headquarters} are filled from src/legacy/data/site.json.
-# Accuracy rule: never state contracts, certifications, registrations or relationships that are not verified.
+# HOME PAGE. Wording approved by the client in the implementation brief of November 2026.
+# Do not rewrite approved headlines or descriptions; propose changes for approval instead.
+# Layout lives in src/legacy/pages/Home.astro.
 
-seoTitle: "Government & Military Procurement Specialists | Exron Global"
-seoDescription: "Exron Global sources, supplies and delivers for U.S. Government operations, military installations and defense support contractors. Submit an RFQ."
+seoTitle: "Global Procurement & Supply Solutions | Exron Global"
+seoDescription: "International procurement and supply company in Abu Dhabi, UAE: sourcing, supply and logistics coordination for government, commercial and industrial customers."
 
-# 01 Introduction ------------------------------------------------------------
+# Section 1: Main introduction
 hero:
-  kicker: "Exron Global"
-  heading: ["Mission-Driven Procurement.", "Global Sourcing.", "Reliable Delivery."]
-  positioning: "Government & Military Installation Support Procurement Specialists"
-  text: "Sourcing, supply and logistics coordination for U.S. Government operations, military installations and defense support contractors."
+  heading: "Global Procurement & Supply Solutions"
+  subheading: "Strategic Sourcing. Global Supply. Reliable Execution."
+  text: "Exron Global is an international procurement and supply company based in Abu Dhabi, United Arab Emirates, providing sourcing, supply and logistics coordination solutions to government, commercial and industrial customers."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
-    - { label: "Government Contracting", href: "/government-contracting/" }
+    - { label: "Explore Our Capabilities", href: "/capabilities/" }
+  # Simplified inquiry form: passes the details to the full RFQ form.
   quick:
-    label: "RFQ Desk"
     heading: "Start an RFQ"
-    text: "Four details now. The full form opens with them filled in, ready for line items and documents."
-    note: "Every RFQ is acknowledged {rfqAcknowledgment}, with a reference number and a named contact."
+    text: "Enter these details now. The full form opens with them filled in, ready for line items and documents."
     button: "Continue to the full RFQ"
-  figures:
-    - { value: "{categories}", label: "Supply categories quoted in one response" }
-    - { value: "Middle East", label: "Primary market, with international coverage" }
-    - { value: "1", label: "Named contact per RFQ, from quote to delivery" }
 
-# 02 Company overview ---------------------------------------------------------
+# Section 2: Company overview
 overview:
-  eyebrow: "02 · Company overview"
-  heading: "A procurement partner for installation requirements"
+  heading: "Your Procurement Partner"
   paragraphs:
-    - "Exron Global General Trading LLC is a privately owned procurement and supply company. We source and deliver what government operations and military installations order, from RFQ to proof of delivery."
-  link: { label: "About Exron", href: "/about/" }
-  profile:
-    title: "Company profile"
-    rows:
-      - { k: "Legal name", v: "Exron Global General Trading LLC" }
-      - { k: "Headquarters", v: "{headquarters}" }
-      - { k: "Focus", v: "Government & military installation support" }
-      - { k: "SAM.gov / CAGE", v: "Registration in process" }
-    link: { label: "Vendor information", href: "/government-contracting/" }
+    - "Exron Global was established to provide a professional, responsive and accountable approach to procurement and supply. Through our management’s previous industry experience and a sourcing model focused on customer requirements, we coordinate the procurement process from initial inquiry through final delivery."
+    - "Our approach is built around clear communication, reliable sourcing and attention to detail."
+  button: { label: "About Exron Global", href: "/about/" }
 
-# 03 Capabilities --------------------------------------------------------------
+# Section 3: Capabilities overview
 capabilities:
-  eyebrow: "03 · Capabilities"
-  heading: "What we supply"
-  lead: "Mixed requirements quoted together in one itemized response."
-  items:
-    - { icon: "package", title: "General supplies & commodities", link: { label: "Details", href: "/capabilities/#general-supplies" } }
-    - { icon: "wrench", title: "Equipment, tools & machinery", link: { label: "Details", href: "/capabilities/#industrial-equipment" } }
-    - { icon: "wind", title: "Electrical, HVAC & infrastructure", link: { label: "Details", href: "/capabilities/#hvac-plumbing" } }
-    - { icon: "brick", title: "Building materials & facility maintenance", link: { label: "Details", href: "/capabilities/#building-materials" } }
-    - { icon: "monitor", title: "IT hardware & networking", link: { label: "Details", href: "/capabilities/#it-networking" } }
-    - { icon: "hardhat", title: "Safety equipment & PPE", link: { label: "Details", href: "/capabilities/#safety-ppe" } }
-  link: { label: "View all capabilities", href: "/capabilities/" }
+  heading: "Comprehensive Supply Capabilities"
+  paragraphs:
+    - "We provide sourcing and supply solutions across a broad range of commercial and industrial requirements, supported by supplier coordination, logistics management and after-sales assistance."
+    - "Our procurement model allows us to source products according to customer specifications without being limited to a fixed inventory or product catalog."
+  # Principal supply categories (names only on the homepage; details on the Capabilities page).
+  categories:
+    - "General Supplies & Commodities"
+    - "Industrial Equipment, Tools & Machinery"
+    - "Electrical, Mechanical & Maintenance Supplies"
+    - "Building Materials & Facility Maintenance"
+    - "HVAC, Plumbing & Infrastructure Equipment"
+    - "IT Hardware, Networking & Office Technology"
+    - "Safety Equipment & PPE"
+    - "Office Furniture, Equipment & Operational Supplies"
+  button: { label: "View All Capabilities", href: "/capabilities/" }
 
-# 04 Competitive strengths -------------------------------------------------------
+# Section 4: Competitive strengths
 strengths:
-  eyebrow: "04 · Competitive strengths"
-  heading: "Why contracting officers work with us"
+  heading: "Why Exron Global"
   items:
-    - title: "Management experience"
-      text: "Our managers bring [CLIENT TO PROVIDE: number] years of procurement and U.S. military installation support in the Middle East."
-    - title: "Diverse requirements, one quotation"
-      text: "From general supplies to hard-to-find items, quoted together to the specification."
-    - title: "Logistics coordination"
-      text: "Freight, customs clearance and delivery to the installation's receiving rules."
-    - title: "Accuracy and accountability"
-      text: "A reference number, a named contact and a quotation that matches the specification."
-  notice: "Management experience was gained in previous roles, including at Expedition Trading & Services. That company's contracts and past performance are not represented as Exron Global's."
+    - title: "Experienced Management"
+      text: "Industry knowledge gained through previous experience in international procurement, trading and supply operations."
+    - title: "Flexible Global Sourcing"
+      text: "A requirements-driven procurement model that allows us to identify suitable suppliers across local and international markets."
+    - title: "Attention to Detail"
+      text: "A structured approach to reviewing specifications, commercial requirements and customer expectations."
+    - title: "Operational Coordination"
+      text: "Coordinated communication throughout the procurement, logistics and delivery process."
+    - title: "Accountability & Communication"
+      text: "A commitment to clear communication, transparency and professional customer support throughout every engagement."
 
-# 05 Geographic coverage & group affiliation -----------------------------------
+# Section 5: Geographic coverage and group affiliation
 coverage:
-  eyebrow: "05 · Coverage & group affiliation"
-  heading: "Middle East operations. International supply."
-  text: "Our primary market is the Middle East, where our management team has supported installation requirements. We source internationally and take on requirements in other markets where we can perform reliably."
-  rows:
-    - { k: "Primary market", v: "Middle East" }
-    - { k: "Other markets", v: "International, where we can perform reliably" }
-    - { k: "Sourcing", v: "[CLIENT TO PROVIDE: main sourcing countries or regions]" }
-  markers:
-    - { label: "Middle East", lon: 47, lat: 26, primary: true }
+  heading: "Regional Presence. International Reach."
+  paragraphs:
+    - "Headquartered in Abu Dhabi, United Arab Emirates, Exron Global is positioned to support regional and international procurement requirements through local and global sourcing channels."
+    - "Our geographic focus includes the Middle East, with international sourcing capabilities aligned with customer requirements."
+  # Designated area for the group affiliation statement. Pending the exact legal name,
+  # corporate relationship and approved description. Do not generate this text.
   group:
     label: "Group affiliation"
-    heading: "Part of {groupName}"
-    text: "Exron Global is affiliated with {groupName}, whose companies work in [CLIENT TO PROVIDE: sectors, e.g. engineering, infrastructure, energy, construction]. The group adds market knowledge, supplier relationships and commercial backing."
-    notice: "Each group company is a separate legal entity. Exron Global does not present their contracts or capabilities as its own."
-    link: { label: "About the group", href: "/about/#group" }
-    # Shown only once management approves: logo file in public/images/, and the group's website address.
+    statement: "[CLIENT TO PROVIDE: approved Hydropower Group affiliation statement, exact legal name and corporate relationship]"
     logo: ""
     website: ""
 
-# 06 RFQ submission ---------------------------------------------------------------
+# Section 6: RFQ submission
 rfq:
-  eyebrow: "06 · Submit an RFQ"
-  heading: "Have an open solicitation?"
-  text: "Send the RFQ number, item list and documents in one submission. It goes straight to our procurement team, is acknowledged with a reference number, and is answered with an itemized quotation."
-  buttons:
-    - { label: "Submit an RFQ", href: "/submit-rfq/" }
-    - { label: "Contact procurement", href: "/contact/" }
-  checklistTitle: "Have these ready"
-  checklist:
-    - "RFQ or solicitation number, if you have one"
-    - "Line items and quantities"
-    - "Delivery destination and required date"
-    - "Specifications or documents (PDF, Word, Excel, CSV or images, up to 8 MB)"
-  security: "Do not send classified information, Controlled Unclassified Information (CUI) or export-controlled technical data through this website. If your requirement involves such information, contact us first to agree an appropriate secure method of transmission."
+  heading: "Let Us Assist With Your Procurement Requirements"
+  text: "Share your requirements with our team, including product specifications, quantities and delivery details, where available."
+  button: { label: "Submit an RFQ", href: "/submit-rfq/" }
 ---

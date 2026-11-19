@@ -6,6 +6,9 @@ export function initRfqForm() {
   const form = document.querySelector<HTMLFormElement>('[data-rfq-form]');
   if (!form) return;
   form.noValidate = true;
+  // Time the form was opened: the server treats submissions sent within seconds as automated.
+  const started = form.querySelector<HTMLInputElement>('[data-started]');
+  if (started) started.value = String(Date.now());
 
   const $ = <T extends Element>(sel: string) => form.querySelector<T>(sel)!;
   const summary = $<HTMLElement>('[data-error-summary]');

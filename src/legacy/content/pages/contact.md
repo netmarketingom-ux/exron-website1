@@ -6,7 +6,7 @@ seoTitle: "Contact Exron Global | Procurement Team"
 seoDescription: "Contact Exron Global's procurement team by email, phone or WhatsApp, or send a general inquiry. To request a quotation, submit an RFQ."
 
 hero:
-  eyebrow: "Contact"
+  eyebrow: "Contact Us"
   title: "Contact our procurement team"
   lead: "For a quotation, use the RFQ form so your solicitation number, line items and documents reach procurement together. For anything else, write to us or call."
   buttons:

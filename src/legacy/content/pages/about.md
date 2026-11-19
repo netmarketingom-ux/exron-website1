@@ -8,7 +8,7 @@ seoTitle: "About Exron Global | Government & Military Procurement Company"
 seoDescription: "Who Exron Global is: a privately owned procurement and supply company for government and military installation requirements, with management experience in the Middle East."
 
 hero:
-  eyebrow: "About Exron"
+  eyebrow: "About Us"
   title: "A procurement company built around installation requirements"
   lead: "Exron Global General Trading LLC sources, supplies and delivers the materials, equipment and commodities that government operations, military installations and their support contractors order, and runs a second division for commercial and industrial buyers."
   buttons:

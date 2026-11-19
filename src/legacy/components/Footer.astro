@@ -65,15 +65,15 @@ import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site'
   .site-footer__about { display: grid; gap: 1rem; justify-items: start; }
   .site-footer__about p { margin: 0; line-height: 1.7; max-width: 48ch; }
   .site-footer__positioning { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 650; color: #fff; font-size: 1rem; line-height: 1.35 !important; }
-  .site-footer__title { color: #fff; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-stretch: normal; margin-bottom: 1rem; }
+  .site-footer__title { color: #fff; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0; text-transform: none; font-stretch: normal; margin-bottom: 1rem; }
   .site-footer__links { list-style: none; display: grid; gap: 0.55rem; }
-  .site-footer a { color: var(--on-dark-2); text-decoration: none; }
-  .site-footer a:hover { color: #fff; text-decoration: underline; }
+  .site-footer a:not(.btn) { color: var(--on-dark-2); text-decoration: none; }
+  .site-footer a:not(.btn):hover { color: #fff; text-decoration: underline; }
   .site-footer__contact { list-style: none; display: grid; gap: 1rem; }
   .site-footer__contact li { display: flex; gap: 0.75rem; align-items: flex-start; }
   .site-footer__contact :global(svg) { color: var(--red-300); flex-shrink: 0; margin-top: 0.2rem; }
   .site-footer__contact li > span { display: grid; gap: 0.1rem; min-width: 0; overflow-wrap: anywhere; }
-  .site-footer__contact .k { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--on-dark-3); }
+  .site-footer__contact .k { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: none; letter-spacing: 0; color: var(--on-dark-3); }
   .site-footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.8125rem; }
   .site-footer__bottom-inner { display: grid; gap: 1rem; padding-block: 1.5rem calc(1.5rem + 64px); }
   @media (min-width: 768px) { .site-footer__bottom-inner { padding-bottom: 1.5rem; } }
