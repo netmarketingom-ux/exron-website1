@@ -14,8 +14,8 @@ Photos are added to the site only after client approval
 | Your Procurement Partner | #16 | Hand signing a document | https://unsplash.com/photos/man-writing-on-paper-OQMZwNd3ThU | Proposed, awaiting approval |
 | Your Procurement Partner (alt.) | #15 | Two businessmen reviewing documents, faces not shown | https://unsplash.com/photos/two-men-sitting-at-a-table-with-papers-and-a-pen-Mqc-m8kgxkg | Alternative |
 | Your Procurement Partner (alt.) | #8 | White desk with blank papers | [link to add] | Alternative |
-| Supply Capabilities | #19 | Industrial pipework and valves (black and white) | [link to add] | Proposed, awaiting approval |
-| Supply Capabilities (alt.) | #20 | Brass fittings, close-up | [link to add] | Alternative |
+| Supply Capabilities | #19 | Industrial pipework and valves (black and white) | https://unsplash.com/photos/industrial-metal-pipes-and-valves-41X6FwTwPh4 | Proposed, awaiting approval |
+| Supply Capabilities (alt.) | #20 | Brass fittings, close-up | https://unsplash.com/photos/a-close-up-of-many-screws-and-nuts-Dh3EHnVJuR4 | Alternative |
 | Regional Presence | #28 | Abu Dhabi Corniche skyline at night | [link to add] | Proposed, awaiting approval |
 | Regional Presence (alt.) / About Us (alt.) | #26 | Abu Dhabi skyline by day from the beach | [link to add] | Alternative |
 | About Us banner | #30 | Etihad Towers, cropped to remove hotel signs | [link to add] | Proposed, awaiting approval |
