@@ -11,8 +11,8 @@ Photos are added to the site only after client approval
 |---|---|---|---|---|
 | Homepage banner | #2 | Container ship at the quay with red cranes, seen from above | https://unsplash.com/photos/cargo-ship-loaded-with-colorful-containers-at-a-port-w8VfTO3TGs8 | Proposed, awaiting approval |
 | Homepage banner (alt.) / Capabilities banner (alt.) | #1 | Container terminal at golden hour | [link to add] | Alternative |
-| Your Procurement Partner | #16 | Hand signing a document | [link to add] | Proposed, awaiting approval |
-| Your Procurement Partner (alt.) | #15 | Two businessmen reviewing documents, faces not shown | [link to add] | Alternative |
+| Your Procurement Partner | #16 | Hand signing a document | https://unsplash.com/photos/man-writing-on-paper-OQMZwNd3ThU | Proposed, awaiting approval |
+| Your Procurement Partner (alt.) | #15 | Two businessmen reviewing documents, faces not shown | https://unsplash.com/photos/two-men-sitting-at-a-table-with-papers-and-a-pen-Mqc-m8kgxkg | Alternative |
 | Your Procurement Partner (alt.) | #8 | White desk with blank papers | [link to add] | Alternative |
 | Supply Capabilities | #19 | Industrial pipework and valves (black and white) | [link to add] | Proposed, awaiting approval |
 | Supply Capabilities (alt.) | #20 | Brass fittings, close-up | [link to add] | Alternative |
