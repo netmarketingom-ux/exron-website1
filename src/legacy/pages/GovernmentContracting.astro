@@ -16,7 +16,7 @@ const requestTo = isSet(site.procurementEmail) ? site.procurementEmail : site.em
 const requestHref = `mailto:${requestTo}?subject=${encodeURIComponent(d.statement.requestSubject)}`;
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription}>
-  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Government Contracting" image="/images/photos/government-banner.jpg">
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Government Contracting" image="/images/photos/government-banner.jpg" imagePosition="center 40%">
     <div slot="aside" class="cs-card" id="capability-statement">
       <p class="cs-card__label"><Icon name="file" size={16} />PDF download</p>
       <h2 class="cs-card__title">{d.statement.title}</h2>
