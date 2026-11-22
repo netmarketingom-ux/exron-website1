@@ -8,7 +8,7 @@ seoDescription: "Supply categories, sourcing process and logistics coordination 
 hero:
   eyebrow: "Capabilities"
   title: "Procurement, supply and logistics capabilities"
-  lead: "What we source and supply, how we handle specifications and brands, and how we get it delivered. A requirement can be one line item or a mixed RFQ across several categories, quoted together."
+  lead: "What we source and supply, how we handle specifications and brands, and the operational services that support delivery. A requirement can be one line item or a mixed RFQ across several categories."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Government Contracting", href: "/government-contracting/" }

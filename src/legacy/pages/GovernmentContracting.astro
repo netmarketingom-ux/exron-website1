@@ -49,7 +49,7 @@ const requestHref = `mailto:${requestTo}?subject=${encodeURIComponent(d.statemen
               <tr>
                 <th scope="row"><span class="reg__name">{r.name}</span><span class="reg__about">{r.about}</span></th>
                 <td><span class:list={['chip', `chip--${r.status}`]}>{reg.statusLabels[r.status] ?? r.status}</span></td>
-                <td class="reg__value">{r.value ? <span set:html={rich(r.value)} /> : <span class="reg__none">Not yet issued</span>}</td>
+                <td class="reg__value">{r.value ? <span set:html={rich(r.value)} /> : <span class="reg__none">Not published</span>}</td>
               </tr>
             ))}
           </tbody>
