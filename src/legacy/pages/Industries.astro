@@ -14,7 +14,7 @@ import raw from '../content/pages/industries.md?raw';
 const d = loadPage(raw);
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription} schema={[faqSchema(d.faq)]}>
-  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Industries We Serve" />
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Industries We Serve" image="/images/photos/industries-banner.jpg" />
 
   <section class="section section--dark ind-gov" id="government">
     <div class="container">
