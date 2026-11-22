@@ -16,13 +16,13 @@ hero:
 jump:
   - { label: "Supply categories", href: "#categories" }
   - { label: "Specification compliance", href: "#compliance" }
-  - { label: "Logistics & delivery", href: "#logistics" }
+  - { label: "Operational services", href: "#logistics" }
   - { label: "FAQ", href: "#faq" }
 
 categories:
   eyebrow: "Supply categories"
   heading: "What we source and supply"
-  lead: "Mixed requirements are quoted together rather than split across several vendors. If an item is not listed, send the specification and we will confirm whether we can supply it."
+  lead: "Our nine product and sourcing categories. Exron Global can also evaluate requirements outside these categories, subject to our ability to source, comply and deliver."
   items:
     - id: general-supplies
       icon: package
@@ -66,23 +66,13 @@ categories:
       examples: ["Desks & seating", "Storage", "Lodging furniture", "Office equipment"]
     - id: specialized
       icon: search
-      title: "Specialized Equipment Sourcing"
+      title: "Specialized Equipment & Hard-to-Find Items"
       text: "Brand-specific, low-volume or hard-to-find items that need to be located and verified."
       examples: ["Brand-name items", "Obsolete or hard-to-find parts", "Specification-driven equipment"]
-    - id: logistics
-      icon: truck
-      title: "Logistics, Freight & Customs Coordination"
-      text: "Freight forwarding, customs clearance coordination and final delivery, arranged with our logistics partners."
-      examples: ["Freight forwarding", "Customs clearance coordination", "Final delivery"]
-    - id: other
-      icon: plus
-      title: "Other Authorized Requirements"
-      text: "Further procurement requirements within our operational capabilities. Send the specification and we will confirm."
-      examples: ["On request"]
 
 banner:
   heading: "One RFQ. Every line item."
-  text: "Send the whole requirement. We quote each line, combine the order and coordinate one delivery."
+  text: "Send the whole requirement in one RFQ. We review each line item and respond with an itemized quotation."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
 
@@ -92,15 +82,15 @@ compliance:
   items:
     - { title: "Brand name or equal", text: "Where we offer an equal to a named brand, the quotation identifies it clearly with the data sheet. Alternates are supplied only with written approval." }
     - { title: "Supplier selection", text: "We prefer manufacturers and authorized distributors, and assess suppliers on compliance, reliability and documentation." }
-    - { title: "Confirmed lead times", text: "Lead times are confirmed with the supplier before we quote, not estimated after award." }
-    - { title: "Total landed cost", text: "Sources are compared on freight and duty as well as unit price, so the price we submit holds." }
+    - { title: "Lead times", text: "Lead times are checked with the supplier for each requirement before we quote." }
+    - { title: "Total landed cost", text: "Sources are compared on freight and duty as well as unit price." }
 
 logistics:
-  eyebrow: "Logistics & delivery"
-  heading: "Freight, customs and delivery coordination"
-  lead: "Logistics is part of the order, not an add-on. We coordinate each step with our logistics partners and keep you updated until proof of delivery."
+  eyebrow: "Operational services"
+  heading: "Freight, logistics, customs clearance and delivery coordination"
+  lead: "Supporting services, coordinated with our logistics partners for each order. They are not product categories; they support the supply of the items you order."
   points:
-    - "Freight forwarding by sea, air or road, consolidated where possible"
+    - "Freight forwarding by sea, air or road"
     - "Customs clearance coordination and shipping documents"
     - "Delivery scheduled to the installation's or site's receiving requirements"
     - "Packing lists, commercial invoices and proof of delivery"
@@ -111,18 +101,16 @@ faq:
   - q: "Can you quote items that are not listed here?"
     a: "Often, yes. Send the specification, part number or brand and we will confirm availability and lead time before quoting."
   - q: "Can I combine several categories in one RFQ?"
-    a: "Yes. Mixed requirements are quoted together in one itemized response and can be delivered as one consolidated shipment."
+    a: "Yes. A mixed requirement can be submitted as one RFQ and is answered in one itemized quotation. Delivery arrangements are confirmed once the requirement has been evaluated."
   - q: "Do you offer equivalents to a named brand?"
     a: "Where the specification allows an equal, we may propose one. It is identified clearly in the quotation with its data sheet, and supplied only with your written approval."
   - q: "What documentation do you provide with a delivery?"
     a: "Itemized quotations, commercial invoices, packing lists and proof of delivery as standard, plus any certificates or forms the order specifies."
-  - q: "Is there a minimum order value?"
-    a: "[CLIENT TO PROVIDE: minimum order value, or no minimum]"
 
 cta:
   heading: "Tell us what your operation needs."
-  text: "Send the solicitation or item list with quantities, delivery destination and required date. We acknowledge every request and reply with an itemized quotation."
+  text: "Send the solicitation or item list with quantities, delivery destination and required date. Each request receives a reference number and is reviewed by our procurement team."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
-    - { label: "Contact the procurement team", href: "/contact/" }
+    - { label: "Contact Us", href: "/contact/" }
 ---

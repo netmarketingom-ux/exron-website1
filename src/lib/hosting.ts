@@ -9,3 +9,12 @@ export const CPANEL = process.env.HOSTING === 'cpanel';
 /** Form attributes that only Netlify understands. */
 export const netlifyFormAttrs = (): Record<string, string> =>
   CPANEL ? {} : { 'data-netlify': 'true', 'netlify-honeypot': 'bot-field', 'data-netlify-recaptcha': 'true' };
+
+/**
+ * Search-engine indexing. The site is indexable only when it is built for the
+ * real domain: on Netlify, when the site's primary URL is exronglobal.com, or
+ * when SITE_INDEXING=true is set (for example for the cPanel launch build).
+ * The temporary netlify.app address is therefore never indexed.
+ */
+export const INDEXABLE =
+  process.env.SITE_INDEXING === 'true' || /(^|\/\/|\.)exronglobal\.com/.test(process.env.URL ?? '');

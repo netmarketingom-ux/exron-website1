@@ -26,7 +26,15 @@ overview:
   paragraphs:
     - "Exron Global was established to provide a professional, responsive and accountable approach to procurement and supply. Through our management’s previous industry experience and a sourcing model focused on customer requirements, we coordinate the procurement process from initial inquiry through final delivery."
     - "Our approach is built around clear communication, reliable sourcing and attention to detail."
-  button: { label: "About Exron Global", href: "/about/" }
+  # Customer groups, in the client's wording (Industries We Serve instruction, Nov 2026).
+  serveHeading: "Who we serve"
+  serve:
+    - "U.S. Government operations"
+    - "Military installation procurement and support"
+    - "Prime contractors and defense support contractors"
+    - "Construction and infrastructure companies"
+    - "Industrial and commercial organizations"
+  button: { label: "About Us", href: "/about/" }
 
 # Section 3: Capabilities overview
 capabilities:
@@ -44,6 +52,9 @@ capabilities:
     - "IT Hardware, Networking & Office Technology"
     - "Safety Equipment & PPE"
     - "Office Furniture, Equipment & Operational Supplies"
+    - "Specialized Equipment & Hard-to-Find Items"
+  # Supporting services, shown separately from the product categories (client instruction, Nov 2026).
+  services: "Freight, logistics, customs clearance and delivery coordination."
   button: { label: "View All Capabilities", href: "/capabilities/" }
 
 # Section 4: Competitive strengths
@@ -71,7 +82,8 @@ coverage:
   # corporate relationship and approved description. Do not generate this text.
   group:
     label: "Group affiliation"
-    statement: "[CLIENT TO PROVIDE: approved Hydropower Group affiliation statement, exact legal name and corporate relationship]"
+    # Pending: approved legal wording, exact group name and corporate relationship (client to provide).
+    statement: "Details of Exron Global's relationship with {groupName} will be published following final corporate approval."
     logo: ""
     website: ""
 

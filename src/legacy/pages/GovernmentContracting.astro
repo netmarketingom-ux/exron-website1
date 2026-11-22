@@ -6,7 +6,7 @@ import SectionHead from '../components/SectionHead.astro';
 import ProcessGrid from '../components/ProcessGrid.astro';
 import CTABand from '../components/CTABand.astro';
 import Icon from '../components/Icon.astro';
-import { rich, site, isSet } from '../lib/site';
+import { rich, site, isSet, hasPlaceholder } from '../lib/site';
 import { loadPage } from '../lib/page';
 import raw from '../content/pages/government-contracting.md?raw';
 
@@ -18,7 +18,7 @@ const requestHref = `mailto:${requestTo}?subject=${encodeURIComponent(d.statemen
 <BaseLayout title={d.seoTitle} description={d.seoDescription}>
   <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Government Contracting" image="/images/photos/government-banner.jpg" imagePosition="center 40%">
     <div slot="aside" class="cs-card" id="capability-statement">
-      <p class="cs-card__label"><Icon name="file" size={16} />PDF download</p>
+      {d.statement.file && <p class="cs-card__label"><Icon name="file" size={16} />PDF download</p>}
       <h2 class="cs-card__title">{d.statement.title}</h2>
       <p class="cs-card__text">{d.statement.text}</p>
       {d.statement.file ? (
@@ -29,7 +29,8 @@ const requestHref = `mailto:${requestTo}?subject=${encodeURIComponent(d.statemen
       ) : (
         <>
           <p class="cs-card__pending">{d.statement.pending}</p>
-          <a class="btn btn--primary btn--lg cs-card__btn" href={requestHref}><Icon name="mail" />Request a copy</a>
+          <a class="btn btn--primary btn--lg cs-card__btn" href={requestHref}><Icon name="mail" />Request a copy by email</a>
+          <p class="cs-card__meta">Or write to <a href={`mailto:${requestTo}`}>{requestTo}</a> with the subject “{d.statement.requestSubject}”.</p>
         </>
       )}
     </div>
@@ -53,7 +54,7 @@ const requestHref = `mailto:${requestTo}?subject=${encodeURIComponent(d.statemen
             ))}
           </tbody>
         </table>
-        <p class="reg__checked">Status last confirmed: <span set:html={rich(reg.checked)} /></p>
+        {!hasPlaceholder(reg.checked) && <p class="reg__checked">Status last confirmed: <span set:html={rich(reg.checked)} /></p>}
       </div>
       <div class="reg-side">
         <DataCard title={d.identity.title} rows={d.identity.rows} />

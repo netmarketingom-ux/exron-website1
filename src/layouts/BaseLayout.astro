@@ -38,6 +38,7 @@ const fontFaces = `
 @font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:400;src:url(${plex400}) format('woff2');unicode-range:${unicodeLatin}}
 @font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:500;src:url(${plex500}) format('woff2');unicode-range:${unicodeLatin}}
 `;
+import { INDEXABLE } from '../lib/hosting';
 ---
 <!doctype html>
 <html lang="en-US">
@@ -51,7 +52,7 @@ const fontFaces = `
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {(noindex || !INDEXABLE) && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#3C3B6E" />
     <link rel="preload" href={archivo} as="font" type="font/woff2" crossorigin />

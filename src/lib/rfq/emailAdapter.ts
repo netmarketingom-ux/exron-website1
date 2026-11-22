@@ -6,7 +6,8 @@ const FROM = process.env.RFQ_FROM ?? 'Exron Global Procurement <rfq@exronglobal.
 
 // Values in site.json that are still placeholders are left out of emails.
 const confirmed = (v: string) => (/\[(CONFIRM|CLIENT TO PROVIDE)/.test(v) ? '' : v);
-const responseTime = confirmed(site.rfqAcknowledgment) || 'as soon as possible';
+// A response time is stated only once management has confirmed it in site.json.
+const responseTime = confirmed(site.rfqAcknowledgment);
 const SECURE_NOTICE =
   'Do not send classified information, Controlled Unclassified Information (CUI) or export-controlled technical data through this website. If your requirement involves such information, contact us first to agree an appropriate secure method of transmission.';
 /** Netlify's file links expire, so procurement receives the files themselves. Resend allows 40 MB per email. */
@@ -104,7 +105,7 @@ const plainRows = (rows: [string, string][]) =>
   rows.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n');
 
 const wrap = (inner: string) =>
-  `<div style="font-family:Arial,sans-serif;color:#1E1E2A;line-height:1.5"><div style="background:#3C3B6E;color:#fff;padding:16px 20px;font-weight:bold;letter-spacing:.04em">EXRON GLOBAL</div><div style="padding:20px">${inner}</div><p style="padding:0 20px;font-size:12px;color:#5C6070">${esc(site.disclaimer)}</p></div>`;
+  `<div style="font-family:Arial,sans-serif;color:#1E1E2A;line-height:1.5"><div style="background:#102338;color:#fff;padding:16px 20px;font-weight:bold">Exron Global</div><div style="padding:20px">${inner}</div><p style="padding:0 20px;font-size:12px;color:#5C6070">${esc(site.disclaimer)}</p></div>`;
 
 export function acknowledgmentEmail(rfq: RfqSubmission): Email {
   const files = rfq.attachments.map((a) => a.filename);
@@ -117,7 +118,7 @@ export function acknowledgmentEmail(rfq: RfqSubmission): Email {
     ['Quotation due', rfq.quoteDue],
     ['Documents received', files.join(', ')],
   ];
-  const intro = `We have received your request and logged it under reference ${rfq.reference}. A member of our procurement team will contact you ${responseTime} to confirm the response deadline and any points we need to clarify, then prepare an itemized quotation.`;
+  const intro = `We have received your request and logged it under reference ${rfq.reference}. Our procurement team will review the requirement${responseTime ? ` and contact you ${responseTime}` : ''}, and will raise any points that need to be clarified before preparing a quotation.`;
   const notice = SECURE_NOTICE;
   return {
     to: [rfq.email],

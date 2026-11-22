@@ -10,7 +10,7 @@ seoDescription: "Who Exron Global is: a privately owned procurement and supply c
 hero:
   eyebrow: "About Us"
   title: "A procurement company built around installation requirements"
-  lead: "Exron Global General Trading LLC sources, supplies and delivers the materials, equipment and commodities that government operations, military installations and their support contractors order, and runs a second division for commercial and industrial buyers."
+  lead: "Exron Global General Trading LLC is a privately owned procurement and supply company with two divisions: Government & Military Installation Support, and Commercial & Industrial Procurement."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "Government Contracting", href: "/government-contracting/" }
@@ -29,15 +29,14 @@ who:
   heading: "Built by people who have done this work"
   paragraphs:
     - "Exron Global General Trading LLC is a privately owned procurement, sourcing and supply company. It was set up to serve U.S. Government operations, military installations and the contractors who support them, drawing on the experience its management built in that work across the Middle East."
-    - "Sourcing, supplier coordination and logistics are handled by our own team, which stays the single point of contact for each customer requirement."
   image: { label: "Exron Global office or warehouse (real photograph)", alt: "Exron Global procurement team at work", src: "" }
 
 experience:
   eyebrow: "Management experience"
   heading: "Experience that comes before the company"
   paragraphs:
-    - "Exron Global is a new company. The people running it are not new to this work. Members of our management team have spent [CLIENT TO PROVIDE: number] years in procurement, sourcing, trading and logistics coordination, including at Expedition Trading & Services, a company that supported U.S. military installations and government-related requirements across the Middle East."
-    - "That background shapes how we work: how installation RFQs are written, what a contracting officer needs to see in a quotation, and what it takes to move material through customs and onto an installation on schedule."
+    - "Exron Global is a new company. The people running it are not new to this work. Members of our management team have experience in procurement, sourcing, trading and logistics coordination, including at Expedition Trading & Services, a company that supported U.S. military installations and government-related requirements across the Middle East."
+    - "That background shapes how we work: how solicitations are written, what a contracting officer needs to see in a quotation, and what it takes to deliver on schedule."
   areas:
     - "Procurement & strategic sourcing"
     - "Trading & supplier coordination"
@@ -53,8 +52,8 @@ mission:
   valuesHeading: "What we hold ourselves to"
   values:
     - { icon: "target", title: "Accuracy", text: "Our quotation matches the specification, or we state exactly where it does not." }
-    - { icon: "shield", title: "Accountability", text: "One named contact owns each requirement from acknowledgment to proof of delivery." }
-    - { icon: "clock", title: "Responsiveness", text: "Every RFQ is acknowledged, and questions are raised before the deadline, not after award." }
+    - { icon: "shield", title: "Accountability", text: "Each requirement is followed through by our procurement team, from receipt to proof of delivery." }
+    - { icon: "clock", title: "Responsiveness", text: "Questions are raised before the deadline, not after award." }
     - { icon: "file-check", title: "Transparency", text: "We state what we can supply, how and from where. We never claim registrations, contracts or capabilities we do not hold." }
     - { icon: "clipboard", title: "Discipline", text: "Solicitation terms, delivery rules and documentation requirements are followed line by line." }
     - { icon: "users", title: "Partnership", text: "We work as an extension of the buyer's procurement team, and stay engaged after delivery." }
@@ -82,18 +81,19 @@ divisions:
     link: { label: "Industries We Serve", href: "/industries/" }
 
 group:
-  eyebrow: "Group affiliation"
-  heading: "Part of a wider business group"
-  text: "Exron Global is affiliated with {groupName}, whose companies work in [CLIENT TO PROVIDE: sectors, e.g. engineering, infrastructure, energy, construction]. The group gives us market knowledge, supplier relationships and commercial backing."
+  eyebrow: "Business group"
+  heading: "Group affiliation"
+  # Pending: approved legal wording, exact group name, relationship, sectors, logo and website (client to provide).
+  text: "Details of Exron Global's relationship with {groupName} will be published following final corporate approval."
   # Shown only once management approves: logo file in public/images/, and the group's website address.
   logo: ""
   website: ""
-  notice: "Each company in the group is a separate legal entity and operates independently. Exron Global does not present their contracts or capabilities as its own, unless those resources are available to Exron under an established arrangement."
+  notice: "Each company in the group is a separate legal entity and operates independently. Exron Global does not own the group companies and does not present their contracts, certifications or resources as its own."
 
 cta:
   heading: "Work with a procurement partner that quotes to the specification."
-  text: "Send us your solicitation or item list. We acknowledge every request and reply with an itemized quotation."
+  text: "Send us your solicitation or item list. Each request receives a reference number and is reviewed by our procurement team."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
-    - { label: "Contact the procurement team", href: "/contact/" }
+    - { label: "Contact Us", href: "/contact/" }
 ---

@@ -32,7 +32,6 @@ const secure = 'Do not send classified information, Controlled Unclassified Info
               </li>
             ))}
           </ol>
-          <p class="data-card__note">You receive an acknowledgment email with your reference number <span set:html={rich('{rfqAcknowledgment}')} />.</p>
         </div>
 
         <p class="notice notice--warn"><Icon name="shield" /><span><strong>Controlled information.</strong> {secure}</span></p>
@@ -41,9 +40,7 @@ const secure = 'Do not send classified information, Controlled Unclassified Info
           <p class="data-card__title">Prefer email?</p>
           <p class="rfq-page__email">
             Send the solicitation and attachments to
-            {isSet(site.procurementEmail)
-              ? <a href={`mailto:${site.procurementEmail}`}>{site.procurementEmail}</a>
-              : <span set:html={rich(site.procurementEmail)} />}.
+            <a href={`mailto:${isSet(site.procurementEmail) ? site.procurementEmail : site.email}`}>{isSet(site.procurementEmail) ? site.procurementEmail : site.email}</a>.
             Put the RFQ number in the subject line.
           </p>
         </div>
