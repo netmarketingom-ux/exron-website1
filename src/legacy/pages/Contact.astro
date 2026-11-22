@@ -5,7 +5,7 @@ import SectionHead from '../components/SectionHead.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
 import Icon from '../components/Icon.astro';
 import ContactForm from '../../components/ContactForm.astro';
-import { rich, site, isSet, telHref, whatsappHref } from '../lib/site';
+import { rich, site, isSet, telHref, whatsappHref, hasPlaceholder } from '../lib/site';
 import { loadPage } from '../lib/page';
 import raw from '../content/pages/contact.md?raw';
 
@@ -17,7 +17,7 @@ const linkFor: Record<string, string | undefined> = {
   Phone: isSet(site.phone) ? telHref : undefined,
   WhatsApp: isSet(site.whatsapp) ? whatsappHref : undefined,
 };
-const rows = d.details.rows.map((r: any) => {
+const rows = d.details.rows.filter((r: any) => !hasPlaceholder(r.v)).map((r: any) => {
   const href = linkFor[r.k];
   return href ? { ...r, href } : r;
 });
@@ -27,6 +27,7 @@ const rows = d.details.rows.map((r: any) => {
 
   <section class="section section--alt">
     <div class="container">
+      <h2 class="sr-only">How to reach us</h2>
       <FeatureGrid items={d.routes} columns={3} />
     </div>
   </section>

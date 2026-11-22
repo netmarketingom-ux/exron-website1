@@ -66,9 +66,12 @@ export function initRfqForm() {
     linesField.value = lineValues()
       .map((l, i) => `${i + 1}. ${l.item} | Qty: ${l.qty || '?'} ${l.unit || ''}`.trim())
       .join('\n');
+    // Quantities are entered once: the free-text list is hidden while the table holds complete line items.
     const needQuantities = complete.length === 0;
     quantities.required = needQuantities;
     quantitiesReq.hidden = !needQuantities;
+    const qtyField = quantities.closest<HTMLElement>('[data-field="quantities"]');
+    if (qtyField) qtyField.hidden = !needQuantities;
   };
   const addLine = (focus = true) => {
     body.append(template.content.cloneNode(true));
@@ -127,7 +130,7 @@ export function initRfqForm() {
     }
     if (el.type === 'checkbox') return '';
     if (el.required && !value) {
-      if (el.name === 'quantities') return 'Enter the required quantities, or add line items above.';
+      if (el.name === 'quantities') return 'Add line items with quantities in the table, or list the items and quantities here.';
       return `Enter the ${labelFor(el).toLowerCase()}.`;
     }
     if (el.name === 'email' && value && !EMAIL_RE.test(value)) return 'Enter an email address in the format name@organization.gov.';

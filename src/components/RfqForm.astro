@@ -97,7 +97,7 @@ const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : sit
 
     <div class="field lines" data-line-items hidden>
       <p class="field__label" id="lines-label">Line items</p>
-      <p class="field__hint" id="lines-hint">Optional. Add one row per item. If you list items here, the quantities field below is optional.</p>
+      <p class="field__hint" id="lines-hint">One row per item, with its quantity and unit. If you prefer, paste a list in the box below instead. You do not need to do both.</p>
       <table class="lines__table" aria-labelledby="lines-label" aria-describedby="lines-hint">
         <thead>
           <tr><th scope="col">#</th><th scope="col">Item</th><th scope="col">Quantity</th><th scope="col">Unit</th><th scope="col"><span class="sr-only">Remove</span></th></tr>
@@ -117,8 +117,8 @@ const fallbackEmail = isSet(site.procurementEmail) ? site.procurementEmail : sit
     </div>
 
     <div class="field" data-field="quantities">
-      <label class="field__label" for="quantities">Required quantities <span class="req" data-quantities-req>Required</span></label>
-      <p class="field__hint" id="qty-hint">Quantity and unit for each item, for example "40 EA" or "12 rolls".</p>
+      <label class="field__label" for="quantities">Item list with quantities <span class="req" data-quantities-req>Required</span></label>
+      <p class="field__hint" id="qty-hint">Each item with its quantity and unit, for example "Cable ties, 40 EA". Not needed if you use the line-item table.</p>
       <textarea id="quantities" name="quantities" rows="3" required maxlength="5000" aria-describedby="qty-hint"></textarea>
     </div>
   </fieldset>

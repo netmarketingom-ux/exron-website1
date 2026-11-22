@@ -9,14 +9,10 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 ---
 <div class="topbar">
   <div class="container topbar__inner">
-    <p class="topbar__tag">{site.topBar}</p>
+    {site.topBar && <p class="topbar__tag">{site.topBar}</p>}
     <ul class="topbar__contact">
       <li><a href={mailHref}><Icon name="mail" size={14} />{site.email}</a></li>
-      <li class="topbar__phone">
-        {isSet(site.phone)
-          ? <a href={telHref}><Icon name="phone" size={14} />{site.phone}</a>
-          : <span><Icon name="phone" size={14} /><span set:html={rich(site.phone)} /></span>}
-      </li>
+      {isSet(site.phone) && <li class="topbar__phone"><a href={telHref}><Icon name="phone" size={14} />{site.phone}</a></li>}
     </ul>
   </div>
 </div>
@@ -79,7 +75,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   .topbar { background: var(--navy-950); color: var(--on-dark-3); font-size: 0.8125rem; }
   .topbar__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 36px; }
   .topbar__tag { margin: 0; display: none; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0; text-transform: none; }
-  .topbar__contact { list-style: none; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .topbar__contact { margin-left: auto; list-style: none; display: flex; gap: 1.25rem; flex-wrap: wrap; }
   .topbar__contact a, .topbar__contact > li > span { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--on-dark-2); text-decoration: none; }
   .topbar__contact a:hover { color: #fff; }
   .topbar :global(mark.ph) { font-size: 0.6875rem; }

@@ -8,7 +8,6 @@ import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site'
   <div class="container site-footer__grid">
     <div class="site-footer__about">
       <Logo inverse />
-      <p class="site-footer__positioning">{site.positioning}</p>
       <p>{site.footerIntro}</p>
       <a class="btn btn--quote" href={nav.quote.href}>{nav.quote.label}</a>
     </div>
@@ -31,13 +30,10 @@ import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site'
       <h2 class="site-footer__title">Contact</h2>
       <ul class="site-footer__contact">
         <li><Icon name="mail" size={18} /><span><span class="k">General</span><a href={mailHref}>{site.email}</a></span></li>
-        <li><Icon name="file" size={18} /><span><span class="k">RFQs</span>
-          {isSet(site.procurementEmail) ? <a href={`mailto:${site.procurementEmail}`}>{site.procurementEmail}</a> : <span set:html={rich(site.procurementEmail)} />}</span></li>
-        <li><Icon name="phone" size={18} /><span><span class="k">Phone</span>
-          {isSet(site.phone) ? <a href={telHref}>{site.phone}</a> : <span set:html={rich(site.phone)} />}</span></li>
-        <li><Icon name="whatsapp" size={18} /><span><span class="k">WhatsApp</span>
-          {isSet(site.whatsapp) ? <a href={whatsappHref} target="_blank" rel="noopener">{site.whatsapp}</a> : <span set:html={rich(site.whatsapp)} />}</span></li>
-        <li><Icon name="map-pin" size={18} /><span><span class="k">Office</span><span set:html={rich(site.address)} /></span></li>
+        {isSet(site.procurementEmail) && <li><Icon name="file" size={18} /><span><span class="k">RFQs</span><a href={`mailto:${site.procurementEmail}`}>{site.procurementEmail}</a></span></li>}
+        {isSet(site.phone) && <li><Icon name="phone" size={18} /><span><span class="k">Phone</span><a href={telHref}>{site.phone}</a></span></li>}
+        {isSet(site.whatsapp) && <li><Icon name="whatsapp" size={18} /><span><span class="k">WhatsApp</span><a href={whatsappHref} target="_blank" rel="noopener">{site.whatsapp}</a></span></li>}
+        <li><Icon name="map-pin" size={18} /><span><span class="k">Office</span>{isSet(site.address) ? site.address : site.headquarters}</span></li>
       </ul>
     </div>
   </div>

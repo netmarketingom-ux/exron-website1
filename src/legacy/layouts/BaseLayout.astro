@@ -26,6 +26,7 @@ const org = {
   slogan: site.tagline.join(' '),
   description: site.footerIntro,
 };
+import { INDEXABLE } from '../../lib/hosting';
 ---
 <!doctype html>
 <html lang="en">
@@ -35,7 +36,7 @@ const org = {
     <title>{title}</title>
     <meta name="description" content={plain(description)} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {(noindex || !INDEXABLE) && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#102338" />
     <meta property="og:type" content="website" />

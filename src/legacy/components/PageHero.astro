@@ -4,7 +4,7 @@
  * Optional right-hand panel goes in the "aside" slot.
  */
 import Button from './Button.astro';
-import { rich } from '../lib/site';
+import { rich, webpSrcset } from '../lib/site';
 
 interface Btn { label: string; href: string; }
 interface Props {
@@ -21,7 +21,12 @@ const { eyebrow, title, lead, buttons = [], crumb, image, imagePosition = 'cente
 const hasAside = Astro.slots.has('aside');
 ---
 <section class:list={['page-hero', image && 'page-hero--photo']}>
-  {image && <img class="page-hero__bg" src={image} alt="" fetchpriority="high" decoding="async" style={`object-position:${imagePosition}`} />}
+  {image && (
+    <picture>
+      <source type="image/webp" srcset={webpSrcset(image, [1000, 2000])} sizes="100vw" />
+      <img class="page-hero__bg" src={image} alt="" fetchpriority="high" decoding="async" style={`object-position:${imagePosition}`} />
+    </picture>
+  )}
   <div class:list={['container', 'page-hero__grid', hasAside && 'page-hero__grid--aside']}>
     <div class="page-hero__copy">
       <nav class="page-hero__crumbs" aria-label="Breadcrumb">

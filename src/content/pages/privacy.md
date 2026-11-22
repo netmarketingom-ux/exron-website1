@@ -18,7 +18,7 @@ This website is operated by Exron Global General Trading LLC, [CONFIRM: register
 
 **Through the contact form:** your name, email address, subject and message.
 
-**Automatically:** our hosting provider records standard server logs (IP address, browser type, pages requested and time of request) to operate and secure the site. We do not use advertising or analytics cookies.
+**Automatically:** our hosting provider records standard server logs (IP address, browser type, pages requested and time of request) to operate and secure the site. We do not use advertising or analytics cookies. The spam check on our forms (Google reCAPTCHA) may set its own cookies when a form is used. Fonts are served from this website, not from a third-party font service.
 
 ## How we use it
 
@@ -28,9 +28,10 @@ When we share part of a requirement with a supplier or freight forwarder to obta
 
 ## Services that process your information
 
-- **Netlify** hosts the website and receives form submissions and attachments.
-- **Google reCAPTCHA** checks that forms are submitted by a person. Google's privacy policy and terms apply to that check.
-- **Resend** delivers the acknowledgment email and our internal notification.
+- **Netlify, Inc.** (United States) hosts the website. Form submissions and attached files are received and stored in our Netlify account (Netlify Forms).
+- **Google reCAPTCHA** (Google LLC) checks that forms are submitted by a person. Google's privacy policy and terms apply to that check.
+- **Resend** (United States) sends the internal notification of each RFQ to our procurement mailbox, with the attached files, and the confirmation email to the requester, when email delivery is enabled.
+- **Our email provider** stores the notification emails and attachments in the procurement mailbox. [CONFIRM: email provider used for the procurement mailbox]
 - [CONFIRM: Odoo, once the business platform is connected]
 
 These providers may process data outside your country. [CONFIRM: legal basis and safeguards for international transfers]
@@ -45,7 +46,7 @@ Form submissions and attachments are kept in our hosting account for [CONFIRM: r
 
 ## Security
 
-The site is served over HTTPS. Form attachments are stored by our hosting provider and are accessible only to authorized Exron Global staff. Internal emails link to attachments rather than forwarding the files.
+The site is served over HTTPS. Uploads are limited to PDF, Word, Excel, CSV, JPG and PNG files, up to three files per request. Form submissions and attachments are stored in our Netlify account, which is accessible only to authorized users of that account, and are also delivered by email to our procurement mailbox. [CONFIRM: who at Exron Global has access to the Netlify account and the procurement mailbox]
 
 ## Your choices
 

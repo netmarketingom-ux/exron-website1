@@ -22,12 +22,13 @@
   "logo": "/images/exron-logo.png",
   "vendor": {
     "_readme": "Government vendor information. Status text only until each item is officially issued and verified.",
-    "samGov": "Registration in process",
-    "cage": "Registration in process",
+    "samGov": "[CLIENT TO PROVIDE: verified SAM.gov registration status]",
+    "cage": "[CLIENT TO PROVIDE: verified CAGE / NCAGE status]",
     "naics": "[CLIENT TO PROVIDE: NAICS codes]",
     "registration": "[CLIENT TO PROVIDE: business registration / trade license no.]"
   },
-  "topBar": "Global Procurement & Supply Solutions",
+  "_topBarReadme": "Optional one-line positioning shown in the top bar on wide screens. Empty until the client confirms the agreed business-identity line.",
+  "topBar": "",
   "footerIntro": "Exron Global is an international procurement and supply company based in Abu Dhabi, United Arab Emirates, providing sourcing, supply and logistics coordination solutions to government, commercial and industrial customers.",
   "disclaimer": "Exron Global General Trading LLC is a privately owned company. It is not a government agency and is not endorsed by the U.S. Government or any of its departments.",
   "copyright": "© 2026 Exron Global General Trading LLC. All rights reserved."

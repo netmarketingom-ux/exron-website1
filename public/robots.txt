@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /admin/
-
-Sitemap: https://exronglobal.com/sitemap-index.xml

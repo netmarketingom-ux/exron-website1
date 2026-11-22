@@ -6,7 +6,7 @@ import { loadPage } from '../../legacy/lib/page';
 import rfqRaw from '../../legacy/content/pages/rfq.md?raw';
 
 const steps = loadPage(rfqRaw).next.slice(1);
-const procurementEmail = isSet(site.procurementEmail) ? site.procurementEmail : '';
+const procurementEmail = isSet(site.procurementEmail) ? site.procurementEmail : site.email;
 ---
 <BaseLayout
   title="RFQ received | Exron Global"
@@ -23,8 +23,8 @@ const procurementEmail = isSet(site.procurementEmail) ? site.procurementEmail : 
   <section class="section">
     <div class="container received">
       <p class="lead">
-        We have your request. An acknowledgment email with the reference number and a summary of what you sent goes to the address you entered.
-        Our procurement team will contact you <span set:html={rich('{rfqAcknowledgment}')} /> to confirm the response deadline and any points we need to clarify.
+        We have your request, and our procurement team has received it with its documents.
+        Please keep the reference number above for any follow-up.
       </p>
       <h2>What happens next</h2>
       <ol class="received__steps">
@@ -33,8 +33,8 @@ const procurementEmail = isSet(site.procurementEmail) ? site.procurementEmail : 
         ))}
       </ol>
       <p>
-        Quote the reference in any follow-up. If the acknowledgment has not arrived, check your spam folder or write to
-        {procurementEmail ? <a href={`mailto:${procurementEmail}`}>{procurementEmail}</a> : <span set:html={rich(site.procurementEmail)} />}.
+        If you need to add documents or correct a detail, write to
+        <a href={`mailto:${procurementEmail}`}>{procurementEmail}</a> and quote the reference number.
       </p>
       <p><a class="link-arrow" href="/">Return to the homepage <span aria-hidden="true">→</span></a></p>
     </div>

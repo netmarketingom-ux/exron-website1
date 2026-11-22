@@ -50,6 +50,12 @@ export function rich(text = ''): string {
   return esc(filled).replace(PLACEHOLDER_RE, (m) => `<mark class="ph">${m}</mark>`);
 }
 
+/** True when the text (after {token} substitution) still contains an unfinished placeholder. */
+export function hasPlaceholder(text = ''): boolean {
+  const filled = text.replace(/\{(\w+)\}/g, (m, k) => tokens[k] ?? m);
+  return new RegExp(PLACEHOLDER_RE.source).test(filled);
+}
+
 /** Plain-text version (for meta tags and JSON-LD): placeholders are dropped. */
 export function plain(text = ''): string {
   return text
@@ -58,5 +64,9 @@ export function plain(text = ''): string {
     .replace(/\s{2,}/g, ' ')
     .trim();
 }
+
+/** srcset of the WebP versions made for a photo in public/images/photos/ (name-<width>.webp). */
+export const webpSrcset = (jpg: string, widths: number[]) =>
+  widths.map((w) => `${jpg.replace(/\.jpg$/, `-${w}.webp`)} ${w}w`).join(', ');
 
 export { site };

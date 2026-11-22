@@ -12,7 +12,7 @@ hero:
   lead: "Our registration status, capability statement, how we respond to solicitations, what we can supply and who to contact. Everything a contracting officer needs for the vendor file, on one page."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
-    - { label: "Contact procurement", href: "/contact/" }
+    - { label: "Contact Us", href: "/contact/" }
 
 statement:
   title: "Capability statement"
@@ -34,17 +34,17 @@ identity:
 registrations:
   eyebrow: "Registration status"
   heading: "U.S. Government registrations"
-  lead: "Numbers appear here only once they have been officially issued and verified. Until then, the status shows where each registration stands."
-  # status: active | in-process | pending | to-confirm. Add the number to value once issued.
+  lead: "Registration numbers and statuses are published here only once they have been officially confirmed."
+  # status: active | in-process | to-confirm. Change a status, or add a number to value, ONLY once officially confirmed by Exron management.
+  # UEI assignment, active SAM.gov registration and CAGE/NCAGE are separate items with separate statuses.
   items:
-    - { name: "SAM.gov", about: "System for Award Management entity registration", status: "in-process", value: "" }
-    - { name: "UEI", about: "Unique Entity ID, assigned through SAM.gov", status: "pending", value: "" }
-    - { name: "CAGE / NCAGE", about: "Commercial and Government Entity code", status: "in-process", value: "" }
+    - { name: "UEI", about: "Unique Entity ID, assigned through SAM.gov. An entity can be assigned a UEI without completing full registration.", status: "to-confirm", value: "" }
+    - { name: "SAM.gov registration", about: "Active entity registration in the System for Award Management", status: "to-confirm", value: "" }
+    - { name: "CAGE / NCAGE", about: "Commercial and Government Entity code (NCAGE for entities outside the United States)", status: "to-confirm", value: "" }
     - { name: "NAICS codes", about: "Industry classification codes", status: "to-confirm", value: "" }
   statusLabels:
     active: "Active"
-    in-process: "Registration in process"
-    pending: "Issued after SAM.gov registration"
+    in-process: "In process"
     to-confirm: "To be confirmed"
   checked: "[CLIENT TO PROVIDE: date this status was last confirmed]"
 
@@ -53,20 +53,20 @@ solicitations:
   heading: "How we respond to an RFQ or solicitation"
   lead: "What a contracting officer can expect from the moment a solicitation reaches us."
   steps:
-    - { title: "Acknowledge and log", text: "The RFQ is given a reference number and acknowledged. We confirm the response deadline and delivery destination." }
+    - { title: "Log the request", text: "The RFQ is given a reference number. We confirm the response deadline and delivery destination." }
     - { title: "Read the whole solicitation", text: "Specifications, quantities, delivery terms, required forms, clauses and submission instructions." }
     - { title: "Raise questions early", text: "Anything unclear is raised before the question deadline, not after award." }
     - { title: "Source to specification", text: "Exact items from manufacturers and authorized distributors, or clearly identified equals with data sheets." }
     - { title: "Quote in the required format", text: "Itemized unit prices, lead times and validity, submitted by the deadline in the format requested." }
     - { title: "Execute on award", text: "Supplier orders placed, production and dispatch confirmed, freight and customs coordinated." }
     - { title: "Deliver to receiving rules", text: "Deliveries scheduled to the installation's access and receiving requirements, with packing lists and proof of delivery." }
-    - { title: "Close out", text: "Discrepancies, replacements and warranty questions handled by the same named contact." }
+    - { title: "Close out", text: "Discrepancies, replacements and warranty questions handled by our procurement team." }
 
 supply:
   eyebrow: "What we can supply"
   heading: "Supply categories"
-  lead: "Mixed requirements across these categories can be quoted in a single response."
-  link: { label: "View full capabilities", href: "/capabilities/" }
+  lead: "Our nine product and sourcing categories. Freight, logistics, customs clearance and delivery coordination are provided as supporting operational services."
+  link: { label: "View All Capabilities", href: "/capabilities/" }
   items:
     - { label: "General supplies & commodities", href: "/capabilities/#general-supplies" }
     - { label: "Industrial equipment, tools & machinery", href: "/capabilities/#industrial-equipment" }
@@ -75,9 +75,8 @@ supply:
     - { label: "HVAC, plumbing & infrastructure equipment", href: "/capabilities/#hvac-plumbing" }
     - { label: "IT hardware, networking & office technology", href: "/capabilities/#it-networking" }
     - { label: "Safety equipment & PPE", href: "/capabilities/#safety-ppe" }
-    - { label: "Office furniture & operational supplies", href: "/capabilities/#furniture" }
-    - { label: "Specialized equipment sourcing", href: "/capabilities/#specialized" }
-    - { label: "Logistics, freight & customs coordination", href: "/capabilities/#logistics" }
+    - { label: "Office furniture, equipment & operational supplies", href: "/capabilities/#furniture" }
+    - { label: "Specialized equipment & hard-to-find items", href: "/capabilities/#specialized" }
 
 coverage:
   eyebrow: "Coverage"
@@ -108,8 +107,8 @@ security: "Do not send classified information, Controlled Unclassified Informati
 
 cta:
   heading: "Have an open solicitation?"
-  text: "Send the RFQ number, item list and documents. Every request is acknowledged and answered with an itemized quotation."
+  text: "Send the RFQ number, item list and documents. Each request receives a reference number and is reviewed by our procurement team."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
-    - { label: "Contact procurement", href: "/contact/" }
+    - { label: "Contact Us", href: "/contact/" }
 ---
