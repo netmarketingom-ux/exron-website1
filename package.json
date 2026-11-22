@@ -8,7 +8,8 @@
     "build": "astro build",
     "check:placeholders": "node scripts/check-placeholders.mjs",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "build:cpanel": "HOSTING=cpanel astro build && HOSTING=cpanel node scripts/package-cpanel.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

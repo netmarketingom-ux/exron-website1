@@ -15,7 +15,7 @@ const d = loadPage(raw);
 const divisions = [d.divisions.primary, d.divisions.secondary];
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription}>
-  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="About Exron">
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="About Us" image="/images/photos/about-banner.jpg" imagePosition="center top">
     <DataCard slot="aside" title={d.hero.profile.title} rows={d.hero.profile.rows} />
   </PageHero>
 
@@ -91,5 +91,5 @@ const divisions = [d.divisions.primary, d.divisions.secondary];
   .about-exp__tags { margin: 1.5rem 0; }
   .mission { max-width: 860px; padding-left: 1.5rem; border-left: 4px solid var(--red-600); margin-bottom: 3rem; }
   .mission__statement { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600; font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem); line-height: 1.35; color: var(--navy-700); margin: 0; }
-  .about-sub { font-family: var(--font-mono); font-stretch: normal; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 1.25rem; }
+  .about-sub { font-family: var(--font-mono); font-stretch: normal; font-size: 0.75rem; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--ink-500); margin-bottom: 1.25rem; }
 </style>

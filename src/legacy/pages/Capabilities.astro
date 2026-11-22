@@ -15,7 +15,7 @@ import raw from '../content/pages/capabilities.md?raw';
 const d = loadPage(raw);
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription} schema={[faqSchema(d.faq)]}>
-  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Capabilities" />
+  <PageHero eyebrow={d.hero.eyebrow} title={d.hero.title} lead={d.hero.lead} buttons={d.hero.buttons} crumb="Capabilities" image="/images/photos/capabilities-banner.jpg" />
 
   <nav class="jump-nav" aria-label="On this page">
     <div class="container">

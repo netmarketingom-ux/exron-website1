@@ -1,193 +1,131 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
-import Icon from '../components/Icon.astro';
-import SectionHead from '../components/SectionHead.astro';
-import DataCard from '../components/DataCard.astro';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import CoverageMap from '../components/CoverageMap.astro';
 import { rich, site } from '../lib/site';
 import { loadPage } from '../lib/page';
 import raw from '../content/pages/home.md?raw';
-import capsRaw from '../content/pages/capabilities.md?raw';
 
 const d = loadPage(raw);
-// The category count comes from the Capabilities page, so the two always agree.
-const categories = String(loadPage(capsRaw).categories.items.length);
-const figures = d.hero.figures.map((f: any) => ({ ...f, value: f.value.replace('{categories}', categories) }));
-const pad = (i: number) => String(i + 1).padStart(2, '0');
+const group = d.coverage.group;
 ---
 <BaseLayout title={d.seoTitle} description={d.seoDescription}>
 
-  <!-- 01 Introduction -->
+  <!-- Section 1: Main introduction -->
   <section class="intro-hero" aria-labelledby="home-title">
-    <div class="intro-hero__stripes" aria-hidden="true"></div>
+    <img class="intro-hero__bg" src="/images/photos/home-banner.jpg" alt="" fetchpriority="high" decoding="async" />
     <div class="container intro-hero__grid">
       <div>
-        <p class="intro-hero__kicker">{d.hero.kicker}</p>
-        <h1 id="home-title">{d.hero.heading.map((line: string) => <span>{line}</span>)}</h1>
-        <p class="intro-hero__positioning">{d.hero.positioning}</p>
-        <p class="intro-hero__text" set:html={rich(d.hero.text)} />
+        <h1 id="home-title">{d.hero.heading}</h1>
+        <p class="intro-hero__sub">{d.hero.subheading}</p>
+        <p class="intro-hero__text">{d.hero.text}</p>
         <div class="btn-row btn-row--stack">
-          <Button href={d.hero.buttons[0].href} variant="quote" size="lg" icon="file">{d.hero.buttons[0].label}</Button>
-          <Button href={d.hero.buttons[1].href} variant="ghost" size="lg" iconAfter="arrow-right">{d.hero.buttons[1].label}</Button>
+          <Button href={d.hero.buttons[0].href} variant="quote" size="lg">{d.hero.buttons[0].label}</Button>
+          <Button href={d.hero.buttons[1].href} variant="ghost" size="lg">{d.hero.buttons[1].label}</Button>
         </div>
       </div>
 
       <form class="quick" action="/submit-rfq/" method="get" aria-labelledby="quick-title">
-        <p class="quick__label"><span class="dot" aria-hidden="true"></span>{d.hero.quick.label}</p>
-        <div class="quick__body">
-          <h2 id="quick-title">{d.hero.quick.heading}</h2>
-          <p class="quick__text">{d.hero.quick.text}</p>
-          <label for="q-org">Organization</label>
-          <input id="q-org" name="organization" type="text" maxlength="200" autocomplete="organization" />
-          <label for="q-email">Official email</label>
-          <input id="q-email" name="email" type="email" maxlength="200" autocomplete="email" />
-          <label for="q-sol">RFQ or solicitation number <span class="quick__opt">(optional)</span></label>
-          <input id="q-sol" name="solicitation_number" type="text" maxlength="100" class="mono" />
-          <label for="q-desc">What do you need? <span class="quick__opt">(optional)</span></label>
-          <textarea id="q-desc" name="description" rows="2" maxlength="2000"></textarea>
-          <button class="btn btn--quote btn--lg quick__btn" type="submit">{d.hero.quick.button}<Icon name="arrow-right" /></button>
-          <p class="quick__note"><Icon name="check-circle" size={18} /><span set:html={rich(d.hero.quick.note)} /></p>
-        </div>
+        <h2 id="quick-title">{d.hero.quick.heading}</h2>
+        <p class="quick__text">{d.hero.quick.text}</p>
+        <label for="q-org">Organization</label>
+        <input id="q-org" name="organization" type="text" maxlength="200" autocomplete="organization" />
+        <label for="q-email">Email</label>
+        <input id="q-email" name="email" type="email" maxlength="200" autocomplete="email" />
+        <label for="q-sol">RFQ or solicitation number <span class="quick__opt">(optional)</span></label>
+        <input id="q-sol" name="solicitation_number" type="text" maxlength="100" />
+        <label for="q-desc">Requirement <span class="quick__opt">(optional)</span></label>
+        <textarea id="q-desc" name="description" rows="2" maxlength="2000"></textarea>
+        <button class="btn btn--quote quick__btn" type="submit">{d.hero.quick.button}</button>
       </form>
     </div>
   </section>
 
-  <section class="figures" aria-label="Exron Global in figures">
-    <dl class="container figures__grid">
-      {figures.map((f: any) => (
-        <div><dt>{f.label}</dt><dd class:list={[!/^\d+$/.test(f.value) && 'is-text']}>{f.value}</dd></div>
-      ))}
-    </dl>
-  </section>
-
-  <!-- 02 Company overview -->
+  <!-- Section 2: Company overview -->
   <section class="section" id="overview">
-    <div class="container split split--wide-left">
+    <div class="container media-row">
       <div>
-        <SectionHead eyebrow={d.overview.eyebrow} heading={d.overview.heading} />
-        {d.overview.paragraphs.map((p: string, i: number) => <p class:list={[i === 0 && 'lead']} set:html={rich(p)} />)}
-        <a class="link-arrow" href={d.overview.link.href}>{d.overview.link.label}<Icon name="arrow-right" /></a>
+        <h2>{d.overview.heading}</h2>
+        {d.overview.paragraphs.map((p: string) => <p class="lead">{p}</p>)}
+        <Button href={d.overview.button.href} variant="secondary">{d.overview.button.label}</Button>
       </div>
-      <DataCard title={d.overview.profile.title} rows={d.overview.profile.rows}>
-        <a class="link-arrow" href={d.overview.profile.link.href}>{d.overview.profile.link.label}<Icon name="arrow-right" /></a>
-      </DataCard>
+      <img class="media-row__img" src="/images/photos/procurement-partner.jpg" alt="A hand signing a document" loading="lazy" decoding="async" width="1200" height="900" />
     </div>
   </section>
 
-  <!-- 03 Capabilities -->
+  <!-- Section 3: Capabilities overview -->
   <section class="section section--alt" id="capabilities">
-    <div class="container">
-      <div class="head-row">
-        <SectionHead eyebrow={d.capabilities.eyebrow} heading={d.capabilities.heading} intro={d.capabilities.lead} />
-        <a class="link-arrow head-row__link" href={d.capabilities.link.href}>{d.capabilities.link.label}<Icon name="arrow-right" /></a>
+    <div class="container media-row media-row--flip">
+      <img class="media-row__img" src="/images/photos/supply-capabilities.jpg" alt="Industrial pipework and valves" loading="lazy" decoding="async" width="1200" height="900" />
+      <div>
+        <h2>{d.capabilities.heading}</h2>
+        {d.capabilities.paragraphs.map((p: string) => <p class="lead">{p}</p>)}
+        <ul class="cat-list">
+          {d.capabilities.categories.map((c: string) => <li>{c}</li>)}
+        </ul>
+        <Button href={d.capabilities.button.href} variant="secondary">{d.capabilities.button.label}</Button>
       </div>
-      <FeatureGrid items={d.capabilities.items} columns={3} />
     </div>
   </section>
 
-  <!-- 04 Competitive strengths -->
+  <!-- Section 4: Competitive strengths -->
   <section class="section" id="strengths">
     <div class="container">
-      <SectionHead eyebrow={d.strengths.eyebrow} heading={d.strengths.heading} />
-      <ol class="strengths">
-        {d.strengths.items.map((s: any, i: number) => (
+      <h2 class="section-title">{d.strengths.heading}</h2>
+      <ul class="strengths">
+        {d.strengths.items.map((s: any) => (
           <li>
-            <span class="strengths__num">{pad(i)}</span>
-            <h3 set:html={rich(s.title)} />
-            <p set:html={rich(s.text)} />
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
           </li>
         ))}
-      </ol>
-      <p class="notice strengths__notice"><Icon name="shield" /><span set:html={rich(d.strengths.notice)} /></p>
+      </ul>
     </div>
   </section>
 
-  <!-- 05 Geographic coverage & group affiliation -->
-  <section class="section section--deep cover" id="coverage">
-    <div class="container cover__grid">
+  <!-- Section 5: Geographic coverage and group affiliation -->
+  <section class="section section--dark" id="coverage">
+    <div class="container two-col two-col--even">
       <div>
-        <SectionHead eyebrow={d.coverage.eyebrow} heading={d.coverage.heading} intro={d.coverage.text} />
-        <div class="cover__map"><CoverageMap markers={d.coverage.markers} /></div>
-        <dl class="cover__rows">
-          {d.coverage.rows.map((r: any) => <div><dt>{r.k}</dt><dd set:html={rich(r.v)} /></div>)}
-        </dl>
+        <h2>{d.coverage.heading}</h2>
+        {d.coverage.paragraphs.map((p: string) => <p class="lead">{p}</p>)}
       </div>
-      <aside class="group-card" aria-labelledby="group-title">
-        <p class="group-card__label">{d.coverage.group.label}</p>
-        {d.coverage.group.logo && <img class="group-card__logo" src={d.coverage.group.logo} alt={`${site.groupName} logo`} loading="lazy" />}
-        <h3 id="group-title" set:html={rich(d.coverage.group.heading)} />
-        <p set:html={rich(d.coverage.group.text)} />
-        <p class="group-card__notice"><Icon name="shield" size={18} /><span set:html={rich(d.coverage.group.notice)} /></p>
-        <div class="group-card__links">
-          <a class="link-arrow" href={d.coverage.group.link.href}>{d.coverage.group.link.label}<Icon name="arrow-right" /></a>
-          {d.coverage.group.website && <a class="link-arrow" href={d.coverage.group.website} target="_blank" rel="noopener">Group website<Icon name="arrow-right" /></a>}
-        </div>
+      <div class="coverage__side">
+        <img class="coverage__img" src="/images/photos/regional-presence.jpg" alt="Abu Dhabi skyline at night" loading="lazy" decoding="async" width="1200" height="800" />
+      <aside class="group" aria-label={group.label}>
+        <h3 class="group__label">{group.label}</h3>
+        {group.logo && <img class="group__logo" src={group.logo} alt={`${site.groupName} logo`} loading="lazy" />}
+        <p set:html={rich(group.statement)} />
+        {group.website && <a class="link-arrow" href={group.website} target="_blank" rel="noopener">Group website</a>}
       </aside>
+      </div>
     </div>
   </section>
 
-  <!-- 06 RFQ submission -->
-  <section class="section rfq-close" id="rfq">
-    <div class="container rfq-close__grid">
-      <div>
-        <SectionHead eyebrow={d.rfq.eyebrow} heading={d.rfq.heading} intro={d.rfq.text} />
-        <div class="btn-row btn-row--stack">
-          <Button href={d.rfq.buttons[0].href} variant="quote" size="lg" icon="file">{d.rfq.buttons[0].label}</Button>
-          <Button href={d.rfq.buttons[1].href} variant="secondary" size="lg">{d.rfq.buttons[1].label}</Button>
-        </div>
-        <p class="notice notice--warn rfq-close__security"><Icon name="shield" /><span><strong>Secure transmission.</strong> <span set:html={rich(d.rfq.security)} /></span></p>
-      </div>
-      <div class="data-card">
-        <p class="data-card__title">{d.rfq.checklistTitle}</p>
-        <ul class="check-list rfq-close__list">
-          {d.rfq.checklist.map((c: string) => <li><Icon name="check" />{c}</li>)}
-        </ul>
-      </div>
+  <!-- Section 6: RFQ submission -->
+  <section class="section section--alt" id="rfq">
+    <div class="container rfq-close">
+      <h2>{d.rfq.heading}</h2>
+      <p class="lead">{d.rfq.text}</p>
+      <Button href={d.rfq.button.href} variant="quote" size="lg">{d.rfq.button.label}</Button>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* 01 Introduction (Option C foundation) */
-  .intro-hero {
-    position: relative; overflow: hidden; color: var(--on-dark-2);
-    background: linear-gradient(160deg, var(--navy-800) 0%, var(--navy-900) 60%, var(--navy-950) 100%);
-    padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
-    border-top: 4px solid var(--red-600);
-  }
-  .intro-hero__stripes {
-    position: absolute; inset: 0 0 0 auto; width: 45%; pointer-events: none;
-    background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0 28px, transparent 28px 56px);
-    mask-image: linear-gradient(90deg, transparent, #000 60%);
-  }
-  .intro-hero__grid { position: relative; display: grid; gap: 2.5rem; align-items: center; }
+  /* Section 1 */
+  .intro-hero { position: relative; overflow: hidden; background: var(--navy-700); color: var(--on-dark-2); padding-block: clamp(3rem, 2rem + 4vw, 5.5rem); }
+  .intro-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .intro-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(16, 35, 56, 0.74); }
+  .intro-hero__grid { position: relative; z-index: 2; }
+  .intro-hero__grid { display: grid; gap: 2.5rem; align-items: center; }
   .intro-hero__grid > * { min-width: 0; }
-  @media (min-width: 1024px) { .intro-hero__grid { grid-template-columns: 1.3fr 0.9fr; gap: 4rem; } }
-  .intro-hero__kicker {
-    margin: 0 0 1rem; font-family: var(--font-display); font-stretch: 118%; font-weight: 800;
-    font-size: 0.9375rem; letter-spacing: 0.22em; text-transform: uppercase; color: #fff;
-    display: inline-flex; align-items: center; gap: 0.75rem;
-  }
-  .intro-hero__kicker::before { content: ''; width: 32px; height: 3px; background: var(--red-600); }
-  .intro-hero h1 { color: #fff; font-size: clamp(2.125rem, 1.4rem + 2.8vw, 3.75rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .intro-hero h1 span { display: block; }
-  .intro-hero__positioning {
-    margin: 0 0 1.25rem; padding-left: 1rem; border-left: 3px solid var(--red-600);
-    font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600;
-    font-size: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem); line-height: 1.35; color: #fff; max-width: 34ch;
-  }
-  .intro-hero__text { font-size: var(--fs-lead); line-height: 1.6; max-width: 56ch; margin-bottom: 2rem; color: var(--on-dark-2); }
+  @media (min-width: 1024px) { .intro-hero__grid { grid-template-columns: 1.35fr 0.85fr; gap: 4rem; } }
+  .intro-hero h1 { color: #fff; font-size: var(--fs-display); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 1rem; max-width: 16ch; }
+  .intro-hero__sub { margin: 0 0 1.25rem; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem); font-weight: 600; line-height: 1.35; color: #fff; }
+  .intro-hero__text { font-size: var(--fs-lead); line-height: 1.6; max-width: 58ch; margin: 0 0 2rem; color: var(--on-dark-2); }
 
-  .quick { background: #fff; color: var(--ink-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; }
-  .quick__label {
-    display: flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.75rem 1.5rem;
-    background: var(--navy-700); color: #fff; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
-  }
-  .quick__label .dot { width: 8px; height: 8px; border-radius: 50%; background: #3ccf7a; box-shadow: 0 0 0 3px rgba(60, 207, 122, 0.25); }
-  .quick__body { padding: 1.5rem; display: grid; gap: 0.4rem; }
-  .quick h2 { font-size: 1.375rem; margin: 0; }
+  .quick { background: #fff; color: var(--ink-700); border-radius: var(--radius-lg); padding: 1.75rem; display: grid; gap: 0.4rem; }
+  .quick h2 { font-size: 1.375rem; margin: 0; color: var(--ink-900); }
   .quick__text { margin: 0.25rem 0 0.5rem; font-size: 0.9375rem; color: var(--ink-500); }
   .quick label { margin-top: 0.5rem; font-weight: 600; font-size: 0.9375rem; color: var(--ink-900); }
   .quick__opt { font-weight: 400; color: var(--ink-500); }
@@ -196,72 +134,55 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
     background: #fff; border: 1px solid var(--line-strong); border-radius: var(--radius);
   }
   .quick textarea { min-height: 72px; resize: vertical; }
-  .quick input.mono { font-family: var(--font-mono); }
   .quick input:focus-visible, .quick textarea:focus-visible { outline: 3px solid var(--navy-700); outline-offset: 0; box-shadow: none; }
   .quick__btn { width: 100%; margin-top: 1rem; }
-  .quick__note { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0.75rem 0 0; padding-top: 0.875rem; border-top: 1px solid var(--line); font-size: 0.875rem; font-weight: 600; color: var(--navy-700); }
-  .quick__note :global(svg) { color: #1f7a46; flex-shrink: 0; margin-top: 0.1rem; }
 
-  .figures { background: var(--navy-700); border-bottom: 1px solid var(--navy-800); }
-  .figures__grid { display: grid; grid-template-columns: 1fr; margin-inline: auto; }
-  .figures__grid > div { display: flex; flex-direction: column-reverse; gap: 0.35rem; padding: 1.5rem 1rem 1.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
-  .figures dd { margin: 0; font-family: var(--font-mono); font-size: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem); font-weight: 500; line-height: 1; color: #fff; }
-  .figures dd.is-text { font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 700; font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); }
-  .figures dt { font-size: 0.9375rem; color: var(--on-dark-2); max-width: 24ch; }
-  @media (min-width: 900px) {
-    .figures__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .figures__grid > div { border-bottom: 0; padding: 2rem 1.5rem; border-left: 1px solid rgba(255, 255, 255, 0.12); }
-    .figures__grid > div:first-child { border-left: 0; padding-left: 0; }
+  /* Sections 2, 3 and 5: heading beside its text on wide screens */
+  .two-col { display: grid; gap: 1.25rem 4rem; align-items: start; }
+  .two-col > * { min-width: 0; }
+  @media (min-width: 960px) {
+    .two-col { grid-template-columns: 0.8fr 1.2fr; }
+    .two-col--even { grid-template-columns: 1fr 1fr; }
   }
+  .two-col h2 { margin: 0; }
+  .two-col .lead { margin-bottom: 1rem; max-width: 64ch; }
+  .two-col :global(.btn) { margin-top: 1rem; }
 
-  /* 02 Overview */
-  #overview :global(.data-card .link-arrow) { display: inline-flex; margin-top: 1.25rem; }
-  #overview .link-arrow { margin-top: 0.5rem; }
+  .cat-list { list-style: none; display: grid; margin: 1.5rem 0 0.5rem; border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .cat-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; } }
+  .cat-list li { padding: 0.8rem 0; border-bottom: 1px solid var(--line); font-weight: 500; color: var(--ink-900); }
 
-  /* 03 Capabilities */
-  .head-row { display: grid; gap: 1rem; margin-bottom: 2.5rem; }
-  .head-row :global(.section-head) { margin-bottom: 0; }
-  @media (min-width: 900px) { .head-row { grid-template-columns: 1fr auto; align-items: end; gap: 3rem; } }
-  #capabilities :global(.feature-grid > li) { grid-template-columns: auto 1fr; align-items: center; column-gap: 1rem; padding: 1.5rem; }
-  #capabilities :global(.feature-grid h3) { margin: 0; font-size: 1.0625rem; }
-  #capabilities :global(.feature-grid .link-arrow) { grid-column: 1 / -1; font-size: 0.875rem; }
+  /* Sections 2 and 3: text beside a photo */
+  .media-row { display: grid; gap: 2rem 4rem; align-items: center; }
+  .media-row > * { min-width: 0; }
+  @media (min-width: 960px) { .media-row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 959px) { .media-row--flip .media-row__img { order: 2; } }
+  .media-row h2 { margin: 0 0 1.25rem; }
+  .media-row .lead { margin-bottom: 1rem; }
+  .media-row :global(.btn) { margin-top: 1rem; }
+  .media-row__img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+  .coverage__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+  .coverage__side { display: grid; gap: 1.5rem; }
 
-  /* 04 Strengths (Option A numbering, Option B whitespace) */
-  .strengths { list-style: none; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  /* Section 4 */
+  .section-title { margin-bottom: 2rem; }
+  .strengths { list-style: none; display: grid; gap: 2rem 3rem; }
   @media (min-width: 768px) { .strengths { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .strengths li { background: #fff; padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem); display: grid; gap: 0.75rem; align-content: start; }
-  .strengths__num { font-family: var(--font-mono); font-size: 1.5rem; color: var(--red-600); line-height: 1; }
-  .strengths h3 { font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.5rem); margin: 0; }
-  .strengths p { margin: 0; color: var(--ink-700); max-width: 52ch; }
-  .strengths__notice { margin-top: 1.5rem; }
+  @media (min-width: 1100px) { .strengths { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .strengths li { padding-top: 1.25rem; border-top: 2px solid var(--navy-700); }
+  .strengths h3 { font-size: var(--fs-h3); margin: 0 0 0.5rem; }
+  .strengths p { margin: 0; color: var(--ink-700); }
 
-  /* 05 Coverage & group */
-  .cover { overflow: hidden; }
-  .cover__grid { display: grid; gap: 3rem; align-items: start; }
-  .cover__grid > * { min-width: 0; }
-  @media (min-width: 1024px) { .cover__grid { grid-template-columns: 1.25fr 0.75fr; gap: 4rem; } }
-  .cover__map { margin: 0 calc(var(--gutter) * -1) 1.5rem; }
-  @media (min-width: 768px) { .cover__map { margin-inline: 0; } }
-  .cover__rows { display: grid; gap: 1px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.12); margin: 0; }
-  @media (min-width: 640px) { .cover__rows { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .cover__rows > div { background: var(--navy-900); padding: 1.1rem 1.25rem; display: grid; gap: 0.35rem; align-content: start; }
-  .cover__rows dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red-300); }
-  .cover__rows dd { margin: 0; color: #fff; font-family: var(--font-display); font-stretch: var(--display-stretch); font-weight: 600; font-size: 1rem; }
-  .group-card { background: #fff; color: var(--ink-700); border-top: 4px solid var(--red-600); padding: 2rem; display: grid; gap: 1rem; border-radius: var(--radius-lg); }
-  .group-card__label { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy-700); }
-  .group-card h3 { margin: 0; font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem); color: var(--ink-900); }
-  .group-card p { margin: 0; }
-  .group-card__notice { display: flex; gap: 0.5rem; align-items: flex-start; padding: 0.875rem 1rem; background: var(--navy-50); border-left: 3px solid var(--navy-700); font-size: 0.875rem; }
-  .group-card__notice :global(svg) { color: var(--navy-700); flex-shrink: 0; margin-top: 0.1rem; }
-  .group-card :global(.link-arrow) { color: var(--navy-700); }
-  .group-card__logo { max-height: 56px; width: auto; }
-  .group-card__links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+  /* Section 5 */
+  #coverage .lead { color: var(--on-dark-2); }
+  #coverage h2 { margin-bottom: 1.25rem; }
+  .group { border: 1px solid var(--navy-600); background: var(--navy-800); padding: 1.75rem; color: var(--on-dark-2); }
+  .group__label { margin: 0 0 0.75rem; font-size: 1rem; font-weight: 600; color: var(--on-dark-3) !important; }
+  .group__logo { max-height: 56px; width: auto; margin-bottom: 1rem; }
+  .group p { margin: 0; }
+  .group :global(.link-arrow) { margin-top: 1rem; }
 
-  /* 06 RFQ submission */
-  .rfq-close { border-top: 4px solid var(--red-600); background: var(--paper); }
-  .rfq-close__grid { display: grid; gap: 3rem; align-items: start; }
-  .rfq-close__grid > * { min-width: 0; }
-  @media (min-width: 1024px) { .rfq-close__grid { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; } }
-  .rfq-close__security { margin-top: 2rem; }
-  .rfq-close__list { padding: 1.5rem; font-size: 0.9375rem; }
+  /* Section 6 */
+  .rfq-close > * { max-width: 760px; }
+  .rfq-close .lead { margin: 0.75rem 0 1.75rem; }
 </style>
