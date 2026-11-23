@@ -4,11 +4,13 @@
 # Layout lives in src/legacy/pages/Home.astro.
 
 seoTitle: "Global Procurement & Supply Solutions | Exron Global"
-seoDescription: "International procurement and supply company in Abu Dhabi, UAE: sourcing, supply and logistics coordination for government, commercial and industrial customers."
+seoDescription: "Exron Global, Abu Dhabi: global procurement and supply solutions supporting government, military installation and commercial procurement requirements. Submit an RFQ."
 
 # Section 1: Main introduction
 hero:
   heading: "Global Procurement & Supply Solutions"
+  # Supporting positioning line, approved by the client (November 2026).
+  positioning: "Supporting Government, Military Installation & Commercial Procurement Requirements"
   subheading: "Strategic Sourcing. Global Supply. Reliable Execution."
   text: "Exron Global is an international procurement and supply company based in Abu Dhabi, United Arab Emirates, providing sourcing, supply and logistics coordination solutions to government, commercial and industrial customers."
   buttons:

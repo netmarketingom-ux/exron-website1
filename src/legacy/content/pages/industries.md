@@ -7,8 +7,8 @@ seoDescription: "Procurement and supply for U.S. Government operations, military
 
 hero:
   eyebrow: "Industries We Serve"
-  title: "Built for government and military installation requirements"
-  lead: "The customers we are set up to serve, and what each typically needs from a supplier. Government and military installation buyers come first."
+  title: "Government, military installation and commercial customers"
+  lead: "The customers we are set up to serve. U.S. Government and military installation procurement is our primary focus, alongside our commercial and industrial procurement division."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }
     - { label: "View All Capabilities", href: "/capabilities/" }

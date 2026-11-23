@@ -1,56 +1,39 @@
 # Outstanding information and decisions
 
-Internal completion checklist. Nothing in this list is shown on the public website until it is supplied and confirmed. Where each item will appear is given in brackets.
+One consolidated checklist. "Before launch" items are required for the website to be credible and fully functional. "Can follow" items can be added after launch without affecting credibility or function; until supplied, they are simply not shown. Nothing in this list appears on the public website until it is supplied and confirmed.
 
-## Information to be supplied by Exron Global
+## Required before launch
+
+| # | Item | Where it appears | Why it is required |
+|---|---|---|---|
+| 1 | Dedicated procurement / RFQ email address | Footer, Contact, RFQ page, Government Contracting, RFQ emails | Receives every RFQ; needed for the live RFQ test |
+| 2 | Official phone number, with country code | Header, footer, Contact, Government Contracting | Basic credibility for buyers |
+| 3 | Office address (and registered address, if different) | Footer, Contact, Privacy Policy | Basic credibility; required in the Privacy Policy |
+| 4 | Trade licence or registration number and issuing authority | Government Contracting | Contracting officers check company identity |
+| 5 | Privacy contact email, retention periods, governing law, legal basis for international transfers | Privacy Policy, Terms of Use | Needed for legal review |
+| 6 | Legal review and approval of the Privacy Policy and Terms of Use | Privacy Policy, Terms of Use | Draft notices stay until approved |
+| 7 | Final photograph selections | All pages | Approval of the photography shortlist |
+| 8 | Website ownership: Exron Netlify team, GitHub organization and Resend account | Hosting and email | Exron control of the site and RFQ data (see handover document) |
+| 9 | Domain connection to exronglobal.com | Whole site | Launch address; switches on search indexing |
+| 10 | Live RFQ test with both emails received | RFQ system | Proof that RFQs reach procurement |
+| 11 | Who at Exron may access the Netlify account and procurement mailbox | Internal | Authorized access to customer data |
+| 12 | Approval of the wording we introduced (listed in the change log) | Various pages | You asked to approve any new wording |
+
+## Can follow after launch
 
 | # | Item | Where it appears |
 |---|---|---|
-| 1 | Official phone number, with country code | Header, footer, Contact, Government Contracting |
-| 2 | WhatsApp number, with country code | Footer, Contact, WhatsApp button |
-| 3 | Office address and registered address | Footer, Contact, Privacy Policy |
-| 4 | Dedicated procurement / RFQ email address | Footer, Contact, RFQ page, Government Contracting, RFQ emails |
-| 5 | Founding date | About Us (company profile) |
-| 6 | Trade licence or registration number and issuing authority | Government Contracting (company details) |
-| 7 | Verified UEI status and number | Government Contracting |
-| 8 | Verified SAM.gov registration status | Government Contracting |
-| 9 | Verified CAGE / NCAGE status and code | Government Contracting |
-| 10 | NAICS codes | Government Contracting |
-| 11 | Date the registration statuses were last confirmed | Government Contracting |
-| 12 | Approved Hydropower Group statement: exact legal name, relationship, sectors | Homepage, About Us |
-| 13 | Group logo (with permission to use) and website address | Homepage, About Us |
-| 14 | Management experience figure (years) | About Us |
-| 15 | Business days, hours and time zone | Contact, Government Contracting |
-| 16 | Designated procurement contact (name and title), if one should be published | Government Contracting |
-| 17 | Final capability statement PDF | Government Contracting (download button appears automatically) |
-| 18 | Delivery destinations (countries or regions) and main sourcing regions | Government Contracting (coverage) |
+| 13 | WhatsApp number | Footer, Contact, WhatsApp button (hidden until supplied) |
+| 14 | Business days, hours and time zone | Contact, Government Contracting |
+| 15 | Founding date | About Us |
+| 16 | UEI, SAM.gov registration and CAGE / NCAGE status and numbers, with date confirmed | Government Contracting (shown as "To be confirmed" until then) |
+| 17 | NAICS codes | Government Contracting |
+| 18 | Final capability statement PDF | Government Contracting (download button appears automatically; "Request a copy" works until then) |
+| 19 | Approved Hydropower Group statement, sectors, logo and website | Homepage, About Us (neutral holding sentence until then) |
+| 20 | Management experience figure (years) | About Us |
+| 21 | Designated procurement contact (name and title), if one should be published | Government Contracting |
+| 22 | Delivery destinations and main sourcing regions | Government Contracting |
+| 23 | RFQ response-time policy | Not stated anywhere until confirmed |
+| 24 | Minimum order value policy | Not stated anywhere until confirmed |
 
-## Policies requiring management approval
-
-| # | Item | Notes |
-|---|---|---|
-| 19 | RFQ response time | No response time is stated anywhere until confirmed. |
-| 20 | Minimum order value | FAQ entry removed until a policy is confirmed. |
-| 21 | Retention period for form submissions and attachments, and for business records | Privacy Policy |
-| 22 | Privacy contact email | Privacy Policy, Terms of Use |
-| 23 | Governing law and jurisdiction | Terms of Use |
-| 24 | Legal basis and safeguards for international data transfers | Privacy Policy |
-| 25 | Who at Exron may access the Netlify account and procurement mailbox | Privacy Policy and internal security |
-| 26 | Email provider for the procurement mailbox | Privacy Policy |
-| 27 | Legal review and approval of the Privacy Policy and Terms of Use | Required before launch; draft notices stay until then |
-
-## Decisions requested
-
-| # | Decision | Current state |
-|---|---|---|
-| 28 | Single agreed positioning line for the whole site | The homepage headline is your approved "Global Procurement & Supply Solutions". The About Us and Industries banners still use the earlier government and military wording. Please confirm which positioning to use on every page, and supply the inner-page wording if it should change. |
-| 29 | Photographs | Approve, replace or remove each photo in the photography proposal. |
-| 30 | Wording introduced for approval | Eight items listed at the end of the change log. |
-
-## Technical items before launch
-
-| # | Item | Owner |
-|---|---|---|
-| 31 | Connect exronglobal.com to the hosting; indexing then switches on automatically | Fadi / Exron IT |
-| 32 | Set RESEND_API_KEY and RFQ_INBOX in Netlify, verify the sending domain, then send one live test RFQ and confirm both emails arrive | Fadi |
-| 33 | Confirm who has access to the Netlify account (form submissions and attachments are stored there) | Exron management |
+Note on registrations: launching with "To be confirmed" is accurate and does not harm credibility. Publishing an unverified status would.

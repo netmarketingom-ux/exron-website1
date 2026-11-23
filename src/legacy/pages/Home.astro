@@ -16,7 +16,8 @@ const group = d.coverage.group;
     <div class="container intro-hero__grid">
       <div>
         <h1 id="home-title">{d.hero.heading.replace(' & ', '\u00a0& ')}</h1>
-        <p class="intro-hero__sub">{d.hero.subheading}</p>
+        <p class="intro-hero__sub">{d.hero.positioning}</p>
+        <p class="intro-hero__tag">{d.hero.subheading}</p>
         <p class="intro-hero__text">{d.hero.text}</p>
         <div class="btn-row btn-row--stack">
           <Button href={d.hero.buttons[0].href} variant="quote" size="lg">{d.hero.buttons[0].label}</Button>
@@ -124,7 +125,8 @@ const group = d.coverage.group;
   .intro-hero__grid > * { min-width: 0; }
   @media (min-width: 1024px) { .intro-hero__grid { grid-template-columns: 1.35fr 0.85fr; gap: 4rem; } }
   .intro-hero h1 { color: #fff; font-size: var(--fs-display); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 1rem; max-width: 20ch; text-wrap: balance; }
-  .intro-hero__sub { margin: 0 0 1.25rem; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem); font-weight: 600; line-height: 1.35; color: #fff; }
+  .intro-hero__tag { margin: 0 0 1.25rem; font-size: 1rem; font-weight: 500; color: var(--on-dark-3); }
+  .intro-hero__sub { margin: 0 0 0.5rem; font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem); font-weight: 600; line-height: 1.35; color: #fff; }
   .intro-hero__text { font-size: var(--fs-lead); line-height: 1.6; max-width: 58ch; margin: 0 0 2rem; color: var(--on-dark-2); }
 
   .quick { background: #fff; color: var(--ink-700); border-radius: var(--radius-lg); padding: 1.75rem; display: grid; gap: 0.4rem; }
