@@ -3,6 +3,7 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import nav from '../data/navigation.json';
 import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site';
+import { BUILD_ID, BUILD_DATE } from '../../lib/hosting';
 ---
 <footer class="site-footer">
   <div class="container site-footer__grid">
@@ -43,6 +44,7 @@ import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site'
       <p class="site-footer__disclaimer">{site.disclaimer}</p>
       <div class="site-footer__legal">
         <p>{site.copyright}</p>
+        <p class="site-footer__build">Version {BUILD_ID} · {BUILD_DATE}</p>
         <ul>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/terms/">Terms of Use</a></li>
@@ -77,4 +79,5 @@ import { site, rich, isSet, telHref, mailHref, whatsappHref } from '../lib/site'
   .site-footer__legal { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; justify-content: space-between; align-items: center; }
   .site-footer__legal p { margin: 0; }
   .site-footer__legal ul { list-style: none; display: flex; gap: 1.25rem; }
+  .site-footer__build { font-size: 0.75rem; opacity: 0.7; }
 </style>

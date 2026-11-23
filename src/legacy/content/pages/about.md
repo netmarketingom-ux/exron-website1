@@ -4,12 +4,12 @@
 # Accuracy rule: experience at Expedition Trading & Services is described as the experience of individuals,
 # never as Exron Global's own contracts or past performance.
 
-seoTitle: "About Exron Global | Government & Military Procurement Company"
-seoDescription: "Who Exron Global is: a privately owned procurement and supply company for government and military installation requirements, with management experience in the Middle East."
+seoTitle: "About Exron Global | Government, Military & Commercial Procurement"
+seoDescription: "Who Exron Global is: a privately owned procurement and supply company in Abu Dhabi supporting government, military installation and commercial procurement requirements."
 
 hero:
   eyebrow: "About Us"
-  title: "A procurement company built around installation requirements"
+  title: "About Exron Global"
   lead: "Exron Global General Trading LLC is a privately owned procurement and supply company with two divisions: Government & Military Installation Support, and Commercial & Industrial Procurement."
   buttons:
     - { label: "Submit an RFQ", href: "/submit-rfq/" }

@@ -2,7 +2,7 @@
   "_readme": "Company details used across the whole site. Replace any value that starts with [CLIENT TO PROVIDE ...] with verified information. Phone and WhatsApp must include the country code. Never enter registration numbers that have not been officially issued.",
   "name": "Exron Global",
   "legalName": "Exron Global General Trading LLC",
-  "positioning": "Global Procurement & Supply Solutions",
+  "positioning": "Supporting Government, Military Installation & Commercial Procurement Requirements",
   "tagline": [
     "Strategic Sourcing.",
     "Global Supply.",
@@ -28,7 +28,7 @@
     "registration": "[CLIENT TO PROVIDE: business registration / trade license no.]"
   },
   "_topBarReadme": "Optional one-line positioning shown in the top bar on wide screens. Empty until the client confirms the agreed business-identity line.",
-  "topBar": "",
+  "topBar": "Supporting Government, Military Installation & Commercial Procurement Requirements",
   "footerIntro": "Exron Global is an international procurement and supply company based in Abu Dhabi, United Arab Emirates, providing sourcing, supply and logistics coordination solutions to government, commercial and industrial customers.",
   "disclaimer": "Exron Global General Trading LLC is a privately owned company. It is not a government agency and is not endorsed by the U.S. Government or any of its departments.",
   "copyright": "© 2026 Exron Global General Trading LLC. All rights reserved."

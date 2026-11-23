@@ -18,3 +18,7 @@ export const netlifyFormAttrs = (): Record<string, string> =>
  */
 export const INDEXABLE =
   process.env.SITE_INDEXING === 'true' || /(^|\/\/|\.)exronglobal\.com/.test(process.env.URL ?? '');
+
+/** Build identifier shown in the footer: the Git commit Netlify built from, and the build date (UTC). */
+export const BUILD_ID = (process.env.COMMIT_REF ?? '').slice(0, 7) || 'local';
+export const BUILD_DATE = new Date().toISOString().slice(0, 10);
