@@ -4,6 +4,11 @@ Dear Rami,
 
 Following your November decisions, please find the replacement photo options for the seven placements you asked us to change. Each placement has three options (A, B and C), and each option is shown in its real page section on desktop and mobile. Nothing on the live site has been changed.
 
+You can see the options on the website itself here:
+https://playful-mousse-0613a1.netlify.app/photo-preview/
+
+That page shows every option as a thumbnail; click one to see it in place on its page. You can also browse the whole site with all A, all B or all C options, and switch between them with the red bar at the bottom of each page. This preview page is not linked from the site menu or indexed by search engines, and the photos on the actual pages have not been changed.
+
 Attachments:
 
 1. Exron-Photography-Proposal-Round2.pdf – the proposal. One page per option, with desktop and mobile previews, photographer, Unsplash link, licence, download date, a note on whether it shows any real, identifiable location, company or activity, and a decision line.
